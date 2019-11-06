@@ -5,9 +5,9 @@ pygame.init()
 
 class ui_variables:
     # Fonts
-    font_path = "./assets/fonts/OpenSans-Light.ttf"
-    font_path_b = "./assets/fonts/OpenSans-Bold.ttf"
-    font_path_i = "./assets/fonts/Inconsolata/Inconsolata.otf"
+    font_path = "../assets/fonts/OpenSans-Light.ttf"
+    font_path_b = "../assets/fonts/OpenSans-Bold.ttf"
+    font_path_i = "../assets/fonts/Inconsolata/Inconsolata.otf"
 
     h1 = pygame.font.Font(font_path, 50)
     h2 = pygame.font.Font(font_path, 30)
@@ -22,13 +22,13 @@ class ui_variables:
     h5_i = pygame.font.Font(font_path_i, 13)
 
     # Sounds
-    click_sound = pygame.mixer.Sound("assets/sounds/SFX_ButtonUp.wav")
-    move_sound = pygame.mixer.Sound("assets/sounds/SFX_PieceMoveLR.wav")
-    drop_sound = pygame.mixer.Sound("assets/sounds/SFX_PieceHardDrop.wav")
-    single_sound = pygame.mixer.Sound("assets/sounds/SFX_SpecialLineClearSingle.wav")
-    double_sound = pygame.mixer.Sound("assets/sounds/SFX_SpecialLineClearDouble.wav")
-    triple_sound = pygame.mixer.Sound("assets/sounds/SFX_SpecialLineClearTriple.wav")
-    tetris_sound = pygame.mixer.Sound("assets/sounds/SFX_SpecialTetris.wav")
+    click_sound = pygame.mixer.Sound("../assets/sounds/SFX_ButtonUp.wav")
+    move_sound = pygame.mixer.Sound("../assets/sounds/SFX_PieceMoveLR.wav")
+    drop_sound = pygame.mixer.Sound("../assets/sounds/SFX_PieceHardDrop.wav")
+    single_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialLineClearSingle.wav")
+    double_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialLineClearDouble.wav")
+    triple_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialLineClearTriple.wav")
+    tetris_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialTetris.wav")
 
     # Background colors
     black = (10, 10, 10) #rgb(10, 10, 10)
