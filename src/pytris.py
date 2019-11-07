@@ -7,14 +7,15 @@ from random import *
 from pygame.locals import *
 from ui import *
 from screeninfo import get_monitors
-from screeninfo import get_monitors
 
+
+#화면크기 조정
 screen_width = 0
 screen_height = 0
 
 for m in get_monitors():
-    screen_width = m.width
-    screen_height = m.height
+    screen_width = int(m.width*0.7)
+    screen_height = int(m.height*0.7)
 
 # Define
 block_size = 17 # Height, width of single block
@@ -23,7 +24,7 @@ height = 20 # Board height
 framerate = 30 # Bigger -> Slower
 
 pygame.init()
-size = [int(screen_width*0.7),int(screen_height*0.7)]
+size = [screen_width, screen_height]
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode(size)
 pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
@@ -238,8 +239,10 @@ def is_stackable(mino):
 
     return True
 
-def background_image(x,y,background):
-    screen.blit(background,(x,y))
+def background_image():
+    background = pygame.image.load('../assets/images/backgroundimage.png')
+    picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
+    screen.blit(picture,(0,int(screen_height/2)))
     
 
 # Initial values
@@ -279,7 +282,6 @@ leaders = sorted(leaders.items(), key=operator.itemgetter(1), reverse=True)
 
 matrix = [[0 for y in range(height + 1)] for x in range(width)] # Board matrix
 
-background = pygame.image.load('../assets/images/backgroundimage.png')
 ###########################################################
 # Loop Start
 ###########################################################
@@ -636,7 +638,7 @@ while not done:
             # ui_variables.grey_1,
         #     Rect(0, 250, 500, 574)
         # )
-        background_image(0,250,background)
+        background_image()
 
         title = ui_variables.h1.render("PYTRIS™", 1, ui_variables.blue)
         title_start = ui_variables.h5.render("Press space to start", 1, ui_variables.white)
@@ -653,7 +655,7 @@ while not done:
             blink = True
 
         screen.blit(title, (0, 120))
-        screen.blit(title_info, (40, 335))
+        screen.blit(title_info, (screen_width*0.4, 335))
 
         screen.blit(leader_1, (10, 10))
         screen.blit(leader_2, (10, 23))
