@@ -6,6 +6,15 @@ from mino import *
 from random import *
 from pygame.locals import *
 from ui import *
+from screeninfo import get_monitors
+from screeninfo import get_monitors
+
+screen_width = 0
+screen_height = 0
+
+for m in get_monitors():
+    screen_width = m.width
+    screen_height = m.height
 
 # Define
 block_size = 17 # Height, width of single block
@@ -14,7 +23,7 @@ height = 20 # Board height
 framerate = 30 # Bigger -> Slower
 
 pygame.init()
-size = [500,574]
+size = [int(screen_width*0.7),int(screen_height*0.7)]
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode(size)
 pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
@@ -229,12 +238,17 @@ def is_stackable(mino):
 
     return True
 
+def background_image(x,y,background):
+    screen.blit(background,(x,y))
+    
+
 # Initial values
 blink = False
 start = False
 pause = False
 done = False
 game_over = False
+show_score = False
 
 score = 0
 level = 1
@@ -265,6 +279,7 @@ leaders = sorted(leaders.items(), key=operator.itemgetter(1), reverse=True)
 
 matrix = [[0 for y in range(height + 1)] for x in range(width)] # Board matrix
 
+background = pygame.image.load('../assets/images/backgroundimage.png')
 ###########################################################
 # Loop Start
 ###########################################################
@@ -593,6 +608,17 @@ while not done:
                         name[name_location] = 90
                     pygame.time.set_timer(pygame.USEREVENT, 1)
 
+    elif show_score:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                done = True
+            elif event.type == USEREVENT:
+                pygame.time.set_timer(pygame.USEREVENT, 300)
+        
+        screen.fill(ui_variables.black)
+        background = pygame.image.load('../images/backgroundimage.png')
+        
+
     # Start screen
     else:
         for event in pygame.event.get():
@@ -605,13 +631,14 @@ while not done:
 
         # pygame.time.set_timer(pygame.USEREVENT, 300)
         screen.fill(ui_variables.white)
-        pygame.draw.rect(
-            screen,
-            ui_variables.grey_1,
-            Rect(0, 250, 500, 574)
-        )
+        # pygame.draw.rect(
+        #     screen,
+            # ui_variables.grey_1,
+        #     Rect(0, 250, 500, 574)
+        # )
+        background_image(0,250,background)
 
-        title = ui_variables.h1.render("PYTRIS™", 1, ui_variables.grey_1)
+        title = ui_variables.h1.render("PYTRIS™", 1, ui_variables.blue)
         title_start = ui_variables.h5.render("Press space to start", 1, ui_variables.white)
         title_info = ui_variables.h6.render("Copyright (c) 2017 Jason Kim All Rights Reserved.", 1, ui_variables.white)
 
@@ -625,7 +652,7 @@ while not done:
         else:
             blink = True
 
-        screen.blit(title, (65, 120))
+        screen.blit(title, (0, 120))
         screen.blit(title_info, (40, 335))
 
         screen.blit(leader_1, (10, 10))
@@ -635,5 +662,7 @@ while not done:
         if not start:
             pygame.display.update()
             clock.tick(3)
+        
+        #여기에 버튼 만들고 그걸 클릭하면 show_score = True로 해줘야해요!
 
 pygame.quit()
