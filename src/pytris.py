@@ -639,11 +639,11 @@ while not done:
                 background_image()
 
                 # pygame.draw.rect(screen, ui_variables.white, [10,40,100,50])
-                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.9),40,100,50])
+                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.9),int(screen_height*0.05),int(screen_width*0.07),int(screen_height*0.05)])
                 # pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.3),40,500,50], 2)
 
                 # show_button_left = ui_variables.h2_b.render("main", 1, ui_variables.black)
-                show_button_right = ui_variables.h2_b.render("game", 1, ui_variables.black)
+                show_button_right = ui_variables.DG_v_small.render("game", 1, ui_variables.black)
                 show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.white)
 
                 show_score_list = list()
@@ -657,13 +657,13 @@ while not done:
                 prop = (show_name_y*0.3) 
 
                 for element in show_score_list:
-                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y)) 
+                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.25), show_name_y)) 
                     show_name_y += prop
                 
 
                 # screen.blit(show_button_left, (20, 37))
                 screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), 45))
-                screen.blit(show_button_right, (int(screen_width*0.9)+10, 37))
+                screen.blit(show_button_right, (int(screen_width*0.91), int(screen_height*0.05)))
 
                 Mouse_x, Mouse_y = pygame.mouse.get_pos()
                 if 40<=Mouse_y<=90 and int(screen_width*0.9)<=Mouse_x<=int(screen_width*0.9)+100:
