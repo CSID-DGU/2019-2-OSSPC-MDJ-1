@@ -622,26 +622,28 @@ while not done:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
 
                 screen.fill(ui_variables.black)
+                background_image()
 
-                # pygame.draw.rect(screen, ui_variables.grey_3, [x,y,w,h])
+                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.3),40,500,50], 2)
+                show_score_title = ui_variables.h2_b.render("Ranking", 1, ui_variables.white)
 
                 show_score_list = list()
 
-                for i in range(0,3):
+                for i in range(0,10):
                     j=0
-                    temp = ui_variables.h5_i.render(str(i+1)+'등'+leaders[i][j] + ' ' + str(leaders[i][j+1]), 1, ui_variables.blue)
+                    temp = ui_variables.h3_i.render('%2d' % ((i+1))+'\t'+'등'+'{:>}'.format(leaders[i][j]) + '\t ' + '{:>}'.format(str(leaders[i][j+1])), 1, ui_variables.white)
                     show_score_list.append(temp)
+                
+                show_name_y = 110
 
-                # for element in show_score_list:
-                    # screen.blit(element, (x,y)) x는 고정, y는 변수로 지정
-
-                # leader_1 = ui_variables.h5_i.render('1st ' + leaders[0][0] + ' ' + str(leaders[0][1]), 1, ui_variables.blue)
-                # leader_2 = ui_variables.h5_i.render('2nd ' + leaders[1][0] + ' ' + str(leaders[1][1]), 1, ui_variables.blue)
-                # leader_3 = ui_variables.h5_i.render('3rd ' + leaders[2][0] + ' ' + str(leaders[2][1]), 1, ui_variables.blue)
-
-                screen.blit(show_score_list[0], (10, 10))
-                screen.blit(show_score_list[1], (10, 23))
-                screen.blit(show_score_list[2], (10, 36))
+<<<<<<< HEAD
+                for element in show_score_list:
+                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y)) 
+                    show_name_y +=40        
+                
+                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.6), 45))
+=======
+          
                 pygame.display.update()
 
 
