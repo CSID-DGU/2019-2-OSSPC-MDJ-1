@@ -656,9 +656,9 @@ while not done:
                 show_name_y = 110
 
                 for element in show_score_list:
-                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y)) 
-                    show_name_y +=40        
-                
+                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y))
+                    show_name_y +=40
+
                 # screen.blit(show_button_left, (20, 37))
                 screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.6), 45))
                 screen.blit(show_button_right, (int(screen_width*0.9)+10, 37))
@@ -666,7 +666,7 @@ while not done:
                 Mouse_x, Mouse_y = pygame.mouse.get_pos()
                 if 40<=Mouse_y<=90 and int(screen_width*0.9)<=Mouse_x<=int(screen_width*0.9)+100:
                     start = True
-          
+
                 pygame.display.update()
 
 
@@ -687,9 +687,9 @@ while not done:
         screen.fill(ui_variables.white)
         background_image()
 
-        insert_image(image_aco1, 538, 165, 100, 80)
-        insert_image(image_aco2, 640, 140, 110, 110)
-        insert_image(image_aco3, 750, 120, 130, 130)
+        insert_image(image_aco1, screen_width*0.59, screen_height*0.33, 100, 80)
+        insert_image(image_aco2, screen_width*0.71, screen_height*0.28, 110, 110)
+        insert_image(image_aco3, screen_width*0.84, screen_height*0.24, 130, 130)
 
 
         title = ui_variables.DG_big.render("PYTRIS", 1, ui_variables.black)
@@ -707,13 +707,18 @@ while not done:
         else:
             blink = True
 
-        screen.blit(title, (15, 140))
-        screen.blit(title_uni, (320, 150))
+        screen.blit(title, (screen_width*0.04, screen_height*0.3))
+        screen.blit(title_uni, (screen_width*0.38, screen_height*0.3))
         screen.blit(title_start, (screen_width*0.35, screen_height*0.55))
         screen.blit(title_info, (screen_width*0.35, screen_height*0.93))
 
         pygame.draw.rect(screen, ui_variables.black, [830, 10, 40, 20], 2)
         #830~870, 10~30
+        #Mouse_x, Mouse_y = pygame.mouse.get_pos()
+        #if 10<=Mouse_y<=30 and int(screen_width*0.9)<=Mouse_x<=int(screen_width*0.9)+100:
+        #        start = True
+
+        #pygame.display.update()
 
 
         # screen.blit(leader_1, (10, 10))
