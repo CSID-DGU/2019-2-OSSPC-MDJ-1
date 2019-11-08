@@ -655,7 +655,7 @@ while not done:
 
                 show_name_y = 110
 
-                 for element in show_score_list:
+                for element in show_score_list:
                     screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y)) 
                     show_name_y +=40        
                 
