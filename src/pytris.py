@@ -633,7 +633,7 @@ while not done:
             if event.type == QUIT:
                 done = True
             elif event.type == USEREVENT:
-                # pygame.time.set_timer(pygame.USEREVENT, 1000)
+                pygame.time.set_timer(pygame.USEREVENT, 300)
 
                 screen.fill(ui_variables.black)
                 background_image()
@@ -664,13 +664,13 @@ while not done:
                 # screen.blit(show_button_left, (20, 37))
                 screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), 45))
                 screen.blit(show_button_right, (int(screen_width*0.91), int(screen_height*0.05)))
-
-                Mouse_x, Mouse_y = pygame.mouse.get_pos()
-                if 40<=Mouse_y<=90 and int(screen_width*0.9)<=Mouse_x<=int(screen_width*0.9)+100:
+            
+            elif event.type == pygame.MOUSEBUTTONUP:
+                mouse = pygame.mouse.get_pos()          
+                if int(screen_width*0.9)<=mouse[0]<=int(screen_width*0.9)+int(screen_width*0.07) and int(screen_height*0.05)<=mouse[1]<=int(screen_height*0.05)*2 :
                         start = True
             
-
-                pygame.display.update()
+            pygame.display.update()
 
 
     # Start screen
