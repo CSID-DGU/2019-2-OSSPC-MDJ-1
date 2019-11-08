@@ -26,8 +26,10 @@ class ui_variables:
 
     h1_b = pygame.font.Font(font_path_b, 50)
     h2_b = pygame.font.Font(font_path_b, 30)
+    h3_b = pygame.font.Font(font_path_b, 35)
 
     h2_i = pygame.font.Font(font_path_i, 30)
+    h3_i = pygame.font.Font(font_path_i, 24)
     h5_i = pygame.font.Font(font_path_i, 13)
 
     #새 폰트
@@ -48,7 +50,7 @@ class ui_variables:
     tetris_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialTetris.wav")
 
     # Background colors
-    black = (10, 10, 10) #rgb(10, 10, 10)
+    black = (0,0,0) #rgb(10, 10, 10)
     white = (255, 255, 255) #rgb(255, 255, 255)
     grey_1 = (26, 26, 26) #rgb(26, 26, 26)
     grey_2 = (35, 35, 35) #rgb(35, 35, 35)
