@@ -644,13 +644,13 @@ while not done:
 
                 # show_button_left = ui_variables.h2_b.render("main", 1, ui_variables.black)
                 show_button_right = ui_variables.h2_b.render("game", 1, ui_variables.black)
-                show_score_title = ui_variables.h2_b.render("Ranking", 1, ui_variables.white)
+                show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.white)
 
                 show_score_list = list()
 
                 for i in range(0,10):
                     j=0
-                    temp = ui_variables.h3_i.render('%2d' % ((i+1))+'\t'+'등'+'{:>}'.format(leaders[i][j]) + '\t ' + '{:>}'.format(str(leaders[i][j+1])), 1, ui_variables.white)
+                    temp = ui_variables.DG_small.render('%2d' % ((i+1))+'등 '+'{:>6s}'.format(leaders[i][j]) + '   ' + '{:<8s}'.format(str(leaders[i][j+1])), 1, ui_variables.white)
                     show_score_list.append(temp)
 
                 show_name_y = 110
