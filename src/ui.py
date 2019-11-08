@@ -4,6 +4,10 @@ from pygame.locals import *
 pygame.init()
 
 class ui_variables:
+
+    # images
+
+
     # Fonts
     font_path = "../assets/fonts/OpenSans-Light.ttf"
     font_path_b = "../assets/fonts/OpenSans-Bold.ttf"
@@ -29,8 +33,9 @@ class ui_variables:
     h5_i = pygame.font.Font(font_path_i, 13)
 
     #새 폰트
-    DG80 = pygame.font.Font(font_path_DGM, 80)
-    DG20 = pygame.font.Font(font_path_DGM, 20)
+    DG_big = pygame.font.Font(font_path_DGM, 100)
+    DG_small = pygame.font.Font(font_path_DGM, 30)
+
     DGM23 = pygame.font.Font(font_path_DGM, 23)
     DGM13 = pygame.font.Font(font_path_DGM, 13)
 

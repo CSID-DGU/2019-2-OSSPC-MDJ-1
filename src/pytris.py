@@ -30,6 +30,7 @@ screen = pygame.display.set_mode(size)
 pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
 pygame.display.set_caption("PYTRIS™")
 
+
 # Draw block
 def draw_block(x, y, color):
     pygame.draw.rect(
@@ -245,6 +246,15 @@ def background_image():
     picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
     screen.blit(picture,(0,int(screen_height/2)))
 
+# insert image
+def insert_image(image, x, y, r, c):
+    photo = pygame.transform.scale(image, (r, c))
+    screen.blit(photo, (x, y))
+
+# image
+image_aco1 = pygame.image.load('../assets/images/aco1.png')
+image_aco2 = pygame.image.load('../assets/images/aco2.png')
+image_aco3 = pygame.image.load('../assets/images/aco3.png')
 
 # Initial values
 blink = False
@@ -271,6 +281,9 @@ hold_mino = -1 # Holded mino
 
 name_location = 0
 name = [65, 65, 65]
+
+# mouse position
+mousePos = pygame.mouse.get_pos()
 
 with open('leaderboard.txt') as f:
     lines = f.readlines()
@@ -659,12 +672,18 @@ while not done:
                     show_score=True
 
 
+
         # pygame.time.set_timer(pygame.USEREVENT, 300)
         screen.fill(ui_variables.white)
         background_image()
 
-        title = ui_variables.DG80.render("PYTRIS", 1, ui_variables.black)
-        title_uni = ui_variables.DG20.render("in DGU", 1, ui_variables.black)
+        insert_image(image_aco1, 538, 165, 100, 80)
+        insert_image(image_aco2, 640, 140, 110, 110)
+        insert_image(image_aco3, 750, 120, 130, 130)
+
+
+        title = ui_variables.DG_big.render("PYTRIS", 1, ui_variables.black)
+        title_uni = ui_variables.DG_small.render("in DGU", 1, ui_variables.black)
         title_start = ui_variables.DGM23.render("Press space to start", 1, ui_variables.white)
         title_info = ui_variables.DGM13.render("Copyright (c) 2017 Jason Kim All Rights Reserved.", 1, ui_variables.white)
 
@@ -678,11 +697,15 @@ while not done:
         else:
             blink = True
 
-        screen.blit(title, (10, 150))
-        screen.blit(title_uni, (260, 160))
+        screen.blit(title, (15, 140))
+        screen.blit(title_uni, (320, 150))
         screen.blit(title_start, (screen_width*0.35, screen_height*0.55))
         screen.blit(title_info, (screen_width*0.35, screen_height*0.93))
 
+        pygame.draw.rect(screen, ui_variables.black, [830, 10, 40, 20], 2)
+        #830~870, 10~30
+
+                
         # screen.blit(leader_1, (10, 10))
         # screen.blit(leader_2, (10, 23))
         # screen.blit(leader_3, (10, 36))
