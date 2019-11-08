@@ -652,10 +652,10 @@ while not done:
                     j=0
                     temp = ui_variables.h3_i.render('%2d' % ((i+1))+'\t'+'등'+'{:>}'.format(leaders[i][j]) + '\t ' + '{:>}'.format(str(leaders[i][j+1])), 1, ui_variables.white)
                     show_score_list.append(temp)
-                
+
                 show_name_y = 110
 
-                for element in show_score_list:
+                 for element in show_score_list:
                     screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y)) 
                     show_name_y +=40        
                 
@@ -715,7 +715,7 @@ while not done:
         pygame.draw.rect(screen, ui_variables.black, [830, 10, 40, 20], 2)
         #830~870, 10~30
 
-                
+
         # screen.blit(leader_1, (10, 10))
         # screen.blit(leader_2, (10, 23))
         # screen.blit(leader_3, (10, 36))
