@@ -244,7 +244,7 @@ def background_image():
     background = pygame.image.load('../assets/images/backgroundimage.png')
     picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
     screen.blit(picture,(0,int(screen_height/2)))
-    
+
 
 # Initial values
 blink = False
@@ -620,7 +620,7 @@ while not done:
                 done = True
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
-        
+
                 screen.fill(ui_variables.black)
                 background_image()
 
@@ -636,13 +636,16 @@ while not done:
                 
                 show_name_y = 110
 
+<<<<<<< HEAD
                 for element in show_score_list:
                     screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y)) 
                     show_name_y +=40        
                 
                 screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.6), 45))
+=======
+          
                 pygame.display.update()
-        
+
 
     # Start screen
     else:
@@ -660,9 +663,10 @@ while not done:
         screen.fill(ui_variables.white)
         background_image()
 
-        title = ui_variables.h1.render("PYTRIS™", 1, ui_variables.blue)
-        title_start = ui_variables.h5.render("Press space to start", 1, ui_variables.white)
-        title_info = ui_variables.h6.render("Copyright (c) 2017 Jason Kim All Rights Reserved.", 1, ui_variables.white)
+        title = ui_variables.DG80.render("PYTRIS", 1, ui_variables.black)
+        title_uni = ui_variables.DG20.render("in DGU", 1, ui_variables.black)
+        title_start = ui_variables.DGM23.render("Press space to start", 1, ui_variables.white)
+        title_info = ui_variables.DGM13.render("Copyright (c) 2017 Jason Kim All Rights Reserved.", 1, ui_variables.white)
 
         # leader_1 = ui_variables.h5_i.render('1st ' + leaders[0][0] + ' ' + str(leaders[0][1]), 1, ui_variables.grey_1)
         # leader_2 = ui_variables.h5_i.render('2nd ' + leaders[1][0] + ' ' + str(leaders[1][1]), 1, ui_variables.grey_1)
@@ -674,8 +678,10 @@ while not done:
         else:
             blink = True
 
-        screen.blit(title, (0, 120))
-        screen.blit(title_info, (screen_width*0.4, 335))
+        screen.blit(title, (10, 150))
+        screen.blit(title_uni, (260, 160))
+        screen.blit(title_start, (screen_width*0.35, screen_height*0.55))
+        screen.blit(title_info, (screen_width*0.35, screen_height*0.93))
 
         # screen.blit(leader_1, (10, 10))
         # screen.blit(leader_2, (10, 23))
@@ -684,7 +690,7 @@ while not done:
         if not start:
             pygame.display.update()
             clock.tick(3)
-        
+
         #여기에 버튼 만들고 그걸 클릭하면 show_score = True로 해줘야해요!
 
 pygame.quit()
