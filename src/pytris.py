@@ -633,14 +633,14 @@ while not done:
             if event.type == QUIT:
                 done = True
             elif event.type == USEREVENT:
-                pygame.time.set_timer(pygame.USEREVENT, 300)
+                # pygame.time.set_timer(pygame.USEREVENT, 1000)
 
                 screen.fill(ui_variables.black)
                 background_image()
 
                 # pygame.draw.rect(screen, ui_variables.white, [10,40,100,50])
                 pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.9),40,100,50])
-                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.3),40,500,50], 2)
+                # pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.3),40,500,50], 2)
 
                 # show_button_left = ui_variables.h2_b.render("main", 1, ui_variables.black)
                 show_button_right = ui_variables.h2_b.render("game", 1, ui_variables.black)
@@ -650,28 +650,29 @@ while not done:
 
                 for i in range(0,10):
                     j=0
-                    temp = ui_variables.h3_i.render('%2d' % ((i+1))+'\t'+'등'+'{:>}'.format(leaders[i][j]) + '\t ' + '{:>}'.format(str(leaders[i][j+1])), 1, ui_variables.white)
+                    temp = ui_variables.h3_i.render('%d' % ((i+1))+'\t'+'등'+'{:>}'.format(leaders[i][j]) + '\t ' + '{:>}'.format(str(leaders[i][j+1])), 1, ui_variables.white)
                     show_score_list.append(temp)
 
-                show_name_y = 110
+                show_name_y = int(screen_height*0.17)
+                prop = (show_name_y*0.3) 
 
                 for element in show_score_list:
                     screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y)) 
-                    show_name_y +=40        
+                    show_name_y += prop
                 
                 # screen.blit(show_button_left, (20, 37))
-                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.6), 45))
+                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), 45))
                 screen.blit(show_button_right, (int(screen_width*0.9)+10, 37))
 
                 Mouse_x, Mouse_y = pygame.mouse.get_pos()
                 if 40<=Mouse_y<=90 and int(screen_width*0.9)<=Mouse_x<=int(screen_width*0.9)+100:
-                    start = True
-          
+                        start = True
+            
                 pygame.display.update()
 
 
     # Start screen
-    elif screen_Start:
+    else:
         for event in pygame.event.get():
             if event.type == QUIT:
                 done = True
