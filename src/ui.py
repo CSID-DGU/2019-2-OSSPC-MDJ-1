@@ -34,6 +34,7 @@ class ui_variables:
 
     #새 폰트
     DG_big = pygame.font.Font(font_path_DGM, 100)
+    DG_v_small = pygame.font.Font(font_path_DGM, 25)
     DG_small = pygame.font.Font(font_path_DGM, 30)
 
     DGM23 = pygame.font.Font(font_path_DGM, 23)
