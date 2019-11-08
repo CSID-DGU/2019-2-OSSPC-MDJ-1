@@ -253,6 +253,7 @@ pause = False
 done = False
 game_over = False
 show_score = False
+screen_Start = True
 
 score = 0
 level = 1
@@ -624,7 +625,12 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image()
 
+                # pygame.draw.rect(screen, ui_variables.white, [10,40,100,50])
+                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.9),40,100,50])
                 pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.3),40,500,50], 2)
+
+                # show_button_left = ui_variables.h2_b.render("main", 1, ui_variables.black)
+                show_button_right = ui_variables.h2_b.render("game", 1, ui_variables.black)
                 show_score_title = ui_variables.h2_b.render("Ranking", 1, ui_variables.white)
 
                 show_score_list = list()
@@ -636,19 +642,23 @@ while not done:
                 
                 show_name_y = 110
 
-<<<<<<< HEAD
                 for element in show_score_list:
                     screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), show_name_y)) 
                     show_name_y +=40        
                 
+                # screen.blit(show_button_left, (20, 37))
                 screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.6), 45))
-=======
+                screen.blit(show_button_right, (int(screen_width*0.9)+10, 37))
+
+                Mouse_x, Mouse_y = pygame.mouse.get_pos()
+                if 40<=Mouse_y<=90 and int(screen_width*0.9)<=Mouse_x<=int(screen_width*0.9)+100:
+                    start = True
           
                 pygame.display.update()
 
 
     # Start screen
-    else:
+    elif screen_Start:
         for event in pygame.event.get():
             if event.type == QUIT:
                 done = True
