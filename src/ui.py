@@ -1,4 +1,4 @@
-import pygame 
+import pygame
 from pygame.locals import *
 
 pygame.init()
@@ -8,6 +8,11 @@ class ui_variables:
     font_path = "../assets/fonts/OpenSans-Light.ttf"
     font_path_b = "../assets/fonts/OpenSans-Bold.ttf"
     font_path_i = "../assets/fonts/Inconsolata/Inconsolata.otf"
+    # 폰트 추가
+    font_path_DOSGothic = "../assets/fonts/DOSGothic.ttf"
+    font_path_DOSSaemmul = "../assets/fonts/DOSSaemmul.ttf"
+    font_path_DGM = "../assets/fonts/DungGeunMo.ttf"
+
 
     h1 = pygame.font.Font(font_path, 50)
     h2 = pygame.font.Font(font_path, 30)
@@ -20,6 +25,13 @@ class ui_variables:
 
     h2_i = pygame.font.Font(font_path_i, 30)
     h5_i = pygame.font.Font(font_path_i, 13)
+
+    #새 폰트
+    DG80 = pygame.font.Font(font_path_DGM, 80)
+    DG20 = pygame.font.Font(font_path_DGM, 20)
+    DGM23 = pygame.font.Font(font_path_DGM, 23)
+    DGM13 = pygame.font.Font(font_path_DGM, 13)
+
 
     # Sounds
     click_sound = pygame.mixer.Sound("../assets/sounds/SFX_ButtonUp.wav")
