@@ -639,7 +639,7 @@ while not done:
                 background_image()
 
                 # pygame.draw.rect(screen, ui_variables.white, [10,40,100,50])
-                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.9),int(screen_height*0.05),int(screen_width*0.07),int(screen_height*0.05)])
+                # pygame.draw.ellipse(screen, ui_variables.white, [int(screen_width*0.9),int(screen_height*0.06),int(screen_width*0.07),int(screen_height*0.06)])
                 # pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.3),40,500,50], 2)
 
                 # show_button_left = ui_variables.h2_b.render("main", 1, ui_variables.black)
@@ -662,12 +662,22 @@ while not done:
                 
 
                 # screen.blit(show_button_left, (20, 37))
-                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), 45))
-                screen.blit(show_button_right, (int(screen_width*0.91), int(screen_height*0.05)))
+                pygame.draw.line(screen, ui_variables.white, 
+                [0, int(screen_height*0.055)],
+                [screen_width,int(screen_height*0.055)],2)
+
+                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), int(screen_height*0.06)))
+                
+                pygame.draw.line(screen, ui_variables.white, 
+                [0, int(screen_height*0.125)],
+                [screen_width,int(screen_height*0.125)],2)
+                
+                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.32)+int(int(screen_width*0.32)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
+                screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.44), show_name_y+prop))
             
             elif event.type == pygame.MOUSEBUTTONUP:
                 mouse = pygame.mouse.get_pos()          
-                if int(screen_width*0.9)<=mouse[0]<=int(screen_width*0.9)+int(screen_width*0.07) and int(screen_height*0.05)<=mouse[1]<=int(screen_height*0.05)*2 :
+                if int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)<=mouse[0]<=int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)+int(screen_width*0.07) and show_name_y+prop<=mouse[1]<=int(show_name_y+prop+int(screen_height*0.06)):
                         start = True
             
             pygame.display.update()
