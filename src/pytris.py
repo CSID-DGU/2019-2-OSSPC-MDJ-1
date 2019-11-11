@@ -330,6 +330,10 @@ while not done:
                     ui_variables.click_sound.play()
                     pygame.time.set_timer(pygame.USEREVENT, 1)
 
+            # ?? pause 후 q 누르면 창 나가짐
+                elif event.key == K_q:
+                    done = True
+
     # Game screen
     elif start:
         for event in pygame.event.get():
@@ -632,6 +636,12 @@ while not done:
 
             if event.type == QUIT:
                 done = True
+
+            # Q누르면 창 나가짐
+            elif event.type == KEYDOWN:
+                if event.key == K_q:
+                    done = True
+
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
 
@@ -693,6 +703,10 @@ while not done:
                     ui_variables.click_sound.play()
                     # start = True
                     show_score=True
+            #Q 누르면 창 나가짐
+                elif event.key == K_q:
+                    done = True
+
 
 
 
