@@ -1,3 +1,4 @@
+
 # PYTRIS™ Copyright (c) 2017 Jason Kim All Rights Reserved.
 
 import pygame
@@ -638,12 +639,7 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image()
 
-                # pygame.draw.rect(screen, ui_variables.white, [10,40,100,50])
-                # pygame.draw.ellipse(screen, ui_variables.white, [int(screen_width*0.9),int(screen_height*0.06),int(screen_width*0.07),int(screen_height*0.06)])
-                # pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.3),40,500,50], 2)
-
-                # show_button_left = ui_variables.h2_b.render("main", 1, ui_variables.black)
-                show_button_right = ui_variables.DG_v_small.render("game", 1, ui_variables.black)
+                show_button_right = ui_variables.DG_small.render("GAME", 1, ui_variables.black)
                 show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.white)
 
                 show_score_list = list()
@@ -654,32 +650,32 @@ while not done:
                     show_score_list.append(temp)
 
                 show_name_y = int(screen_height*0.17)
-                prop = (show_name_y*0.3) 
+                prop = (show_name_y*0.3)
 
                 for element in show_score_list:
-                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.25), show_name_y)) 
+                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.25), show_name_y))
                     show_name_y += prop
-                
 
-                # screen.blit(show_button_left, (20, 37))
-                pygame.draw.line(screen, ui_variables.white, 
+                # 랭킹글자
+                pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
                 [screen_width,int(screen_height*0.055)],2)
 
-                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), int(screen_height*0.06)))
-                
-                pygame.draw.line(screen, ui_variables.white, 
+                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), int(screen_height*0.065)))
+
+                pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.125)],
                 [screen_width,int(screen_height*0.125)],2)
-                
-                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.32)+int(int(screen_width*0.32)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
-                screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.44), show_name_y+prop))
-            
+
+                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.31)+int(int(screen_width*0.315)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
+                screen.blit(show_button_right, (int(screen_width*0.3225)+int(int(screen_width*0.3225)*0.44), show_name_y*1.085))
+
+            #game 버튼 클릭
             elif event.type == pygame.MOUSEBUTTONUP:
-                mouse = pygame.mouse.get_pos()          
+                mouse = pygame.mouse.get_pos()
                 if int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)<=mouse[0]<=int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)+int(screen_width*0.07) and show_name_y+prop<=mouse[1]<=int(show_name_y+prop+int(screen_height*0.06)):
                         start = True
-            
+
             pygame.display.update()
 
 
