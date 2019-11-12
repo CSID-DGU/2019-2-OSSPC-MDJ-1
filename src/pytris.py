@@ -646,6 +646,7 @@ while not done:
 
     # Manual screen
     elif show_manual:
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 done = True
@@ -669,6 +670,8 @@ while not done:
                 [screen_width,int(screen_height*0.125)],2)
 
 
+                title_start = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.white)
+                screen.blit(title_start, (screen_width*0.37, screen_height*0.75))
 
             elif event.type == KEYDOWN:
                 if event.key == K_SPACE:
@@ -678,6 +681,7 @@ while not done:
                     done = True
 
             pygame.display.update()
+
 
         #screen.fill(ui_variables.white)
 
@@ -689,10 +693,13 @@ while not done:
             if event.type == QUIT:
                 done = True
 
-            # Q누르면 창 나가짐
             elif event.type == KEYDOWN:
+                # Q누르면 창 나가짐
                 if event.key == K_q:
                     done = True
+                #space누르면 매뉴얼 창으로
+                elif event.key == K_SPACE:
+                    show_manual = True
 
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
@@ -700,7 +707,7 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image()
 
-                show_button_right = ui_variables.DG_small.render("GAME", 1, ui_variables.black)
+                show_button_right = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.white)
                 show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.white)
 
                 show_score_list = list()
@@ -727,13 +734,9 @@ while not done:
                 [0, int(screen_height*0.125)],
                 [screen_width,int(screen_height*0.125)],2)
 
-                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.32)+int(int(screen_width*0.32)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
-                screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.44), show_name_y+prop))
-
-            elif event.type == pygame.MOUSEBUTTONUP:
-                mouse = pygame.mouse.get_pos()
-                if int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)<=mouse[0]<=int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)+int(screen_width*0.07) and show_name_y+prop<=mouse[1]<=int(show_name_y+prop+int(screen_height*0.06)):
-                    show_manual = True
+                #pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.32)+int(int(screen_width*0.32)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
+                #screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.2), show_name_y+prop))
+                screen.blit(show_button_right, (screen_width*0.37, screen_height*0.75))
 
             pygame.display.update()
 
@@ -767,7 +770,7 @@ while not done:
 
         title = ui_variables.DG_big.render("PYTRIS", 1, ui_variables.black)
         title_uni = ui_variables.DG_small.render("in DGU", 1, ui_variables.black)
-        title_start = ui_variables.DGM23.render("Press space to start", 1, ui_variables.white)
+        title_start = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.white)
         title_info = ui_variables.DGM13.render("Copyright (c) 2017 Jason Kim All Rights Reserved.", 1, ui_variables.white)
 
         # leader_1 = ui_variables.h5_i.render('1st ' + leaders[0][0] + ' ' + str(leaders[0][1]), 1, ui_variables.grey_1)
@@ -782,7 +785,7 @@ while not done:
 
         screen.blit(title, (screen_width*0.04, screen_height*0.3))
         screen.blit(title_uni, (screen_width*0.36, screen_height*0.3))
-        screen.blit(title_start, (screen_width*0.35, screen_height*0.55))
+        screen.blit(title_start, (screen_width*0.37, screen_height*0.55))
         screen.blit(title_info, (screen_width*0.35, screen_height*0.93))
 
         #pygame.draw.rect(screen, ui_variables.black, [830, 10, 40, 20], 2)
