@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 # PYTRIS™ Copyright (c) 2017 Jason Kim All Rights Reserved.
 
 import pygame
@@ -246,6 +252,13 @@ def background_image():
     picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
     screen.blit(picture,(0,int(screen_height/2)))
 
+#manual image
+def manual_image():
+    manual = pygame.image.load('../assets/images/manual.png')
+    picture2 = pygame.transform.scale(manual, (screen_width, int(screen_height)))
+    #screen.blit(picture2,(0,int(screen_height)))
+    screen.blit(picture2,(0,0))
+    
 # insert image
 def insert_image(image, x, y, r, c):
     photo = pygame.transform.scale(image, (r, c))
@@ -255,6 +268,7 @@ def insert_image(image, x, y, r, c):
 image_aco1 = pygame.image.load('../assets/images/aco1.png')
 image_aco2 = pygame.image.load('../assets/images/aco2.png')
 image_aco3 = pygame.image.load('../assets/images/aco3.png')
+image_manual = pygame.image.load('../assets/images/manual.png')
 
 # Initial values
 blink = False
@@ -263,6 +277,7 @@ pause = False
 done = False
 game_over = False
 show_score = False
+show_manual = False
 screen_Start = True
 
 score = 0
@@ -626,7 +641,43 @@ while not done:
                     else:
                         name[name_location] = 90
                     pygame.time.set_timer(pygame.USEREVENT, 1)
+                    
+    # Manual screen
+    elif show_manual:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                done = True
+                
+            elif event.type == USEREVENT:
+                pygame.time.set_timer(pygame.USEREVENT, 300)
 
+                screen.fill(ui_variables.black)
+                manual_image()
+                
+                show_score_manual = ui_variables.DG_small.render("Manual", 1, ui_variables.white)
+                
+                pygame.draw.line(screen, ui_variables.white, 
+                [0, int(screen_height*0.055)],
+                [screen_width,int(screen_height*0.055)],2)
+
+                screen.blit(show_score_manual, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), int(screen_height*0.06)))
+                
+                pygame.draw.line(screen, ui_variables.white, 
+                [0, int(screen_height*0.125)],
+                [screen_width,int(screen_height*0.125)],2)
+                
+
+            
+            elif event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    start = True
+    
+            pygame.display.update()
+    
+        #screen.fill(ui_variables.white) 
+        
+        
+    # Show score
     elif show_score:
         for event in pygame.event.get():
 
@@ -674,14 +725,16 @@ while not done:
                 
                 pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.32)+int(int(screen_width*0.32)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
                 screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.44), show_name_y+prop))
-            
+                
+               
             elif event.type == pygame.MOUSEBUTTONUP:
                 mouse = pygame.mouse.get_pos()          
                 if int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)<=mouse[0]<=int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)+int(screen_width*0.07) and show_name_y+prop<=mouse[1]<=int(show_name_y+prop+int(screen_height*0.06)):
-                        start = True
+                    show_manual = True
             
             pygame.display.update()
-
+    
+           
 
     # Start screen
     else:
@@ -738,10 +791,17 @@ while not done:
         # screen.blit(leader_2, (10, 23))
         # screen.blit(leader_3, (10, 36))
 
-        if not start:
+        if not show_score:
             pygame.display.update()
             clock.tick(3)
 
         #여기에 버튼 만들고 그걸 클릭하면 show_score = True로 해줘야해요!
 
 pygame.quit()
+
+
+# In[ ]:
+
+
+
+
