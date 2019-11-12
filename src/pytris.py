@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 #!/usr/bin/env python
 # coding: utf-8
 
 # In[1]:
 
+=======
+>>>>>>> a60d88305d23949d056fa910cd25f3405e90f582
 
 # PYTRIS™ Copyright (c) 2017 Jason Kim All Rights Reserved.
 
@@ -252,6 +255,7 @@ def background_image():
     picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
     screen.blit(picture,(0,int(screen_height/2)))
 
+<<<<<<< HEAD
 #manual image
 def manual_image():
     manual = pygame.image.load('../assets/images/manual.png')
@@ -260,6 +264,9 @@ def manual_image():
     screen.blit(picture2,(0,0))
     
 # insert image
+=======
+# insert image x,y 이미지 위치, r이미지 가로 길이, c이미지 세로 길이
+>>>>>>> a60d88305d23949d056fa910cd25f3405e90f582
 def insert_image(image, x, y, r, c):
     photo = pygame.transform.scale(image, (r, c))
     screen.blit(photo, (x, y))
@@ -344,6 +351,10 @@ while not done:
                     pause = False
                     ui_variables.click_sound.play()
                     pygame.time.set_timer(pygame.USEREVENT, 1)
+
+            # ?? pause 후 q 누르면 창 나가짐
+                elif event.key == K_q:
+                    done = True
 
     # Game screen
     elif start:
@@ -683,18 +694,19 @@ while not done:
 
             if event.type == QUIT:
                 done = True
+
+            # Q누르면 창 나가짐
+            elif event.type == KEYDOWN:
+                if event.key == K_q:
+                    done = True
+
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
 
                 screen.fill(ui_variables.black)
                 background_image()
 
-                # pygame.draw.rect(screen, ui_variables.white, [10,40,100,50])
-                # pygame.draw.ellipse(screen, ui_variables.white, [int(screen_width*0.9),int(screen_height*0.06),int(screen_width*0.07),int(screen_height*0.06)])
-                # pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.3),40,500,50], 2)
-
-                # show_button_left = ui_variables.h2_b.render("main", 1, ui_variables.black)
-                show_button_right = ui_variables.DG_v_small.render("game", 1, ui_variables.black)
+                show_button_right = ui_variables.DG_small.render("GAME", 1, ui_variables.black)
                 show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.white)
 
                 show_score_list = list()
@@ -705,33 +717,44 @@ while not done:
                     show_score_list.append(temp)
 
                 show_name_y = int(screen_height*0.17)
-                prop = (show_name_y*0.3) 
+                prop = (show_name_y*0.3)
 
                 for element in show_score_list:
-                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.25), show_name_y)) 
+                    screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.25), show_name_y))
                     show_name_y += prop
-                
 
-                # screen.blit(show_button_left, (20, 37))
-                pygame.draw.line(screen, ui_variables.white, 
+                pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
                 [screen_width,int(screen_height*0.055)],2)
 
-                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), int(screen_height*0.06)))
-                
-                pygame.draw.line(screen, ui_variables.white, 
+                screen.blit(show_score_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), int(screen_height*0.065)))
+
+                pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.125)],
                 [screen_width,int(screen_height*0.125)],2)
+<<<<<<< HEAD
                 
                 pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.32)+int(int(screen_width*0.32)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
                 screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.44), show_name_y+prop))
                 
                
+=======
+
+
+                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.31)+int(int(screen_width*0.315)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
+                screen.blit(show_button_right, (int(screen_width*0.3225)+int(int(screen_width*0.3225)*0.44), show_name_y*1.085))
+
+>>>>>>> a60d88305d23949d056fa910cd25f3405e90f582
             elif event.type == pygame.MOUSEBUTTONUP:
-                mouse = pygame.mouse.get_pos()          
+                mouse = pygame.mouse.get_pos()
                 if int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)<=mouse[0]<=int(screen_width*0.32)+int(int(screen_width*0.32)*0.45)+int(screen_width*0.07) and show_name_y+prop<=mouse[1]<=int(show_name_y+prop+int(screen_height*0.06)):
+<<<<<<< HEAD
                     show_manual = True
             
+=======
+                        start = True
+
+>>>>>>> a60d88305d23949d056fa910cd25f3405e90f582
             pygame.display.update()
     
            
@@ -746,6 +769,10 @@ while not done:
                     ui_variables.click_sound.play()
                     # start = True
                     show_score=True
+            #Q 누르면 창 나가짐
+                elif event.key == K_q:
+                    done = True
+
 
 
 
@@ -753,7 +780,7 @@ while not done:
         screen.fill(ui_variables.white)
         background_image()
 
-        insert_image(image_aco1, screen_width*0.59, screen_height*0.33, 100, 80)
+        insert_image(image_aco1, screen_width*0.59, screen_height*0.33, 100, 100)
         insert_image(image_aco2, screen_width*0.71, screen_height*0.28, 110, 110)
         insert_image(image_aco3, screen_width*0.84, screen_height*0.24, 130, 130)
 
@@ -774,18 +801,11 @@ while not done:
             blink = True
 
         screen.blit(title, (screen_width*0.04, screen_height*0.3))
-        screen.blit(title_uni, (screen_width*0.38, screen_height*0.3))
+        screen.blit(title_uni, (screen_width*0.36, screen_height*0.3))
         screen.blit(title_start, (screen_width*0.35, screen_height*0.55))
         screen.blit(title_info, (screen_width*0.35, screen_height*0.93))
 
-        pygame.draw.rect(screen, ui_variables.black, [830, 10, 40, 20], 2)
-        #830~870, 10~30
-        #Mouse_x, Mouse_y = pygame.mouse.get_pos()
-        #if 10<=Mouse_y<=30 and int(screen_width*0.9)<=Mouse_x<=int(screen_width*0.9)+100:
-        #        start = True
-
-        #pygame.display.update()
-
+        #pygame.draw.rect(screen, ui_variables.black, [830, 10, 40, 20], 2)
 
         # screen.blit(leader_1, (10, 10))
         # screen.blit(leader_2, (10, 23))
