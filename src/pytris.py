@@ -763,9 +763,9 @@ while not done:
         screen.fill(ui_variables.white)
         background_image()
 
-        insert_image(image_aco1, screen_width*0.59, screen_height*0.33, 100, 100)
-        insert_image(image_aco2, screen_width*0.71, screen_height*0.3, 110, 110)
-        insert_image(image_aco3, screen_width*0.84, screen_height*0.29, 130, 130)
+        insert_image(image_aco1, screen_width*0.54, screen_height*0.29, 140, 130)
+        insert_image(image_aco2, screen_width*0.66, screen_height*0.22, 180, 180)
+        insert_image(image_aco3, screen_width*0.8, screen_height*0.18, 210, 210)
 
 
         title = ui_variables.DG_big.render("PYTRIS", 1, ui_variables.black)
