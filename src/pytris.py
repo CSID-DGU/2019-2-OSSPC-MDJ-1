@@ -56,7 +56,7 @@ def draw_board(next, hold, score, level, goal):
     pygame.draw.rect(
         screen,
         ui_variables.white,
-        Rect(204, 0, 96, 374)
+        Rect(294, 0, 96, 374)
     )
 
     # Draw next mino
@@ -64,7 +64,7 @@ def draw_board(next, hold, score, level, goal):
 
     for i in range(4):
         for j in range(4):
-            dx = 220 + block_size * j
+            dx = 310 + block_size * j
             dy = 140 + block_size * i
             if grid_n[i][j] != 0:
                 pygame.draw.rect(
@@ -79,7 +79,7 @@ def draw_board(next, hold, score, level, goal):
     if hold_mino != -1:
         for i in range(4):
             for j in range(4):
-                dx = 220 + block_size * j
+                dx = 310 + block_size * j
                 dy = 50 + block_size * i
                 if grid_h[i][j] != 0:
                     pygame.draw.rect(
@@ -103,21 +103,28 @@ def draw_board(next, hold, score, level, goal):
     goal_value = ui_variables.h4.render(str(goal), 1, ui_variables.black)
 
     # Place texts
-    screen.blit(text_hold, (215, 14))
-    screen.blit(text_next, (215, 104))
-    screen.blit(text_score, (215, 194))
-    screen.blit(score_value, (220, 210))
-    screen.blit(text_level, (215, 254))
-    screen.blit(level_value, (220, 270))
-    screen.blit(text_goal, (215, 314))
-    screen.blit(goal_value, (220, 330))
+    screen.blit(text_hold, (305, 14))
+    screen.blit(text_next, (305, 104))
+    screen.blit(text_score, (305, 194))
+    screen.blit(score_value, (305, 210))
+    screen.blit(text_level, (305, 254))
+    screen.blit(level_value, (310, 270))
+    screen.blit(text_goal, (305, 314))
+    screen.blit(goal_value, (310, 330))
 
-    # Draw board
+    # Draw board - original
     for x in range(width):
         for y in range(height):
-            dx = 17 + block_size * x
+            dx = 107 + block_size * x
             dy = 17 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
+            
+    ########## Draw board - multi mode ##########
+    for i in range(width):
+        for j in range(height):
+            di = 707 + block_size * i
+            dj = 17 + block_size * j
+            draw_block(di, dj, ui_variables.t_color[matrix[i][j + 1]])
 
 # Draw a tetrimino
 def draw_mino(x, y, mino, r):
@@ -343,7 +350,7 @@ while not done:
                     ui_variables.click_sound.play()
                     pygame.time.set_timer(pygame.USEREVENT, 1)
 
-            # ?? pause 후 q 누르면 창 나가짐
+            # pause 후 q 누르면 창 나가짐
                 elif event.key == K_q:
                     done = True
 
@@ -763,8 +770,8 @@ while not done:
         screen.fill(ui_variables.white)
         background_image()
 
-        insert_image(image_aco1, screen_width*0.54, screen_height*0.29, 140, 130)
-        insert_image(image_aco2, screen_width*0.66, screen_height*0.22, 180, 180)
+        insert_image(image_aco1, screen_width*0.52, screen_height*0.29, 150, 130)
+        insert_image(image_aco2, screen_width*0.65, screen_height*0.22, 180, 180)
         insert_image(image_aco3, screen_width*0.8, screen_height*0.18, 210, 210)
 
 
