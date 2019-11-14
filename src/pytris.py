@@ -57,6 +57,7 @@ def draw_board(next, hold, score, level, goal):
         screen,
         ui_variables.white,
         Rect(294, 0, 96, 374)
+        #Rect(364, 0, 96, 374)
     )
 
     # Draw next mino
@@ -118,7 +119,7 @@ def draw_board(next, hold, score, level, goal):
             dx = 107 + block_size * x
             dy = 17 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
-            
+
     ########## Draw board - multi mode ##########
     for i in range(width):
         for j in range(height):
