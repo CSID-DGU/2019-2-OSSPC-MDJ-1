@@ -21,7 +21,8 @@ for m in get_monitors():
     screen_height = int(m.height*0.7)
 
 # Define
-block_size = 17 # Height, width of single block
+#block_size = 17 # Height, width of single block
+block_size = 25
 width = 10 # Board width
 height = 20 # Board height
 framerate = 30 # Bigger -> Slower
@@ -52,12 +53,18 @@ def draw_block(x, y, color):
 def draw_single_board(next, hold, score, level, goal):
     screen.fill(ui_variables.grey_1)
 
-    # Draw sidebar
+    # Draw sidebar _ right
     pygame.draw.rect(
         screen,
         ui_variables.white,
-        Rect(294, 0, 96, 374)
-        #Rect(364, 0, 96, 374)
+        Rect(screen_width*0.7, screen_height*0.1, 96, 500)
+    )
+
+    # Draw sidebar _ left
+    pygame.draw.rect(
+        screen,
+        ui_variables.white,
+        Rect(screen_width*0.24, screen_height*0.1, 96, 500)
     )
 
     # Draw next mino
@@ -65,8 +72,9 @@ def draw_single_board(next, hold, score, level, goal):
 
     for i in range(4):
         for j in range(4):
-            dx = 310 + block_size * j
-            dy = 140 + block_size * i
+            # 기존 각각 310, 140
+            dx = screen_width*0.71  + block_size * j
+            dy = screen_height*0.27 + block_size * i
             if grid_n[i][j] != 0:
                 pygame.draw.rect(
                     screen,
@@ -80,8 +88,10 @@ def draw_single_board(next, hold, score, level, goal):
     if hold_mino != -1:
         for i in range(4):
             for j in range(4):
-                dx = 310 + block_size * j
-                dy = 50 + block_size * i
+                #dx = 310 + block_size * j
+                #dy = 50 + block_size * i
+                dx = screen_width*0.25 + block_size * j
+                dy = screen_height*0.27 + block_size * i
                 if grid_h[i][j] != 0:
                     pygame.draw.rect(
                         screen,
@@ -94,30 +104,38 @@ def draw_single_board(next, hold, score, level, goal):
         score = 999999
 
     # Draw texts
-    text_hold = ui_variables.h5.render("HOLD", 1, ui_variables.black)
-    text_next = ui_variables.h5.render("NEXT", 1, ui_variables.black)
-    text_score = ui_variables.h5.render("SCORE", 1, ui_variables.black)
-    score_value = ui_variables.h4.render(str(score), 1, ui_variables.black)
-    text_level = ui_variables.h5.render("LEVEL", 1, ui_variables.black)
-    level_value = ui_variables.h4.render(str(level), 1, ui_variables.black)
-    text_goal = ui_variables.h5.render("GOAL", 1, ui_variables.black)
-    goal_value = ui_variables.h4.render(str(goal), 1, ui_variables.black)
+    text_hold = ui_variables.DG_v_small.render("HOLD", 1, ui_variables.black)
+    text_next = ui_variables.DG_v_small.render("NEXT", 1, ui_variables.black)
+    text_score = ui_variables.DG_v_small.render("SCORE", 1, ui_variables.black)
+    score_value = ui_variables.DG_v_small.render(str(score), 1, ui_variables.black)
+    text_level = ui_variables.DG_v_small.render("LEVEL", 1, ui_variables.black)
+    level_value = ui_variables.DG_v_small.render(str(level), 1, ui_variables.black)
+    text_goal = ui_variables.DG_v_small.render("GOAL", 1, ui_variables.black)
+    goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.black)
 
     # Place texts
-    screen.blit(text_hold, (305, 14))
-    screen.blit(text_next, (305, 104))
-    screen.blit(text_score, (305, 194))
-    screen.blit(score_value, (305, 210))
-    screen.blit(text_level, (305, 254))
-    screen.blit(level_value, (310, 270))
-    screen.blit(text_goal, (305, 314))
-    screen.blit(goal_value, (310, 330))
+    #screen.blit(text_hold, (305, 14))
+    #screen.blit(text_next, (305, 104))
+    #screen.blit(text_score, (305, 194))
+    #screen.blit(score_value, (305, 210))
+    #screen.blit(text_level, (305, 254))
+    #screen.blit(level_value, (310, 270))
+    #screen.blit(text_goal, (305, 314))
+    #screen.blit(goal_value, (310, 330))
+    screen.blit(text_hold, (screen_width*0.25, screen_height*0.2))
+    screen.blit(text_level, (screen_width*0.25, screen_height*0.55))
+    screen.blit(level_value, (screen_width*0.25, screen_height*0.62))
+    screen.blit(text_goal, (screen_width*0.25, screen_height*0.75))
+    screen.blit(goal_value, (screen_width*0.25, screen_height*0.82))
+    screen.blit(text_next, (screen_width*0.71, screen_height*0.2))
+    screen.blit(text_score, (screen_width*0.71, screen_height*0.6))
+    screen.blit(score_value, (screen_width*0.71, screen_height*0.67))
 
-    # Draw board - original
+    # Draw board
     for x in range(width):
         for y in range(height):
-            dx = 107 + block_size * x
-            dy = 17 + block_size * y
+            dx = screen_width*0.4 + block_size * x
+            dy = screen_height*0.1 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
 
 # Draw game screen
@@ -406,7 +424,10 @@ while not done:
                 done = True
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
-                draw_board(next_mino, hold_mino, score, level, goal)
+
+                ########### single / multi 조건 달아야함 ###########
+                draw_single_board(next_mino, hold_mino, score, level, goal)
+                draw_multi_board(next_mino, hold_mino, score, level, goal)
 
                 pause_text = ui_variables.h2_b.render("PAUSED", 1, ui_variables.white)
                 pause_start = ui_variables.h5.render("Press esc to continue", 1, ui_variables.white)
@@ -430,6 +451,7 @@ while not done:
                     done = True
 
     # Game screen
+    # Start_single screen
     # Start_single screen
     elif start_single:
         for event in pygame.event.get():
@@ -838,13 +860,18 @@ while not done:
                 done = True
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
-                over_text_1 = ui_variables.h2_b.render("GAME", 1, ui_variables.white)
-                over_text_2 = ui_variables.h2_b.render("OVER", 1, ui_variables.white)
-                over_start = ui_variables.h5.render("Press return to continue", 1, ui_variables.white)
+                over_text_1 = ui_variables.DG_big.render("GAME", 1, ui_variables.white)
+                over_text_2 = ui_variables.DG_big.render("OVER", 1, ui_variables.white)
+                over_start = ui_variables.DG_v_small.render("Press return to continue", 1, ui_variables.white)
 
-                draw_board(next_mino, hold_mino, score, level, goal)
-                screen.blit(over_text_1, (58, 75))
-                screen.blit(over_text_2, (62, 105))
+                ########### single / multi 조건 달아야함 ###########
+                draw_multi_board(next_mino, hold_mino, score, level, goal)
+                draw_single_board(next_mino, hold_mino, score, level, goal)
+
+                #screen.blit(over_text_1, (58, 75))
+                #screen.blit(over_text_2, (62, 105))
+                screen.blit(over_text_1, (screen_width*0.42, screen_height*0.3))
+                screen.blit(over_text_2, (screen_width*0.42, screen_height*0.43))
 
                 name_1 = ui_variables.h2_i.render(chr(name[0]), 1, ui_variables.white)
                 name_2 = ui_variables.h2_i.render(chr(name[1]), 1, ui_variables.white)
@@ -933,6 +960,8 @@ while not done:
                     else:
                         name[name_location] = 90
                     pygame.time.set_timer(pygame.USEREVENT, 1)
+                elif event.key == K_q:
+                    done = True
 
     # Manual screen
     elif show_manual:
@@ -978,9 +1007,6 @@ while not done:
                     done = True
 
             pygame.display.update()
-
-
-        #screen.fill(ui_variables.white)
 
 
     # Show score
