@@ -51,20 +51,21 @@ def draw_block(x, y, color):
 
 # draw single board
 def draw_single_board(next, hold, score, level, goal):
-    screen.fill(ui_variables.grey_1)
+    screen.fill(ui_variables.black)
+    background_image()
 
     # Draw sidebar _ right
     pygame.draw.rect(
         screen,
         ui_variables.white,
-        Rect(screen_width*0.7, screen_height*0.1, 96, 500)
+        Rect(screen_width*0.68, screen_height*0.1, 120, 500)
     )
 
     # Draw sidebar _ left
     pygame.draw.rect(
         screen,
         ui_variables.white,
-        Rect(screen_width*0.24, screen_height*0.1, 96, 500)
+        Rect(screen_width*0.24, screen_height*0.1, 120, 500)
     )
 
     # Draw next mino
@@ -127,9 +128,9 @@ def draw_single_board(next, hold, score, level, goal):
     screen.blit(level_value, (screen_width*0.25, screen_height*0.62))
     screen.blit(text_goal, (screen_width*0.25, screen_height*0.75))
     screen.blit(goal_value, (screen_width*0.25, screen_height*0.82))
-    screen.blit(text_next, (screen_width*0.71, screen_height*0.2))
-    screen.blit(text_score, (screen_width*0.71, screen_height*0.6))
-    screen.blit(score_value, (screen_width*0.71, screen_height*0.67))
+    screen.blit(text_next, (screen_width*0.69, screen_height*0.2))
+    screen.blit(text_score, (screen_width*0.69, screen_height*0.65))
+    screen.blit(score_value, (screen_width*0.69, screen_height*0.72))
 
     # Draw board
     for x in range(width):
@@ -140,7 +141,8 @@ def draw_single_board(next, hold, score, level, goal):
 
 # Draw game screen
 def draw_multi_board(next, hold, score, level, goal):
-    screen.fill(ui_variables.grey_1)
+    screen.fill(ui_variables.black)
+
 
     # Draw sidebar
     pygame.draw.rect(
