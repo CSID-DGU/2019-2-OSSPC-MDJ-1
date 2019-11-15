@@ -979,12 +979,25 @@ while not done:
                 manual_image()
 
                 show_score_manual = ui_variables.DG_small.render("Manual", 1, ui_variables.white)
+                show_desc1_manual = ui_variables.DGM23.render("Pytris는 테트리스 게임으로 총 7가지 모양의 블록이 위에서 아래로", 1, ui_variables.white)
+                show_desc2_manual = ui_variables.DGM23.render("떨어질 때 블록을 회전, 이동, 낙하 시켜 빈 곳으로 블록을 끼워 넣어", 1, ui_variables.white)
+                show_desc3_manual = ui_variables.DGM23.render("한 라인을 채우면 라인이 제거되면서 점수를 얻는 방식입니다.", 1, ui_variables.white)
+
+                show_function_manual = ui_variables.DGM23.render("기능",1, ui_variables.white)
+                show_key_manual = ui_variables.DGM23.render("키(싱글/멀티)",1, ui_variables.white)
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
                 [screen_width,int(screen_height*0.055)],2)
 
                 screen.blit(show_score_manual, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), int(screen_height*0.06)))
+
+                screen.blit(show_desc1_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.15)))
+                screen.blit(show_desc2_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.2)))
+                screen.blit(show_desc3_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.25)))
+
+                screen.blit(show_function_manual, (int(screen_width*0.1)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
+                screen.blit(show_key_manual, (int(screen_width*0.2.3)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.125)],
