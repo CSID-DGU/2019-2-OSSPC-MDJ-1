@@ -979,12 +979,19 @@ while not done:
                 manual_image()
 
                 show_score_manual = ui_variables.DG_small.render("Manual", 1, ui_variables.white)
+                show_desc1_manual = ui_variables.DG_small.render("Pytris는 테트리스 게임으로 총 7가지 모양의 블록이 위에서 아래로 떨어질", 1, ui_variables.white)
+                show_desc2_manual = ui_variables.DG_small.render("때 블록을 회전, 이동, 낙하 시켜 빈 곳으로 블록을 끼워 넣어 한 라인을", 1, ui_variables.white)
+                show_desc3_manual = ui_variables.DG_small.render("채우면 라인이 제거되면서 점수를 얻는 방식입니다.", 1, ui_variables.white)
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
                 [screen_width,int(screen_height*0.055)],2)
 
                 screen.blit(show_score_manual, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.5), int(screen_height*0.06)))
+
+                screen.blit(show_desc1_manual, (int(screen_width*0.1)+int(int(screen_width*0.1)*0.5), int(screen_height*0.12)))
+                screen.blit(show_desc2_manual, (int(screen_width*0.1)+int(int(screen_width*0.1)*0.5), int(screen_height*0.2)))
+                screen.blit(show_desc3_manual, (int(screen_width*0.1)+int(int(screen_width*0.1)*0.5), int(screen_height*0.2.8)))
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.125)],
