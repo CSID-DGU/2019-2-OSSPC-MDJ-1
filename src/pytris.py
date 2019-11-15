@@ -983,8 +983,8 @@ while not done:
                 show_desc2_manual = ui_variables.DGM23.render("떨어질 때 블록을 회전, 이동, 낙하 시켜 빈 곳으로 블록을 끼워 넣어", 1, ui_variables.white)
                 show_desc3_manual = ui_variables.DGM23.render("한 라인을 채우면 라인이 제거되면서 점수를 얻는 방식입니다.", 1, ui_variables.white)
 
-                show_function_manual = ui_variables.DGM23.render("기능")
-                show_key_manual = ui.variables.DGM23.render("키(싱글/멀티)")
+                show_function_manual = ui_variables.DGM23.render("기능",1, ui_variables.white)
+                show_key_manual = ui_variables.DGM23.render("키(싱글/멀티)",1, ui_variables.white)
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
@@ -996,8 +996,8 @@ while not done:
                 screen.blit(show_desc2_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.2)))
                 screen.blit(show_desc3_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.25)))
 
-                screen.blit(show_function_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.20)))
-                screen.blit(show_key_manual, (int(screen_width*0.1+int(int(screen_width*0.1)*0.5), int(screen_height*0.20)))
+                screen.blit(show_function_manual, (int(screen_width*0.1)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
+                screen.blit(show_key_manual, (int(screen_width*0.2.3)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.125)],
