@@ -997,7 +997,7 @@ while not done:
                 screen.blit(show_desc3_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.25)))
 
                 screen.blit(show_function_manual, (int(screen_width*0.1)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
-                screen.blit(show_key_manual, (int(screen_width*0.2.3)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
+                screen.blit(show_key_manual, (int(screen_width*0.23)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.125)],
