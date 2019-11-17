@@ -74,7 +74,7 @@ def draw_single_board(next, hold, score, level, goal):
     for i in range(4):
         for j in range(4):
             # 기존 각각 310, 140
-            dx = screen_width*0.71  + block_size * j
+            dx = screen_width*0.692  + block_size * j
             dy = screen_height*0.27 + block_size * i
             if grid_n[i][j] != 0:
                 pygame.draw.rect(
@@ -91,7 +91,7 @@ def draw_single_board(next, hold, score, level, goal):
             for j in range(4):
                 #dx = 310 + block_size * j
                 #dy = 50 + block_size * i
-                dx = screen_width*0.25 + block_size * j
+                dx = screen_width*0.252 + block_size * j
                 dy = screen_height*0.27 + block_size * i
                 if grid_h[i][j] != 0:
                     pygame.draw.rect(
@@ -431,8 +431,8 @@ while not done:
                 draw_single_board(next_mino, hold_mino, score, level, goal)
                 draw_multi_board(next_mino, hold_mino, score, level, goal)
 
-                pause_text = ui_variables.h2_b.render("PAUSED", 1, ui_variables.white)
-                pause_start = ui_variables.h5.render("Press esc to continue", 1, ui_variables.white)
+                pause_text = ui_variables.DG_small.render("PAUSED", 1, ui_variables.white)
+                pause_start = ui_variables.DG_small.render("Press esc to continue", 1, ui_variables.white)
 
                 screen.blit(pause_text, (43, 100))
                 if blink:
