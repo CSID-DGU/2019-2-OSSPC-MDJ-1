@@ -381,7 +381,7 @@ screen_Start = True
 game_mode = False
 score = 0
 level = 1
-goal = level * 5
+goal = 1
 bottom_count = 0
 hard_drop = False
 
@@ -974,12 +974,32 @@ while not done:
                 if event.key == K_q:
                     done = True
                 #space누르면 매뉴얼 창으로
-                elif event.key == K_SPACE:
-                    #여기 밑에다가 게임 속도 if 문으로 넣기
-                    start_single = True 
+                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_e]:
+                    start_single = True
+                    level = 1
+                    goal = level * 5
+                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_r]:
+                    level = 5
+                    start_single = True
+                    goal = level * 5
+                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_t]:
+                    level = 10
+                    start_single = True
+                    goal = level * 5
 
-                elif event.key == K_m:
+                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_e]:
                     start_mutlti= True
+                    level = 1
+                    goal = level * 5
+                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_r]:
+                    level = 5
+                    goal = level * 5
+                    start_multi = True
+                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_t]:
+                    level = 10
+                    start_multi = True
+                    goal = level * 5
+
 
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
@@ -987,7 +1007,7 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image()
 
-                game_mode_title = ui_variables.DG_small.render("게임옵션설정", 1, ui_variables.white)
+                game_mode_title = ui_variables.DG_small.render("게임옵션설정(두개의 키를 동시에 눌러주세요!)", 1, ui_variables.white)
                 game_mode_choice = ui_variables.DG_v_small.render("게임모드설정", 1, ui_variables.white)
                 game_mode_speed = ui_variables.DG_v_small.render("게임속도설정", 1, ui_variables.white)
                 
@@ -1008,7 +1028,7 @@ while not done:
                 [0, int(screen_height*0.055)],
                 [screen_width,int(screen_height*0.055)],2)
 
-                screen.blit(game_mode_title, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.4), int(screen_height*0.065)))
+                screen.blit(game_mode_title, (int(screen_width*0.1)+int(int(screen_width*0.3)*0.4), int(screen_height*0.065)))
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.125)],
