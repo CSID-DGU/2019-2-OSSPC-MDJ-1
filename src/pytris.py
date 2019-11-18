@@ -356,7 +356,6 @@ def manual_image():
     #screen.blit(picture2,(0,int(screen_height)))
     screen.blit(picture2,(0,0))
 
-# insert image
 # insert image x,y 이미지 위치, r이미지 가로 길이, c이미지 세로 길이
 def insert_image(image, x, y, r, c):
     photo = pygame.transform.scale(image, (r, c))
@@ -379,10 +378,10 @@ game_over = False
 show_score = False
 show_manual = False
 screen_Start = True
-
+game_mode = False
 score = 0
 level = 1
-goal = level * 5
+goal = 1
 bottom_count = 0
 hard_drop = False
 
@@ -453,7 +452,6 @@ while not done:
                     done = True
 
     # Game screen
-    # Start_single screen
     # Start_single screen
     elif start_single:
         for event in pygame.event.get():
@@ -965,12 +963,117 @@ while not done:
                 elif event.key == K_q:
                     done = True
 
+    elif game_mode:
+
+        for event in pygame.event.get():
+
+            if event.type == QUIT:
+                done = True
+            elif event.type == KEYDOWN:
+                # Q누르면 창 나가짐
+                if event.key == K_q:
+                    done = True
+                #space누르면 매뉴얼 창으로
+                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_e]:
+                    start_single = True
+                    level = 1
+                    goal = level * 5
+                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_r]:
+                    level = 5
+                    start_single = True
+                    goal = level * 5
+                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_t]:
+                    level = 10
+                    start_single = True
+                    goal = level * 5
+
+                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_e]:
+                    start_mutlti= True
+                    level = 1
+                    goal = level * 5
+                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_r]:
+                    level = 5
+                    goal = level * 5
+                    start_multi = True
+                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_t]:
+                    level = 10
+                    start_multi = True
+                    goal = level * 5
+
+
+            elif event.type == USEREVENT:
+                pygame.time.set_timer(pygame.USEREVENT, 300)
+
+                screen.fill(ui_variables.black)
+                background_image()
+
+                game_mode_title = ui_variables.DG_small.render("게임옵션설정(두개의 키를 동시에 눌러주세요!)", 1, ui_variables.white)
+                game_mode_choice = ui_variables.DG_v_small.render("게임모드설정", 1, ui_variables.white)
+                game_mode_speed = ui_variables.DG_v_small.render("게임속도설정", 1, ui_variables.white)
+                
+                game_mode_single = ui_variables.DG_v_small.render("● Single 모드 (S키)", 1, ui_variables.white)
+                game_mode_single_des = ui_variables.DG_v_small.render("혼자서 재미있게 하기!!", 1, ui_variables.white)
+                game_mode_multi = ui_variables.DG_v_small.render("● Multi 모드 (M키)", 1, ui_variables.white)
+                game_mode_multi_des = ui_variables.DG_v_small.render("둘이서 재미있게 하기!!", 1, ui_variables.white)
+
+                game_speed_easy = ui_variables.DG_v_small.render("● 아코 모드(E키)", 1, ui_variables.white)
+                game_speed_normal = ui_variables.DG_v_small.render("● 엉아코 모드(R키)", 1, ui_variables.white)
+                game_speed_hard = ui_variables.DG_v_small.render("● 졸업코 모드(T키)", 1, ui_variables.white)
+
+                game_speed_easy_des = ui_variables.DG_v_small.render("EASY 모드!", 1, ui_variables.white)
+                game_speed_normal_des = ui_variables.DG_v_small.render("NORMAL 모드!!", 1, ui_variables.white)
+                game_speed_hard_des = ui_variables.DG_v_small.render("HARD 모드!!!", 1, ui_variables.white)
+                
+                pygame.draw.line(screen, ui_variables.white,
+                [0, int(screen_height*0.055)],
+                [screen_width,int(screen_height*0.055)],2)
+
+                screen.blit(game_mode_title, (int(screen_width*0.1)+int(int(screen_width*0.3)*0.4), int(screen_height*0.065)))
+
+                pygame.draw.line(screen, ui_variables.white,
+                [0, int(screen_height*0.125)],
+                [screen_width,int(screen_height*0.125)],2)
+
+                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.175), int(screen_height*0.2), int(screen_width*0.2), int(screen_height*0.075)], 2)
+                pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.625), int(screen_height*0.2), int(screen_width*0.2), int(screen_height*0.075)], 2)
+
+                screen.blit(game_mode_choice, (int(screen_width*0.198), int(screen_height*0.215)))
+                screen.blit(game_mode_speed, (int(screen_width*0.655), int(screen_height*0.215)))
+
+                screen.blit(game_mode_single, (int(screen_width*0.15), int(screen_height*0.35)))
+                screen.blit(game_mode_multi, (int(screen_width*0.15), int(screen_height*0.55)))
+                screen.blit(game_mode_single_des, (int(screen_width*0.179), int(screen_height*0.4)))
+                screen.blit(game_mode_multi_des, (int(screen_width*0.179), int(screen_height*0.6)))
+
+                screen.blit(game_speed_easy, (int(screen_width*0.6), int(screen_height*0.3)))
+                screen.blit(game_speed_normal, (int(screen_width*0.6), int(screen_height*0.45)))
+                screen.blit(game_speed_hard, (int(screen_width*0.6), int(screen_height*0.6)))
+
+                screen.blit(game_speed_easy_des, (int(screen_width*0.65), int(screen_height*0.35)))
+                screen.blit(game_speed_normal_des, (int(screen_width*0.65), int(screen_height*0.5)))
+                screen.blit(game_speed_hard_des, (int(screen_width*0.65), int(screen_height*0.65)))
+
+                insert_image(image_aco1, int(screen_width*0.79), int(screen_height*0.295), int(screen_width*0.1), int(screen_height*0.1))
+                insert_image(image_aco2, int(screen_width*0.8), int(screen_height*0.445), int(screen_width*0.1), int(screen_height*0.1))
+                insert_image(image_aco3, int(screen_width*0.8), int(screen_height*0.595), int(screen_width*0.1), int(screen_height*0.1))
+
+
+            
+            pygame.display.update() 
+   
     # Manual screen
     elif show_manual:
 
         for event in pygame.event.get():
             if event.type == QUIT:
                 done = True
+            
+            elif event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    game_mode = True
+
+                elif event.key == K_q:
+                    done = True
 
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
@@ -1003,29 +1106,14 @@ while not done:
                 [0, int(screen_height*0.125)],
                 [screen_width,int(screen_height*0.125)],2)
 
-
                 title_start = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.white)
                 screen.blit(title_start, (screen_width*0.37, screen_height*0.75))
 
-            elif event.type == KEYDOWN:
-                ######## space -> single mode // m -> multi mode
-                if event.key == K_SPACE:
-                    #start = True
-                    # 아래 start_single 대신 mode 선택창 으로 넘어가는 거!
-                    start_single = True
-
-                # m 누르면 멀티모드
-                elif event.key == K_m:
-                    start_multi = True
-                #Q누르면 창 나가짐
-                elif event.key == K_q:
-                    done = True
-
             pygame.display.update()
-
 
     # Show score
     elif show_score:
+
         for event in pygame.event.get():
 
             if event.type == QUIT:
@@ -1077,9 +1165,7 @@ while not done:
                 screen.blit(show_button_right, (screen_width*0.37, screen_height*0.75))
 
             pygame.display.update()
-
-
-
+   
     # Start screen
     else:
         for event in pygame.event.get():
@@ -1088,7 +1174,6 @@ while not done:
             elif event.type == KEYDOWN:
                 if event.key == K_SPACE:
                     ui_variables.click_sound.play()
-                    # start = True
                     show_score=True
             #Q 누르면 창 나가짐
                 elif event.key == K_q:
@@ -1111,10 +1196,6 @@ while not done:
         title_start = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.white)
         title_info = ui_variables.DGM13.render("Copyright (c) 2017 Jason Kim All Rights Reserved.", 1, ui_variables.white)
 
-        # leader_1 = ui_variables.h5_i.render('1st ' + leaders[0][0] + ' ' + str(leaders[0][1]), 1, ui_variables.grey_1)
-        # leader_2 = ui_variables.h5_i.render('2nd ' + leaders[1][0] + ' ' + str(leaders[1][1]), 1, ui_variables.grey_1)
-        # leader_3 = ui_variables.h5_i.render('3rd ' + leaders[2][0] + ' ' + str(leaders[2][1]), 1, ui_variables.grey_1)
-
         if blink:
             screen.blit(title_start, (92, 195))
             blink = False
@@ -1126,11 +1207,6 @@ while not done:
         screen.blit(title_start, (screen_width*0.37, screen_height*0.55))
         screen.blit(title_info, (screen_width*0.35, screen_height*0.93))
 
-        #pygame.draw.rect(screen, ui_variables.black, [830, 10, 40, 20], 2)
-
-        # screen.blit(leader_1, (10, 10))
-        # screen.blit(leader_2, (10, 23))
-        # screen.blit(leader_3, (10, 36))
 
         if not show_score:
             pygame.display.update()
