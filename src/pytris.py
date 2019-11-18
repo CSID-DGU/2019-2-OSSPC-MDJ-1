@@ -139,7 +139,7 @@ def draw_single_board(next, hold, score, level, goal):
             dy = screen_height*0.1 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
 
-# Draw game screen
+# Draw multi board
 def draw_multi_board(next, hold, score, level, goal):
     screen.fill(ui_variables.black)
     background_image()
@@ -179,42 +179,44 @@ def draw_multi_board(next, hold, score, level, goal):
 
     # Draw next mino_player1
     grid_n = tetrimino.mino_map[next - 1][0]
+    grid_m = tetrimino.mino_map[next - 1][0]
 
-    for i in range(4):
-        for j in range(4):
-            dx = screen_width*0.385 + block_size * 0.72 * j
-            dy = screen_height*0.27 + block_size * 0.72 * i
-            if grid_n[i][j] != 0:
+    for x in range(4):
+        for y in range(4):
+            dx = screen_width*0.385 + block_size * 0.72 * x
+            dy = screen_height*0.27 + block_size * 0.72 * y
+            if grid_n[x][y] != 0:
                 pygame.draw.rect(
                     screen,
-                    ui_variables.t_color[grid_n[i][j]],
+                    ui_variables.t_color[grid_n[x][y]],
                     Rect(dx, dy, block_size * 0.7, block_size * 0.7)
                 )
     # Draw next mino_player2
     for i in range(4):
         for j in range(4):
-            dx = screen_width*0.919 + block_size * 0.72 * j
-            dy = screen_height*0.27 + block_size * 0.72 * i
+            di = screen_width*0.919 + block_size * 0.72 * j
+            dj = screen_height*0.27 + block_size * 0.72 * i
             if grid_n[i][j] != 0:
                 pygame.draw.rect(
                     screen,
-                    ui_variables.t_color[grid_n[i][j]],
-                    Rect(dx, dy, block_size*0.7, block_size*0.7)
+                    ui_variables.t_color[grid_m[i][j]],
+                    Rect(di, dj, block_size*0.7, block_size*0.7)
                 )
     
 
     # Draw hold mino_player1
     grid_h = tetrimino.mino_map[hold - 1][0]
+    grid_i = tetrimino.mino_map[hold - 1][0]
 
     if hold_mino != -1:
-        for i in range(4):
-            for j in range(4):
-                dx = screen_width*0.012 + block_size * 0.72 * j
-                dy = screen_height*0.27 + block_size * 0.72 * i
-                if grid_h[i][j] != 0:
+        for x in range(4):
+            for y in range(4):
+                dx = screen_width*0.012 + block_size * 0.72 * x
+                dy = screen_height*0.27 + block_size * 0.72 * y
+                if grid_h[x][y] != 0:
                     pygame.draw.rect(
                         screen,
-                        ui_variables.t_color[grid_h[i][j]],
+                        ui_variables.t_color[grid_h[x][y]],
                         Rect(dx, dy, block_size * 0.7, block_size * 0.7)
                     )
 
@@ -222,13 +224,13 @@ def draw_multi_board(next, hold, score, level, goal):
     if hold_mino != -1:
         for i in range(4):
             for j in range(4):
-                dx = screen_width*0.545 + block_size * 0.72 * j
-                dy = screen_height*0.27 + block_size * 0.72 * i
+                di = screen_width*0.545 + block_size * 0.72 * j
+                dj = screen_height*0.27 + block_size * 0.72 * i
                 if grid_h[i][j] != 0:
                     pygame.draw.rect(
                         screen,
-                        ui_variables.t_color[grid_h[i][j]],
-                        Rect(dx, dy, block_size * 0.7, block_size * 0.7)
+                        ui_variables.t_color[grid_i[i][j]],
+                        Rect(di, dj, block_size * 0.7, block_size * 0.7)
                     )
 
 
@@ -740,7 +742,7 @@ while not done:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
 
                 # Draw a mino
-                draw_mino(dx, dy, mino, rotation)
+                draw_mino(dx, dy, mino, rotation)                
                 draw_multi_board(next_mino, hold_mino, score, level, goal)
 
                 # Erase a mino
