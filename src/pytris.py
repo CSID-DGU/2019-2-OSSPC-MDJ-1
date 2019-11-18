@@ -142,15 +142,15 @@ def draw_single_board(next, hold, score, level, goal):
 # Draw game screen
 def draw_multi_board(next, hold, score, level, goal):
     screen.fill(ui_variables.black)
+    background_image()
 
-
-    # Draw sidebar
+    """# Draw sidebar
     pygame.draw.rect(
         screen,
         ui_variables.white,
         Rect(294, 0, 96, 374)
         #Rect(364, 0, 96, 374)
-    )
+    )"""
 
     # Draw next mino
     grid_n = tetrimino.mino_map[next - 1][0]
@@ -166,7 +166,7 @@ def draw_multi_board(next, hold, score, level, goal):
                     Rect(dx, dy, block_size, block_size)
                 )
 
-    # Draw hold mino
+    # Draw hold mino    
     grid_h = tetrimino.mino_map[hold - 1][0]
 
     if hold_mino != -1:
@@ -186,37 +186,54 @@ def draw_multi_board(next, hold, score, level, goal):
         score = 999999
 
     # Draw texts
-    text_hold = ui_variables.h5.render("HOLD", 1, ui_variables.black)
-    text_next = ui_variables.h5.render("NEXT", 1, ui_variables.black)
-    text_score = ui_variables.h5.render("SCORE", 1, ui_variables.black)
-    score_value = ui_variables.h4.render(str(score), 1, ui_variables.black)
-    text_level = ui_variables.h5.render("LEVEL", 1, ui_variables.black)
-    level_value = ui_variables.h4.render(str(level), 1, ui_variables.black)
-    text_goal = ui_variables.h5.render("GOAL", 1, ui_variables.black)
-    goal_value = ui_variables.h4.render(str(goal), 1, ui_variables.black)
+    text_hold = ui_variables.DG_v_small.render("HOLD", 1, ui_variables.white)
+    text_next = ui_variables.DG_v_small.render("NEXT", 1, ui_variables.white)
+    text_score = ui_variables.DG_v_small.render("SCORE", 1, ui_variables.white)
+    score_value = ui_variables.DG_v_small.render(str(score), 1, ui_variables.white)
+    text_level = ui_variables.DG_v_small.render("LEVEL", 1, ui_variables.white)
+    level_value = ui_variables.DG_v_small.render(str(level), 1, ui_variables.white)
+    text_goal = ui_variables.DG_v_small.render("GOAL", 1, ui_variables.white)
+    goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
 
-    # Place texts
-    screen.blit(text_hold, (305, 14))
-    screen.blit(text_next, (305, 104))
-    screen.blit(text_score, (305, 194))
-    screen.blit(score_value, (305, 210))
-    screen.blit(text_level, (305, 254))
-    screen.blit(level_value, (310, 270))
-    screen.blit(text_goal, (305, 314))
-    screen.blit(goal_value, (310, 330))
+    # Place texts for original
+    screen.blit(text_hold, (screen_width*0.01, screen_height*0.2))
+    screen.blit(text_level, (screen_width*0.01, screen_height*0.5))
+    screen.blit(level_value, (screen_width*0.01, screen_height*0.57))
+    screen.blit(text_goal, (screen_width*0.01, screen_height*0.7))
+    screen.blit(goal_value, (screen_width*0.01, screen_height*0.77))
+    screen.blit(text_next, (screen_width*0.38, screen_height*0.2))
+    screen.blit(text_score, (screen_width*0.38, screen_height*0.6))
+    screen.blit(score_value, (screen_width*0.38, screen_height*0.67))
+
+    # Place texts for multi
+    screen.blit(text_hold, (screen_width*0.55, screen_height*0.2))
+    screen.blit(text_level, (screen_width*0.55, screen_height*0.5))
+    screen.blit(level_value, (screen_width*0.55, screen_height*0.57))
+    screen.blit(text_goal, (screen_width*0.55, screen_height*0.7))
+    screen.blit(goal_value, (screen_width*0.55, screen_height*0.77))
+    screen.blit(text_next, (screen_width*0.92, screen_height*0.2))
+    screen.blit(text_score, (screen_width*0.92, screen_height*0.6))
+    screen.blit(score_value, (screen_width*0.92, screen_height*0.67))
+
+    # Draw board - original
+    """for x in range(width):
+        for y in range(height):
+            dx = 107 + block_size * x
+            dy = 17 + block_size * y
+            draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]]) """
 
     # Draw board - original
     for x in range(width):
         for y in range(height):
-            dx = 107 + block_size * x
-            dy = 17 + block_size * y
+            dx = screen_width*0.09 + block_size * x
+            dy = screen_height*0.01 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
 
     ########## Draw board - multi mode ##########
     for i in range(width):
         for j in range(height):
-            di = 707 + block_size * i
-            dj = 17 + block_size * j
+            di = screen_width*0.64 + block_size * i
+            dj = screen_height*0.01 + block_size * j
             draw_block(di, dj, ui_variables.t_color[matrix[i][j + 1]])
 
 # Draw a tetrimino
@@ -1096,8 +1113,8 @@ while not done:
                 show_desc2_manual = ui_variables.DGM23.render("떨어질 때 블록을 회전, 이동, 낙하 시켜 빈 곳으로 블록을 끼워 넣어", 1, ui_variables.white)
                 show_desc3_manual = ui_variables.DGM23.render("한 라인을 채우면 라인이 제거되면서 점수를 얻는 방식입니다.", 1, ui_variables.white)
 
-                show_function_manual = ui_variables.DGM23.render("기능",1, ui_variables.white)
-                show_key_manual = ui_variables.DGM23.render("키(싱글/멀티)",1, ui_variables.white)
+                #show_function_manual = ui_variables.DGM23.render("기능",1, ui_variables.white)
+                #show_key_manual = ui_variables.DGM23.render("키(싱글/멀티)",1, ui_variables.white)
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
@@ -1109,8 +1126,8 @@ while not done:
                 screen.blit(show_desc2_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.2)))
                 screen.blit(show_desc3_manual, (int(screen_width*0.05)+int(int(screen_width*0.1)*0.5), int(screen_height*0.25)))
 
-                screen.blit(show_function_manual, (int(screen_width*0.1)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
-                screen.blit(show_key_manual, (int(screen_width*0.23)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
+                #screen.blit(show_function_manual, (int(screen_width*0.1)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
+                #screen.blit(show_key_manual, (int(screen_width*0.23)+int(int(screen_width*0.1)*0.5), int(screen_height*0.3)))
 
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.125)],
@@ -1143,8 +1160,8 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image()
 
-                show_button_right = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.white)
-                show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.white)
+                show_button_right = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.black)
+                show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.black)
 
                 show_score_list = list()
 
