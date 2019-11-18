@@ -55,18 +55,18 @@ def draw_single_board(next, hold, score, level, goal):
     background_image()
 
     # Draw sidebar _ right
-    pygame.draw.rect(
-        screen,
-        ui_variables.white,
-        Rect(screen_width*0.68, screen_height*0.1, 120, 500)
-    )
+    #pygame.draw.rect(
+    #    screen,
+    #    ui_variables.white,
+    #    Rect(screen_width*0.68, screen_height*0.1, 120, 500)
+    #)
 
     # Draw sidebar _ left
-    pygame.draw.rect(
-        screen,
-        ui_variables.white,
-        Rect(screen_width*0.24, screen_height*0.1, 120, 500)
-    )
+    #pygame.draw.rect(
+    #    screen,
+    #    ui_variables.white,
+    #    Rect(screen_width*0.24, screen_height*0.1, 120, 500)
+    #)
 
     # Draw next mino
     grid_n = tetrimino.mino_map[next - 1][0]
@@ -105,14 +105,14 @@ def draw_single_board(next, hold, score, level, goal):
         score = 999999
 
     # Draw texts
-    text_hold = ui_variables.DG_v_small.render("HOLD", 1, ui_variables.black)
-    text_next = ui_variables.DG_v_small.render("NEXT", 1, ui_variables.black)
-    text_score = ui_variables.DG_v_small.render("SCORE", 1, ui_variables.black)
-    score_value = ui_variables.DG_v_small.render(str(score), 1, ui_variables.black)
-    text_level = ui_variables.DG_v_small.render("LEVEL", 1, ui_variables.black)
-    level_value = ui_variables.DG_v_small.render(str(level), 1, ui_variables.black)
-    text_goal = ui_variables.DG_v_small.render("GOAL", 1, ui_variables.black)
-    goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.black)
+    text_hold = ui_variables.DG_v_small.render("HOLD", 1, ui_variables.white)
+    text_next = ui_variables.DG_v_small.render("NEXT", 1, ui_variables.white)
+    text_score = ui_variables.DG_v_small.render("SCORE", 1, ui_variables.white)
+    score_value = ui_variables.DG_v_small.render(str(score), 1, ui_variables.white)
+    text_level = ui_variables.DG_v_small.render("LEVEL", 1, ui_variables.white)
+    level_value = ui_variables.DG_v_small.render(str(level), 1, ui_variables.white)
+    text_goal = ui_variables.DG_v_small.render("GOAL", 1, ui_variables.white)
+    goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
 
     # Place texts
     #screen.blit(text_hold, (305, 14))
@@ -124,13 +124,13 @@ def draw_single_board(next, hold, score, level, goal):
     #screen.blit(text_goal, (305, 314))
     #screen.blit(goal_value, (310, 330))
     screen.blit(text_hold, (screen_width*0.25, screen_height*0.2))
-    screen.blit(text_level, (screen_width*0.25, screen_height*0.55))
-    screen.blit(level_value, (screen_width*0.25, screen_height*0.62))
-    screen.blit(text_goal, (screen_width*0.25, screen_height*0.75))
-    screen.blit(goal_value, (screen_width*0.25, screen_height*0.82))
+    screen.blit(text_level, (screen_width*0.25, screen_height*0.5))
+    screen.blit(level_value, (screen_width*0.25, screen_height*0.57))
+    screen.blit(text_goal, (screen_width*0.25, screen_height*0.7))
+    screen.blit(goal_value, (screen_width*0.25, screen_height*0.77))
     screen.blit(text_next, (screen_width*0.69, screen_height*0.2))
-    screen.blit(text_score, (screen_width*0.69, screen_height*0.65))
-    screen.blit(score_value, (screen_width*0.69, screen_height*0.72))
+    screen.blit(text_score, (screen_width*0.69, screen_height*0.6))
+    screen.blit(score_value, (screen_width*0.69, screen_height*0.67))
 
     # Draw board
     for x in range(width):
@@ -427,15 +427,19 @@ while not done:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
 
                 ########### single / multi 조건 달아야함 ###########
-                draw_single_board(next_mino, hold_mino, score, level, goal)
-                draw_multi_board(next_mino, hold_mino, score, level, goal)
+                if start_single == True:
+                    draw_single_board(next_mino, hold_mino, score, level, goal)
+                elif start_multi == True:
+                    draw_multi_board(next_mino, hold_mino, score, level, goal)
 
-                pause_text = ui_variables.DG_small.render("PAUSED", 1, ui_variables.white)
+                pause_text = ui_variables.DG_70.render("PAUSED", 1, ui_variables.white)
                 pause_start = ui_variables.DG_small.render("Press esc to continue", 1, ui_variables.white)
 
-                screen.blit(pause_text, (43, 100))
+                #screen.blit(pause_text, (43, 100))
+                screen.blit(pause_text, (screen_width*0.415, screen_height*0.35))
                 if blink:
-                    screen.blit(pause_start, (40, 160))
+                    #screen.blit(pause_start, (40, 160))
+                    screen.blit(pause_start, (screen_width*0.38, screen_height*0.6))
                     blink = False
                 else:
                     blink = True
@@ -860,18 +864,20 @@ while not done:
                 done = True
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
-                over_text_1 = ui_variables.DG_big.render("GAME", 1, ui_variables.white)
-                over_text_2 = ui_variables.DG_big.render("OVER", 1, ui_variables.white)
+                over_text_1 = ui_variables.DG_70.render("GAME OVER", 1, ui_variables.white)
+                #over_text_2 = ui_variables.DG_60.render("OVER", 1, ui_variables.white)
                 over_start = ui_variables.DG_v_small.render("Press return to continue", 1, ui_variables.white)
 
-                ########### single / multi 조건 달아야함 ###########
-                draw_multi_board(next_mino, hold_mino, score, level, goal)
-                draw_single_board(next_mino, hold_mino, score, level, goal)
+                #mode 따른 종료
+                if start_single == True:
+                    draw_single_board(next_mino, hold_mino, score, level, goal)
+                elif start_multi == True:
+                    draw_multi_board(next_mino, hold_mino, score, level, goal)
 
                 #screen.blit(over_text_1, (58, 75))
                 #screen.blit(over_text_2, (62, 105))
-                screen.blit(over_text_1, (screen_width*0.42, screen_height*0.3))
-                screen.blit(over_text_2, (screen_width*0.42, screen_height*0.43))
+                screen.blit(over_text_1, (screen_width*0.37, screen_height*0.2))
+                #screen.blit(over_text_2, (screen_width*0.42, screen_height*0.43))
 
                 name_1 = ui_variables.h2_i.render(chr(name[0]), 1, ui_variables.white)
                 name_2 = ui_variables.h2_i.render(chr(name[1]), 1, ui_variables.white)
@@ -881,20 +887,24 @@ while not done:
                 underbar_2 = ui_variables.h2.render("_", 1, ui_variables.white)
                 underbar_3 = ui_variables.h2.render("_", 1, ui_variables.white)
 
-                screen.blit(name_1, (65, 147))
-                screen.blit(name_2, (95, 147))
-                screen.blit(name_3, (125, 147))
+                #screen.blit(name_1, (65, 147))
+                #screen.blit(name_2, (95, 147))
+                #screen.blit(name_3, (125, 147))
+                screen.blit(name_1, (screen_width*0.4, screen_height*0.5))
+                screen.blit(name_2, (screen_width*0.5, screen_height*0.5))
+                screen.blit(name_3, (screen_width*0.6, screen_height*0.5))
 
                 if blink:
-                    screen.blit(over_start, (32, 195))
+                    #screen.blit(over_start, (32, 195))
+                    screen.blit(over_start, (screen_width*0.38, screen_height*0.7))
                     blink = False
                 else:
                     if name_location == 0:
-                        screen.blit(underbar_1, (65, 145))
+                        screen.blit(underbar_1, (screen_width*0.4, screen_height*0.52))
                     elif name_location == 1:
-                        screen.blit(underbar_2, (95, 145))
+                        screen.blit(underbar_2, (screen_width*0.5, screen_height*0.52))
                     elif name_location == 2:
-                        screen.blit(underbar_3, (125, 145))
+                        screen.blit(underbar_3, (screen_width*0.6, screen_height*0.52))
                     blink = True
 
                 pygame.display.update()
@@ -1010,7 +1020,7 @@ while not done:
                 game_mode_title = ui_variables.DG_small.render("게임옵션설정(두개의 키를 동시에 눌러주세요!)", 1, ui_variables.white)
                 game_mode_choice = ui_variables.DG_v_small.render("게임모드설정", 1, ui_variables.white)
                 game_mode_speed = ui_variables.DG_v_small.render("게임속도설정", 1, ui_variables.white)
-                
+
                 game_mode_single = ui_variables.DG_v_small.render("● Single 모드 (S키)", 1, ui_variables.white)
                 game_mode_single_des = ui_variables.DG_v_small.render("혼자서 재미있게 하기!!", 1, ui_variables.white)
                 game_mode_multi = ui_variables.DG_v_small.render("● Multi 모드 (M키)", 1, ui_variables.white)
@@ -1023,7 +1033,7 @@ while not done:
                 game_speed_easy_des = ui_variables.DG_v_small.render("EASY 모드!", 1, ui_variables.white)
                 game_speed_normal_des = ui_variables.DG_v_small.render("NORMAL 모드!!", 1, ui_variables.white)
                 game_speed_hard_des = ui_variables.DG_v_small.render("HARD 모드!!!", 1, ui_variables.white)
-                
+
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
                 [screen_width,int(screen_height*0.055)],2)
@@ -1058,16 +1068,16 @@ while not done:
                 insert_image(image_aco3, int(screen_width*0.8), int(screen_height*0.595), int(screen_width*0.1), int(screen_height*0.1))
 
 
-            
-            pygame.display.update() 
-   
+
+            pygame.display.update()
+
     # Manual screen
     elif show_manual:
 
         for event in pygame.event.get():
             if event.type == QUIT:
                 done = True
-            
+
             elif event.type == KEYDOWN:
                 if event.key == K_SPACE:
                     game_mode = True
@@ -1165,7 +1175,7 @@ while not done:
                 screen.blit(show_button_right, (screen_width*0.37, screen_height*0.75))
 
             pygame.display.update()
-   
+
     # Start screen
     else:
         for event in pygame.event.get():
