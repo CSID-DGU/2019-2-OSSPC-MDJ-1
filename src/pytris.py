@@ -1240,8 +1240,8 @@ while not done:
                 [screen_width,int(screen_height*0.125)],2)
 
                 #pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.32)+int(int(screen_width*0.32)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
-                #screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.2), show_name_y+prop))
-                screen.blit(show_button_right, (screen_width*0.37, screen_height*0.75))
+                screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.2), show_name_y+prop))
+                # screen.blit(show_button_right, (screen_width*0.37, screen_height*0.75))
 
             pygame.display.update()
 
