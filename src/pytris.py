@@ -35,6 +35,7 @@ pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
 pygame.display.set_caption("PYTRIS™")
 
 
+
 # Draw block
 def draw_block(x, y, color):
     pygame.draw.rect(
@@ -71,6 +72,7 @@ def draw_single_board(next, hold, score, level, goal):
     # Draw next mino
     grid_n = tetrimino.mino_map[next - 1][0]
 
+
     for i in range(4):
         for j in range(4):
             # 기존 각각 310, 140
@@ -80,7 +82,8 @@ def draw_single_board(next, hold, score, level, goal):
                 pygame.draw.rect(
                     screen,
                     ui_variables.t_color[grid_n[i][j]],
-                    Rect(dx, dy, block_size, block_size)
+                    #Rect(dx, dy, block_size, block_size)
+                    Rect(dx, dy, block_size*0.9, block_size*0.9)
                 )
 
     # Draw hold mino
@@ -97,7 +100,8 @@ def draw_single_board(next, hold, score, level, goal):
                     pygame.draw.rect(
                         screen,
                         ui_variables.t_color[grid_h[i][j]],
-                        Rect(dx, dy, block_size, block_size)
+                        #Rect(dx, dy, block_size, block_size)
+                        Rect(dx, dy, block_size*0.9, block_size*0.9)
                     )
 
     # Set max score
