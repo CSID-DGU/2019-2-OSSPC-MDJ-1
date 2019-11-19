@@ -4,10 +4,6 @@ from pygame.locals import *
 pygame.init()
 
 class ui_variables:
-
-    # images
-
-
     # Fonts
     font_path = "../assets/fonts/OpenSans-Light.ttf"
     font_path_b = "../assets/fonts/OpenSans-Bold.ttf"

@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# PYTRIS™ Copyright (c) 2017 Jason Kim All Rights Reserved.
-
 import pygame
 import operator
 from mino import *
@@ -10,7 +8,7 @@ from random import *
 from pygame.locals import *
 from ui import *
 from screeninfo import get_monitors
-
+from pygame.surface import Surface
 
 #화면크기 조정
 screen_width = 0
@@ -488,6 +486,7 @@ matrix = [[0 for y in range(height + 1)] for x in range(width)] # Board matrix
 ###########################################################
 
 while not done:
+    pygame.event.pump()
     # Pause screen
     if pause:
         for event in pygame.event.get():
@@ -725,7 +724,7 @@ while not done:
                     #draw_board(next_mino, hold_mino, score, level, goal)
                     draw_single_board(next_mino, hold_mino, score, level, goal)
 
-        pygame.display.update()
+            pygame.display.update()
 
     # Start_multi screen
     elif start_multi:
@@ -1044,37 +1043,36 @@ while not done:
                     done = True
 
     elif game_mode:
-
         for event in pygame.event.get():
 
             if event.type == QUIT:
                 done = True
             elif event.type == KEYDOWN:
+                keys = pygame.key.get_pressed()
                 # Q누르면 창 나가짐
                 if event.key == K_q:
                     done = True
-                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_e]:
+                elif keys[pygame.K_s] and keys[pygame.K_e]:
                     start_single = True
                     level = 1
                     goal = level * 5
-                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_r]:
+                elif keys[pygame.K_s] and keys[pygame.K_r]:
                     level = 5
                     start_single = True
                     goal = level * 5
-                elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_t]:
+                elif keys[pygame.K_s] and keys[pygame.K_t]:
                     level = 10
                     start_single = True
                     goal = level * 5
-
-                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_e]:
-                    start_mutlti= True
+                elif keys[pygame.K_m] and keys[pygame.K_e]:
                     level = 1
                     goal = level * 5
-                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_r]:
+                    start_mutlti= True
+                elif keys[pygame.K_m] and keys[pygame.K_r]:
                     level = 5
                     goal = level * 5
                     start_multi = True
-                elif pygame.key.get_pressed()[K_m] and pygame.key.get_pressed()[K_t]:
+                elif keys[pygame.K_m] and keys[pygame.K_t]:
                     level = 10
                     start_multi = True
                     goal = level * 5
@@ -1194,7 +1192,6 @@ while not done:
     elif show_score:
 
         for event in pygame.event.get():
-
             if event.type == QUIT:
                 done = True
 
@@ -1212,9 +1209,6 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image()
 
-                show_button_right = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.black)
-                show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.black)
-
                 show_score_list = list()
 
                 for i in range(0,10):
@@ -1229,6 +1223,9 @@ while not done:
                     screen.blit(element, (int(screen_width*0.3)+int(int(screen_width*0.3)*0.25), show_name_y))
                     show_name_y += prop
 
+                show_button_right = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.white)
+                show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.white)
+
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
                 [screen_width,int(screen_height*0.055)],2)
@@ -1239,11 +1236,9 @@ while not done:
                 [0, int(screen_height*0.125)],
                 [screen_width,int(screen_height*0.125)],2)
 
-                #pygame.draw.rect(screen, ui_variables.white, [int(screen_width*0.32)+int(int(screen_width*0.32)*0.45),show_name_y+prop,int(screen_width*0.07),int(screen_height*0.06)])
                 screen.blit(show_button_right, (int(screen_width*0.33)+int(int(screen_width*0.33)*0.2), show_name_y+prop))
-                # screen.blit(show_button_right, (screen_width*0.37, screen_height*0.75))
 
-            pygame.display.update()
+            pygame.display.flip()
 
     # Start screen
     else:
