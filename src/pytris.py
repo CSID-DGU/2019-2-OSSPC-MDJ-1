@@ -1053,7 +1053,6 @@ while not done:
                 # Q누르면 창 나가짐
                 if event.key == K_q:
                     done = True
-                #space누르면 매뉴얼 창으로
                 elif pygame.key.get_pressed()[K_s] and pygame.key.get_pressed()[K_e]:
                     start_single = True
                     level = 1
