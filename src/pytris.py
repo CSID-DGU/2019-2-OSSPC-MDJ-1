@@ -1217,7 +1217,7 @@ while not done:
                 background_image()
 
                 show_button_right = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.black)
-                show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.black)
+                show_score_title = ui_variables.DG_small.render("Ranking", 1, ui_variables.white)
 
                 show_score_list = list()
 
