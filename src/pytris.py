@@ -192,15 +192,15 @@ def draw_multi_board(next, hold, score, level, goal):
                     Rect(dx, dy, block_size * 0.7, block_size * 0.7)
                 )
     # Draw next mino_player2
-    for i in range(4):
-        for j in range(4):
-            di = screen_width*0.919 + block_size * 0.72 * j
-            dj = screen_height*0.27 + block_size * 0.72 * i
-            if grid_n[i][j] != 0:
+    for x in range(4):
+        for y in range(4):
+            dx = screen_width*0.919 + block_size * 0.72 * x
+            dy = screen_height*0.27 + block_size * 0.72 * y
+            if grid_n[x][y] != 0:
                 pygame.draw.rect(
                     screen,
-                    ui_variables.t_color[grid_m[i][j]],
-                    Rect(di, dj, block_size*0.7, block_size*0.7)
+                    ui_variables.t_color[grid_m[x][y]],
+                    Rect(dx, dy, block_size*0.7, block_size*0.7)
                 )
     
 
@@ -222,15 +222,15 @@ def draw_multi_board(next, hold, score, level, goal):
 
     # Draw hold mino_player2
     if hold_mino != -1:
-        for i in range(4):
-            for j in range(4):
-                di = screen_width*0.545 + block_size * 0.72 * j
-                dj = screen_height*0.27 + block_size * 0.72 * i
-                if grid_h[i][j] != 0:
+        for x in range(4):
+            for y in range(4):
+                dx = screen_width*0.545 + block_size * 0.72 * x
+                dy = screen_height*0.27 + block_size * 0.72 * y
+                if grid_h[x][y] != 0:
                     pygame.draw.rect(
                         screen,
-                        ui_variables.t_color[grid_i[i][j]],
-                        Rect(di, dj, block_size * 0.7, block_size * 0.7)
+                        ui_variables.t_color[grid_i[x][y]],
+                        Rect(dx, dy, block_size * 0.7, block_size * 0.7)
                     )
 
 
