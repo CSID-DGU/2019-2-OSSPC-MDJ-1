@@ -159,7 +159,7 @@ def draw_multi_board(next, hold, score, level, goal):
     show_o_multi = ui_variables.DG_70.render("o",1,ui_variables.red)
     show_d_multi = ui_variables.DG_70.render("d",1,ui_variables.red)
     show_e_multi = ui_variables.DG_70.render("e",1,ui_variables.red)
-    
+
     screen.blit(show_V_multi, (screen_width*0.47, screen_height*0.05))
     screen.blit(show_S_multi, (screen_width*0.47, screen_height*0.19))
     screen.blit(show_m_multi, (screen_width*0.477, screen_height*0.38))
@@ -202,7 +202,7 @@ def draw_multi_board(next, hold, score, level, goal):
                     ui_variables.t_color[grid_m[i][j]],
                     Rect(di, dj, block_size*0.7, block_size*0.7)
                 )
-    
+
 
     # Draw hold mino_player1
     grid_h = tetrimino.mino_map[hold - 1][0]
@@ -742,7 +742,7 @@ while not done:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
 
                 # Draw a mino
-                draw_mino(dx, dy, mino, rotation)                
+                draw_mino(dx, dy, mino, rotation)
                 draw_multi_board(next_mino, hold_mino, score, level, goal)
 
                 # Erase a mino
