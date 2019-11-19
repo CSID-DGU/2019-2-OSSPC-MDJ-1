@@ -33,6 +33,7 @@ pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
 pygame.display.set_caption("PYTRIS™")
 
 
+
 # Draw block
 def draw_block(x, y, color):
     pygame.draw.rect(
@@ -69,6 +70,7 @@ def draw_single_board(next, hold, score, level, goal):
     # Draw next mino
     grid_n = tetrimino.mino_map[next - 1][0]
 
+
     for i in range(4):
         for j in range(4):
             # 기존 각각 310, 140
@@ -78,7 +80,8 @@ def draw_single_board(next, hold, score, level, goal):
                 pygame.draw.rect(
                     screen,
                     ui_variables.t_color[grid_n[i][j]],
-                    Rect(dx, dy, block_size, block_size)
+                    #Rect(dx, dy, block_size, block_size)
+                    Rect(dx, dy, block_size*0.9, block_size*0.9)
                 )
 
     # Draw hold mino
@@ -95,7 +98,8 @@ def draw_single_board(next, hold, score, level, goal):
                     pygame.draw.rect(
                         screen,
                         ui_variables.t_color[grid_h[i][j]],
-                        Rect(dx, dy, block_size, block_size)
+                        #Rect(dx, dy, block_size, block_size)
+                        Rect(dx, dy, block_size*0.9, block_size*0.9)
                     )
 
     # Set max score
@@ -157,7 +161,7 @@ def draw_multi_board(next, hold, score, level, goal):
     show_o_multi = ui_variables.DG_70.render("o",1,ui_variables.red)
     show_d_multi = ui_variables.DG_70.render("d",1,ui_variables.red)
     show_e_multi = ui_variables.DG_70.render("e",1,ui_variables.red)
-    
+
     screen.blit(show_V_multi, (screen_width*0.47, screen_height*0.05))
     screen.blit(show_S_multi, (screen_width*0.47, screen_height*0.19))
     screen.blit(show_m_multi, (screen_width*0.477, screen_height*0.38))
@@ -200,7 +204,7 @@ def draw_multi_board(next, hold, score, level, goal):
                     ui_variables.t_color[grid_m[x][y]],
                     Rect(dx, dy, block_size*0.7, block_size*0.7)
                 )
-    
+
 
     # Draw hold mino_player1
     grid_h = tetrimino.mino_map[hold - 1][0]
@@ -741,7 +745,7 @@ while not done:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
 
                 # Draw a mino
-                draw_mino(dx, dy, mino, rotation)                
+                draw_mino(dx, dy, mino, rotation)
                 draw_multi_board(next_mino, hold_mino, score, level, goal)
 
                 # Erase a mino
