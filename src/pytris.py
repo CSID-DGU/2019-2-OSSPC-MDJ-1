@@ -490,7 +490,6 @@ matrix = [[0 for y in range(height + 1)] for x in range(width)] # Board matrix
 ###########################################################
 
 while not done:
-    pygame.event.pump()
     # Pause screen
     if pause:
         for event in pygame.event.get():
@@ -570,9 +569,9 @@ while not done:
                             rotation = 0
                             hold = False
                         else:
-                            # start = False
                             start_single = False
                             game_over = True
+                            single = True
                             pygame.time.set_timer(pygame.USEREVENT, 1)
                     else:
                         bottom_count += 1
@@ -774,6 +773,7 @@ while not done:
                             # start = False
                             start_multi = False
                             game_over = True
+                            single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
                     else:
                         bottom_count += 1
@@ -936,20 +936,16 @@ while not done:
                 done = True
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
-                over_text_1 = ui_variables.DG_70.render("GAME OVER", 1, ui_variables.white)
-                #over_text_2 = ui_variables.DG_60.render("OVER", 1, ui_variables.white)
+                over_text_1 = ui_variables.DG_70.render("GAME OVER", 1, ui_variables.green)
                 over_start = ui_variables.DG_v_small.render("Press return to continue", 1, ui_variables.white)
 
                 #mode 따른 종료
-                if start_single == True:
+                if single == True:
                     draw_single_board(next_mino, hold_mino, score, level, goal)
-                elif start_multi == True:
+                else:
                     draw_multi_board(next_mino, hold_mino, score, level, goal)
 
-                #screen.blit(over_text_1, (58, 75))
-                #screen.blit(over_text_2, (62, 105))
-                screen.blit(over_text_1, (screen_width*0.37, screen_height*0.2))
-                #screen.blit(over_text_2, (screen_width*0.42, screen_height*0.43))
+                pygame.draw.rect(screen, ui_variables.black, [int(screen_width*0.35), int(screen_height*0.19), int(screen_width*0.35), int(screen_height*0.6)])
 
                 name_1 = ui_variables.h2_i.render(chr(name[0]), 1, ui_variables.white)
                 name_2 = ui_variables.h2_i.render(chr(name[1]), 1, ui_variables.white)
@@ -959,30 +955,27 @@ while not done:
                 underbar_2 = ui_variables.h2.render("_", 1, ui_variables.white)
                 underbar_3 = ui_variables.h2.render("_", 1, ui_variables.white)
 
-                #screen.blit(name_1, (65, 147))
-                #screen.blit(name_2, (95, 147))
-                #screen.blit(name_3, (125, 147))
-                screen.blit(name_1, (screen_width*0.4, screen_height*0.5))
-                screen.blit(name_2, (screen_width*0.5, screen_height*0.5))
-                screen.blit(name_3, (screen_width*0.6, screen_height*0.5))
+                screen.blit(over_text_1, (int(screen_width*0.37), int(screen_height*0.2)))
+                screen.blit(name_1, (int(screen_width*0.4), int(screen_height*0.5)))
+                screen.blit(name_2, (int(screen_width*0.5), int(screen_height*0.5)))
+                screen.blit(name_3, (int(screen_width*0.6), int(screen_height*0.5)))
 
                 if blink:
-                    #screen.blit(over_start, (32, 195))
-                    screen.blit(over_start, (screen_width*0.38, screen_height*0.7))
+                    screen.blit(over_start, (int(screen_width*0.38), int(screen_height*0.7)))
                     blink = False
                 else:
                     if name_location == 0:
-                        screen.blit(underbar_1, (screen_width*0.4, screen_height*0.52))
+                        screen.blit(underbar_1, (int(screen_width*0.4), int(screen_height*0.52)))
                     elif name_location == 1:
-                        screen.blit(underbar_2, (screen_width*0.5, screen_height*0.52))
+                        screen.blit(underbar_2, (int(screen_width*0.5), int(screen_height*0.52)))
                     elif name_location == 2:
-                        screen.blit(underbar_3, (screen_width*0.6, screen_height*0.52))
+                        screen.blit(underbar_3, (int(screen_width*0.6), int(screen_height*0.52)))
                     blink = True
 
                 pygame.display.update()
+
             elif event.type == KEYDOWN:
                 if event.key == K_RETURN:
-                    ui_variables.click_sound.play()
 
                     outfile = open('leaderboard.txt','a')
                     outfile.write(chr(name[0]) + chr(name[1]) + chr(name[2]) + ' ' + str(score) + '\n')
@@ -1016,7 +1009,8 @@ while not done:
                     leaders = sorted(leaders.items(), key=operator.itemgetter(1), reverse=True)
 
                     pygame.time.set_timer(pygame.USEREVENT, 1)
-                elif event.key == K_RIGHT:
+
+                if event.key == K_RIGHT:
                     if name_location != 2:
                         name_location += 1
                     else:
@@ -1029,21 +1023,126 @@ while not done:
                         name_location = 2
                     pygame.time.set_timer(pygame.USEREVENT, 1)
                 elif event.key == K_UP:
-                    ui_variables.click_sound.play()
                     if name[name_location] != 90:
                         name[name_location] += 1
                     else:
                         name[name_location] = 65
                     pygame.time.set_timer(pygame.USEREVENT, 1)
                 elif event.key == K_DOWN:
-                    ui_variables.click_sound.play()
                     if name[name_location] != 65:
                         name[name_location] -= 1
                     else:
                         name[name_location] = 90
                     pygame.time.set_timer(pygame.USEREVENT, 1)
+
                 elif event.key == K_q:
                     done = True
+
+    # elif game_over:
+    #         for event in pygame.event.get():
+    #             if event.type == QUIT:
+    #                 done = True
+    #             elif event.type == USEREVENT:
+    #                 pygame.time.set_timer(pygame.USEREVENT, 300)
+    #                 over_text_1 = ui_variables.h2_b.render("GAME", 1, ui_variables.white)
+    #                 over_text_2 = ui_variables.h2_b.render("OVER", 1, ui_variables.white)
+    #                 over_start = ui_variables.h5.render("Press return to continue", 1, ui_variables.white)
+                    
+    #                 if single:
+    #                     draw_single_board(next_mino, hold_mino, score, level, goal)
+    #                 else:
+    #                     draw_multi_board(next_mino, hold_mino, score, level, goal)
+                    
+    #                 screen.blit(over_text_1, (int(screen_width*0.45), int(screen_height*0.3)))
+    #                 screen.blit(over_text_2, (int(screen_width*0.45), int(screen_height*0.3)+50))
+
+    #                 name_1 = ui_variables.h2_i.render(chr(name[0]), 1, ui_variables.white)
+    #                 name_2 = ui_variables.h2_i.render(chr(name[1]), 1, ui_variables.white)
+    #                 name_3 = ui_variables.h2_i.render(chr(name[2]), 1, ui_variables.white)
+
+    #                 underbar_1 = ui_variables.h2.render("_", 1, ui_variables.white)
+    #                 underbar_2 = ui_variables.h2.render("_", 1, ui_variables.white)
+    #                 underbar_3 = ui_variables.h2.render("_", 1, ui_variables.white)
+
+    #                 screen.blit(name_1, (int(screen_width*0.45), int(screen_height*0.3)+100))
+    #                 screen.blit(name_2, (int(screen_width*0.45)+50, int(screen_height*0.3)+100))
+    #                 screen.blit(name_3, (int(screen_width*0.45)+100, int(screen_height*0.3)+100))
+
+    #                 if blink:
+    #                     screen.blit(over_start,  (int(screen_width*0.45)+50, int(screen_height*0.3)+150))
+    #                     blink = False
+    #                 else:
+    #                     if name_location == 0:
+    #                         screen.blit(underbar_1, (int(screen_width*0.45), int(screen_height*0.3)+90))
+    #                     elif name_location == 1:
+    #                         screen.blit(underbar_2,  (int(screen_width*0.45)+50, int(screen_height*0.3)+90))
+    #                     elif name_location == 2:
+    #                         screen.blit(underbar_3, (int(screen_width*0.45)+100, int(screen_height*0.3)+90))
+    #                     blink = True
+
+    #                 pygame.display.update()
+    #             elif event.type == KEYDOWN:
+    #                 if event.key == K_RETURN:
+    #                     ui_variables.click_sound.play()
+
+    #                     outfile = open('leaderboard.txt','a')
+    #                     outfile.write(chr(name[0]) + chr(name[1]) + chr(name[2]) + ' ' + str(score) + '\n')
+    #                     outfile.close()
+
+    #                     game_over = False
+    #                     hold = False
+    #                     dx, dy = 3, 0
+    #                     rotation = 0
+    #                     mino = randint(1, 7)
+    #                     next_mino = randint(1, 7)
+    #                     hold_mino = -1
+    #                     framerate = 30
+    #                     score = 0
+    #                     score = 0
+    #                     level = 1
+    #                     goal = level * 5
+    #                     bottom_count = 0
+    #                     hard_drop = False
+    #                     name_location = 0
+    #                     name = [65, 65, 65]
+    #                     matrix = [[0 for y in range(height + 1)] for x in range(width)]
+
+    #                     with open('leaderboard.txt') as f:
+    #                         lines = f.readlines()
+    #                     lines = [line.rstrip('\n') for line in open('leaderboard.txt')]
+
+    #                     leaders = {'AAA': 0, 'BBB': 0, 'CCC': 0}
+    #                     for i in lines:
+    #                         leaders[i.split(' ')[0]] = int(i.split(' ')[1])
+    #                     leaders = sorted(leaders.items(), key=operator.itemgetter(1), reverse=True)
+
+    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
+    #                 elif event.key == K_RIGHT:
+    #                     if name_location != 2:
+    #                         name_location += 1
+    #                     else:
+    #                         name_location = 0
+    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
+    #                 elif event.key == K_LEFT:
+    #                     if name_location != 0:
+    #                         name_location -= 1
+    #                     else:
+    #                         name_location = 2
+    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
+    #                 elif event.key == K_UP:
+    #                     ui_variables.click_sound.play()
+    #                     if name[name_location] != 90:
+    #                         name[name_location] += 1
+    #                     else:
+    #                         name[name_location] = 65
+    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
+    #                 elif event.key == K_DOWN:
+    #                     ui_variables.click_sound.play()
+    #                     if name[name_location] != 65:
+    #                         name[name_location] -= 1
+    #                     else:
+    #                         name[name_location] = 90
+    #                     pygame.time.set_timer(pygame.USEREVENT, 1)               
 
     elif game_mode:
         for event in pygame.event.get():
