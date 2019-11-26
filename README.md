@@ -39,23 +39,29 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 ## Game Screen
 - Start Screen
 
-Press <Space> to watch ranking
+Press Space key to watch ranking
+
 ![StartScreen](./assets/READMEimages/startscreen.PNG)
 
 - Ranking Screen
 
-Press <Space> to watch Game Manual
+Press Space key to watch Game Manual
+
 ![RankingScreen](./assets/READMEimages/rankingscreen.PNG)
 
 - Manual Screen
 
-Press <Space> to select Game Mode
+Press Space key to select Game Mode
+
 ![ManualScreen](./assets/READMEimages/manualscreen.PNG)
 
 - Mode Select Screen
 
 Select Mode by pressing keys and enjoy the game!
+
 ![ModeSelectScreen](./assets/READMEimages/modescreen.PNG)
+
+
 - Single Mode Play
 
 - Multi Mode Play
