@@ -36,6 +36,7 @@ class ui_variables:
 
     DGM23 = pygame.font.Font(font_path_DGM, 23)
     DGM13 = pygame.font.Font(font_path_DGM, 13)
+    DGM40 = pygame.font.Font(font_path_DGM, 40)
 
 
     # Sounds

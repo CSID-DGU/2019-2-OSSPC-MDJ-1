@@ -942,7 +942,7 @@ while not done:
                 done = True
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
-                over_text_1 = ui_variables.DG_70.render("GAME OVER", 1, ui_variables.green)
+                over_text_1 = ui_variables.DG_70.render("GAME OVER", 1, ui_variables.white)
                 over_start = ui_variables.DG_v_small.render("Press return to continue", 1, ui_variables.white)
 
                 #mode 따른 종료
@@ -951,15 +951,21 @@ while not done:
                 else:
                     draw_multi_board(next_mino, hold_mino, score, level, goal)
 
-                pygame.draw.rect(screen, ui_variables.black_t, [int(screen_width*0.35), int(screen_height*0.19), int(screen_width*0.35), int(screen_height*0.6)])
+                #pause시 화면 불투명하게
+                over_surface = screen.convert_alpha()
+                over_surface.fill((0, 0, 0, 0))
+                pygame.draw.rect(over_surface, ui_variables.black_t, [0, 0, int(screen_width), int(screen_height)])
+                screen.blit(over_surface, (0, 0))
 
-                name_1 = ui_variables.h2_i.render(chr(name[0]), 1, ui_variables.white)
-                name_2 = ui_variables.h2_i.render(chr(name[1]), 1, ui_variables.white)
-                name_3 = ui_variables.h2_i.render(chr(name[2]), 1, ui_variables.white)
+                #pygame.draw.rect(screen, ui_variables.black_t, [int(screen_width*0.35), int(screen_height*0.19), int(screen_width*0.35), int(screen_height*0.6)])
 
-                underbar_1 = ui_variables.h2.render("_", 1, ui_variables.white)
-                underbar_2 = ui_variables.h2.render("_", 1, ui_variables.white)
-                underbar_3 = ui_variables.h2.render("_", 1, ui_variables.white)
+                name_1 = ui_variables.DGM40.render(chr(name[0]), 1, ui_variables.white)
+                name_2 = ui_variables.DGM40.render(chr(name[1]), 1, ui_variables.white)
+                name_3 = ui_variables.DGM40.render(chr(name[2]), 1, ui_variables.white)
+
+                underbar_1 = ui_variables.DGM40.render("_", 1, ui_variables.white)
+                underbar_2 = ui_variables.DGM40.render("_", 1, ui_variables.white)
+                underbar_3 = ui_variables.DGM40.render("_", 1, ui_variables.white)
 
                 screen.blit(over_text_1, (int(screen_width*0.37), int(screen_height*0.2)))
                 screen.blit(name_1, (int(screen_width*0.4), int(screen_height*0.5)))
