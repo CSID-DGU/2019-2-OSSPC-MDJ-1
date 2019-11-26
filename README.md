@@ -9,7 +9,7 @@ TETRIS
 
 
 ## Team Members
-Yeonjin Kin, Seongyeon Choi, Seokjin Choi
+Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 
 
 ## Development Environment
@@ -36,13 +36,13 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 ## What has been changed?
 - Start Screen
-![StartScreen](./READMEimages/startscreen.PNG)
+![StartScreen](./assets/READMEimages/startscreen.PNG)
 - Ranking Screen
-![RankingScreen](./READMEimages/rankingscreen.png)
+![RankingScreen](./assets/READMEimages/rankingscreen.png)
 - Manual Screen
-![ManualScreen](./READMEimages/manualscreen.png)
+![ManualScreen](./assets/READMEimages/manualscreen.png)
 - Mode Select Screen
-![ModeSelectScreen](./READMEimages/modescreen.png)
+![ModeSelectScreen](./assets/READMEimages/modescreen.png)
 - Single Mode Play
 
 - Multi Mode Play
