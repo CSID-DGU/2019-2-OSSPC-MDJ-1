@@ -38,11 +38,11 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 - Start Screen
 ![StartScreen](./assets/READMEimages/startscreen.PNG)
 - Ranking Screen
-![RankingScreen](./assets/READMEimages/rankingscreen.png)
+![RankingScreen](./assets/READMEimages/rankingscreen.PNG)
 - Manual Screen
-![ManualScreen](./assets/READMEimages/manualscreen.png)
+![ManualScreen](./assets/READMEimages/manualscreen.PNG)
 - Mode Select Screen
-![ModeSelectScreen](./assets/READMEimages/modescreen.png)
+![ModeSelectScreen](./assets/READMEimages/modescreen.PNG)
 - Single Mode Play
 
 - Multi Mode Play
