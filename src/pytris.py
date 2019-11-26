@@ -503,6 +503,12 @@ while not done:
                 elif start_multi == True:
                     draw_multi_board(next_mino, hold_mino, score, level, goal)
 
+                #pause시 화면 불투명하게
+                pause_surface = screen.convert_alpha()
+                pause_surface.fill((0, 0, 0, 0))
+                pygame.draw.rect(pause_surface, ui_variables.black_t, [0, 0, int(screen_width), int(screen_height)])
+                screen.blit(pause_surface, (0, 0))
+
                 pause_text = ui_variables.DG_70.render("PAUSED", 1, ui_variables.white)
                 pause_start = ui_variables.DG_small.render("Press esc to continue", 1, ui_variables.white)
 
@@ -515,6 +521,7 @@ while not done:
                 else:
                     blink = True
                 pygame.display.update()
+
             elif event.type == KEYDOWN:
                 erase_mino(dx, dy, mino, rotation)
                 if event.key == K_ESCAPE:
@@ -522,7 +529,6 @@ while not done:
                     ui_variables.click_sound.play()
                     pygame.time.set_timer(pygame.USEREVENT, 1)
 
-            # pause 후 q 누르면 창 나가짐
                 elif event.key == K_q:
                     done = True
 
@@ -945,7 +951,7 @@ while not done:
                 else:
                     draw_multi_board(next_mino, hold_mino, score, level, goal)
 
-                pygame.draw.rect(screen, ui_variables.black, [int(screen_width*0.35), int(screen_height*0.19), int(screen_width*0.35), int(screen_height*0.6)])
+                pygame.draw.rect(screen, ui_variables.black_t, [int(screen_width*0.35), int(screen_height*0.19), int(screen_width*0.35), int(screen_height*0.6)])
 
                 name_1 = ui_variables.h2_i.render(chr(name[0]), 1, ui_variables.white)
                 name_2 = ui_variables.h2_i.render(chr(name[1]), 1, ui_variables.white)
@@ -1047,12 +1053,12 @@ while not done:
     #                 over_text_1 = ui_variables.h2_b.render("GAME", 1, ui_variables.white)
     #                 over_text_2 = ui_variables.h2_b.render("OVER", 1, ui_variables.white)
     #                 over_start = ui_variables.h5.render("Press return to continue", 1, ui_variables.white)
-                    
+
     #                 if single:
     #                     draw_single_board(next_mino, hold_mino, score, level, goal)
     #                 else:
     #                     draw_multi_board(next_mino, hold_mino, score, level, goal)
-                    
+
     #                 screen.blit(over_text_1, (int(screen_width*0.45), int(screen_height*0.3)))
     #                 screen.blit(over_text_2, (int(screen_width*0.45), int(screen_height*0.3)+50))
 
@@ -1142,7 +1148,7 @@ while not done:
     #                         name[name_location] -= 1
     #                     else:
     #                         name[name_location] = 90
-    #                     pygame.time.set_timer(pygame.USEREVENT, 1)               
+    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
 
     elif game_mode:
         for event in pygame.event.get():
