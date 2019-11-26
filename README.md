@@ -14,11 +14,13 @@ Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 
 ## Development Environment
 Linux Ubuntu
+
 Python 3.7
 
 
 ## How to run
 Download Package (pygame, screeninfo)
+
 Use *pip install pygame*, *pip install screeninfo*
 
 
@@ -34,7 +36,7 @@ The goal of Tetris is to score as many points as possible by clearing horizontal
 As lines are cleared, the level increases and Tetriminos fall faster, making the game progressively more challenging. If the Blocks land above the top of the playing field, the game is over.
 
 
-## What has been changed?
+## Game Screen
 - Start Screen
 ![StartScreen](./assets/READMEimages/startscreen.PNG)
 - Ranking Screen
@@ -53,11 +55,13 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 
 
-## Features
+## Compared to original PYTRIS
 1. Manual Screen added
 2. Ranking Screen added
 3. Multi Mode added
-4. Ranking System modified
+4. Game mode(easy, normal, hard) added
+5. Ranking System modified
+6. GUI modified
 
 
 ## Demo video
