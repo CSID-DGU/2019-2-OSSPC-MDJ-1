@@ -3,36 +3,44 @@
 ## Project Name
 2019-2-OSSP-MDJ-1 (original source: [PYTRIS](https://github.com/k0626089/PYTRIS))
 
+
 ## Game
 TETRIS
 
+
 ## Team Members
 Yeonjin Kin, Seongyeon Choi, Seokjin Choi
+
 
 ## Development Environment
 Linux Ubuntu
 Python 3.7
 
+
 ## How to run
 Download Package (pygame, screeninfo)
 Use *pip install pygame*, *pip install screeninfo*
 
+
 ## Description
 Tetris is the most addictive classical puzzle game in the world!
+
 Enjoy **PYTRIS in DGU** with cute baby elephants! :elephant: :elephant: :elephant:
+
 
 ## How to play
 The goal of Tetris is to score as many points as possible by clearing horizontal lines of Blocks. The player must rotate, move, and drop the falling Tetriminos inside the Matrix (playing field). Lines are cleared when they are filled with Blocks and have no empty spaces.
 
 As lines are cleared, the level increases and Tetriminos fall faster, making the game progressively more challenging. If the Blocks land above the top of the playing field, the game is over.
 
+
 ## What has been changed?
 - Start Screen
-![StartScreen](./READMEimages/startscreen.png)
+![StartScreen](./READMEimages/startscreen.PNG)
 - Ranking Screen
 ![RankingScreen](./READMEimages/rankingscreen.png)
 - Manual Screen
-![ManualScreen](./READMEimages/mannualscreen.png)
+![ManualScreen](./READMEimages/manualscreen.png)
 - Mode Select Screen
 ![ModeSelectScreen](./READMEimages/modescreen.png)
 - Single Mode Play
@@ -44,13 +52,16 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 - Game Over Screen
 
 
+
 ## Features
-1. Mannual Screen added
+1. Manual Screen added
 2. Ranking Screen added
 3. Multi Mode added
 4. Ranking System modified
 
+
 ## Demo video
+
 
 
 ## License
