@@ -1,7 +1,7 @@
 # 2019-2-OSSPC-MDJ-1
 
 ## Project Name
-2019-2-OSSP-MDJ-1 (original source: [PYTRIS](https://github.com/k0626089/PYTRIS))
+2019-2-OSSP-MDJ-1 (original source: [PYTRIS:TM:](https://github.com/k0626089/PYTRIS))
 
 
 ## Game
@@ -13,15 +13,15 @@ Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 
 
 ## Development Environment
-Linux Ubuntu
+:heavy_check_mark: Linux Ubuntu
 
-Python 3.7
+:heavy_check_mark:Python 3.7
 
 
 ## How to run
 Download Package (pygame, screeninfo)
 
-Use *pip install pygame*, *pip install screeninfo*
+:warning: Use *pip install pygame*, *pip install screeninfo*
 
 
 ## Description
@@ -35,6 +35,10 @@ The goal of Tetris is to score as many points as possible by clearing horizontal
 
 As lines are cleared, the level increases and Tetriminos fall faster, making the game progressively more challenging. If the Blocks land above the top of the playing field, the game is over.
 
+
+## Game keys
+
+- Space : move to the next Package
 
 ## Game Screen
 - Start Screen
