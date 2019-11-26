@@ -70,9 +70,11 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 : Pause and restart the game by pressing esc
 
-![PauseScreen](,/assets/READMEimages/pausescreen.PNG)
+![PauseScreen](./assets/READMEimages/pausescreen.PNG)
 
 - Game Over Screen
+
+![GameOverScreen](./assets/READMEimages/gameoverscreen.PNG)
 
 
 
