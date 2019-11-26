@@ -499,7 +499,6 @@ while not done:
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
 
-                ########### single / multi 조건 달아야함 ###########
                 if start_single == True:
                     draw_single_board(next_mino, hold_mino, score, level, goal)
                 elif start_multi == True:
