@@ -36,6 +36,7 @@ class ui_variables:
 
     DGM23 = pygame.font.Font(font_path_DGM, 23)
     DGM13 = pygame.font.Font(font_path_DGM, 13)
+    DGM40 = pygame.font.Font(font_path_DGM, 40)
 
 
     # Sounds
@@ -49,6 +50,7 @@ class ui_variables:
 
     # Background colors
     black = (0,0,0) #rgb(10, 10, 10)
+    black_t = (0, 0, 0, 127) #transparent black
     white = (255, 255, 255) #rgb(255, 255, 255)
     grey_1 = (26, 26, 26) #rgb(26, 26, 26)
     grey_2 = (35, 35, 35) #rgb(35, 35, 35)
