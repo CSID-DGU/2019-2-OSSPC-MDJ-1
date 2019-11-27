@@ -15,7 +15,7 @@ Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 ## Development Environment
 - Linux Ubuntu
 
-- Python 3.7 (:heavy_check_mark: Check before playing)
+- Python 3.7    :heavy_check_mark: Check before playing
 
 
 ## How to run
@@ -39,6 +39,10 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 ## Game keys
 
 - Space : move to the next Package
+
+- Game keys
+
+![Gamekeys](./assets/READMEimages/key.PNG)
 
 ## Game Screen
 - Start Screen
