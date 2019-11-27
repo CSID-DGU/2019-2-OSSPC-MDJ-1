@@ -53,20 +53,6 @@ def draw_single_board(next, hold, score, level, goal):
     screen.fill(ui_variables.black)
     background_image_alpha()
 
-    # Draw sidebar _ right
-    #pygame.draw.rect(
-    #    screen,
-    #    ui_variables.white,
-    #    Rect(screen_width*0.68, screen_height*0.1, 120, 500)
-    #)
-
-    # Draw sidebar _ left
-    #pygame.draw.rect(
-    #    screen,
-    #    ui_variables.white,
-    #    Rect(screen_width*0.24, screen_height*0.1, 120, 500)
-    #)
-
     # Draw next mino
     grid_n = tetrimino.mino_map[next - 1][0]
 
@@ -75,7 +61,7 @@ def draw_single_board(next, hold, score, level, goal):
         for j in range(4):
             # 기존 각각 310, 140
             dx = screen_width*0.692  + block_size * j
-            dy = screen_height*0.27 + block_size * i
+            dy = screen_height*0.22 + block_size * i
             if grid_n[i][j] != 0:
                 pygame.draw.rect(
                     screen,
@@ -93,7 +79,7 @@ def draw_single_board(next, hold, score, level, goal):
                 #dx = 310 + block_size * j
                 #dy = 50 + block_size * i
                 dx = screen_width*0.252 + block_size * j
-                dy = screen_height*0.27 + block_size * i
+                dy = screen_height*0.22 + block_size * i
                 if grid_h[i][j] != 0:
                     pygame.draw.rect(
                         screen,
@@ -115,24 +101,17 @@ def draw_single_board(next, hold, score, level, goal):
     level_value = ui_variables.DG_v_small.render(str(level), 1, ui_variables.white)
     text_goal = ui_variables.DG_v_small.render("GOAL", 1, ui_variables.white)
     goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
+    aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
 
-    # Place texts
-    #screen.blit(text_hold, (305, 14))
-    #screen.blit(text_next, (305, 104))
-    #screen.blit(text_score, (305, 194))
-    #screen.blit(score_value, (305, 210))
-    #screen.blit(text_level, (305, 254))
-    #screen.blit(level_value, (310, 270))
-    #screen.blit(text_goal, (305, 314))
-    #screen.blit(goal_value, (310, 330))
     screen.blit(text_hold, (screen_width*0.25, screen_height*0.2))
     screen.blit(text_level, (screen_width*0.25, screen_height*0.5))
     screen.blit(level_value, (screen_width*0.25, screen_height*0.57))
     screen.blit(text_goal, (screen_width*0.25, screen_height*0.7))
     screen.blit(goal_value, (screen_width*0.25, screen_height*0.77))
-    screen.blit(text_next, (screen_width*0.69, screen_height*0.2))
-    screen.blit(text_score, (screen_width*0.69, screen_height*0.6))
-    screen.blit(score_value, (screen_width*0.69, screen_height*0.67))
+    screen.blit(text_next, (screen_width*0.69, screen_height*0.15))
+    screen.blit(aco, (screen_width*0.69, screen_height*0.35))
+    screen.blit(text_score, (screen_width*0.69, screen_height*0.65))
+    screen.blit(score_value, (screen_width*0.69, screen_height*0.7))
 
     # Draw board
     for x in range(width):
@@ -146,37 +125,30 @@ def draw_multi_board(next, hold, score, level, goal):
     screen.fill(ui_variables.black)
     background_image_alpha()
 
-    """# Draw sidebar
-    pygame.draw.rect(
-        screen,
-        ui_variables.white,
-        Rect(294, 0, 96, 374)
-        #Rect(364, 0, 96, 374)
-    )"""
-
     # Draw "VS mode" word
-    show_V_multi = ui_variables.DG_big.render("V",1,ui_variables.red)
-    show_S_multi = ui_variables.DG_big.render("S",1,ui_variables.red)
-    show_m_multi = ui_variables.DG_70.render("m",1,ui_variables.red)
-    show_o_multi = ui_variables.DG_70.render("o",1,ui_variables.red)
-    show_d_multi = ui_variables.DG_70.render("d",1,ui_variables.red)
-    show_e_multi = ui_variables.DG_70.render("e",1,ui_variables.red)
+    # show_V_multi = ui_variables.DG_big.render("V",1,ui_variables.red)
+    # show_S_multi = ui_variables.DG_big.render("S",1,ui_variables.red)
+    # show_m_multi = ui_variables.DG_70.render("m",1,ui_variables.red)
+    # show_o_multi = ui_variables.DG_70.render("o",1,ui_variables.red)
+    # show_d_multi = ui_variables.DG_70.render("d",1,ui_variables.red)
+    # show_e_multi = ui_variables.DG_70.render("e",1,ui_variables.red)
 
-    screen.blit(show_V_multi, (screen_width*0.47, screen_height*0.05))
-    screen.blit(show_S_multi, (screen_width*0.47, screen_height*0.19))
-    screen.blit(show_m_multi, (screen_width*0.477, screen_height*0.38))
-    screen.blit(show_o_multi, (screen_width*0.477, screen_height*0.46))
-    screen.blit(show_d_multi, (screen_width*0.477, screen_height*0.56))
-    screen.blit(show_e_multi, (screen_width*0.477, screen_height*0.64))
+    # screen.blit(show_V_multi, (screen_width*0.47, screen_height*0.05))
+    # screen.blit(show_S_multi, (screen_width*0.47, screen_height*0.19))
+    # screen.blit(show_m_multi, (screen_width*0.477, screen_height*0.38))
+    # screen.blit(show_o_multi, (screen_width*0.477, screen_height*0.46))
+    # screen.blit(show_d_multi, (screen_width*0.477, screen_height*0.56))
+    # screen.blit(show_e_multi, (screen_width*0.477, screen_height*0.64))
+    aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
+    screen.blit(aco, (screen_width*0.45, screen_height*0.35))
+    # # Draw "VS mode" line
+    # pygame.draw.line(screen, ui_variables.white,
+    #             [screen_width * 0.457, screen_height * 0.001],
+    #             [screen_width * 0.457, screen_height*0.89],2)
 
-    # Draw "VS mode" line
-    pygame.draw.line(screen, ui_variables.white,
-                [screen_width * 0.457, screen_height * 0.001],
-                [screen_width * 0.457, screen_height*0.89],2)
-
-    pygame.draw.line(screen, ui_variables.white,
-                [screen_width * 0.54, screen_height * 0.001],
-                [screen_width * 0.54, screen_height*0.89],2)
+    # pygame.draw.line(screen, ui_variables.white,
+    #             [screen_width * 0.54, screen_height * 0.001],
+    #             [screen_width * 0.54, screen_height*0.89],2)
 
 
     # Draw next mino_player1
@@ -185,8 +157,8 @@ def draw_multi_board(next, hold, score, level, goal):
 
     for x in range(4):
         for y in range(4):
-            dx = screen_width*0.389 + block_size * 0.72 * x
-            dy = screen_height*0.27 + block_size * 0.72 * y
+            dx = screen_width*0.389 + block_size * 0.72 * y
+            dy = screen_height*0.27 + block_size * 0.72 * x
             if grid_n[x][y] != 0:
                 pygame.draw.rect(
                     screen,
@@ -196,13 +168,13 @@ def draw_multi_board(next, hold, score, level, goal):
     # Draw next mino_player2
     for x in range(4):
         for y in range(4):
-            dx = screen_width*0.924 + block_size * 0.72 * x
-            dy = screen_height*0.27 + block_size * 0.72 * y
+            dx = screen_width*0.924 + block_size * 0.72 * y
+            dy = screen_height*0.27 + block_size * 0.72 * x
             if grid_n[x][y] != 0:
                 pygame.draw.rect(
                     screen,
                     ui_variables.t_color[grid_m[x][y]],
-                    Rect(dx, dy, block_size*0.7, block_size*0.7)
+                    Rect(dx,dy, block_size*0.7, block_size*0.7)
                 )
 
 
@@ -280,15 +252,15 @@ def draw_multi_board(next, hold, score, level, goal):
     # Draw board - player1
     for x in range(width):
         for y in range(height):
-            dx = screen_width*0.0922 + block_size * x
-            dy = screen_height*0.0035 + block_size * y
+            dx = screen_width*0.15 + block_size * x
+            dy = screen_height*0.1 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
 
     # Draw board - player2
     for i in range(width):
         for j in range(height):
-            di = screen_width*0.63 + block_size * i
-            dj = screen_height*0.0035 + block_size * j
+            di = screen_width*0.6 + block_size * i
+            dj = screen_height*0.1 + block_size * j
             draw_block(di, dj, ui_variables.t_color[matrix[i][j + 1]])
 
 # Draw a tetrimino
@@ -449,7 +421,6 @@ image_manual = pygame.image.load('../assets/images/manual.png')
 
 # Initial values
 blink = False
-#start = False
 start_single = False  # sinlge mode
 start_multi = False  # multi mode
 pause = False
@@ -1057,112 +1028,6 @@ while not done:
 
                 elif event.key == K_q:
                     done = True
-
-    # elif game_over:
-    #         for event in pygame.event.get():
-    #             if event.type == QUIT:
-    #                 done = True
-    #             elif event.type == USEREVENT:
-    #                 pygame.time.set_timer(pygame.USEREVENT, 300)
-    #                 over_text_1 = ui_variables.h2_b.render("GAME", 1, ui_variables.white)
-    #                 over_text_2 = ui_variables.h2_b.render("OVER", 1, ui_variables.white)
-    #                 over_start = ui_variables.h5.render("Press return to continue", 1, ui_variables.white)
-
-    #                 if single:
-    #                     draw_single_board(next_mino, hold_mino, score, level, goal)
-    #                 else:
-    #                     draw_multi_board(next_mino, hold_mino, score, level, goal)
-
-    #                 screen.blit(over_text_1, (int(screen_width*0.45), int(screen_height*0.3)))
-    #                 screen.blit(over_text_2, (int(screen_width*0.45), int(screen_height*0.3)+50))
-
-    #                 name_1 = ui_variables.h2_i.render(chr(name[0]), 1, ui_variables.white)
-    #                 name_2 = ui_variables.h2_i.render(chr(name[1]), 1, ui_variables.white)
-    #                 name_3 = ui_variables.h2_i.render(chr(name[2]), 1, ui_variables.white)
-
-    #                 underbar_1 = ui_variables.h2.render("_", 1, ui_variables.white)
-    #                 underbar_2 = ui_variables.h2.render("_", 1, ui_variables.white)
-    #                 underbar_3 = ui_variables.h2.render("_", 1, ui_variables.white)
-
-    #                 screen.blit(name_1, (int(screen_width*0.45), int(screen_height*0.3)+100))
-    #                 screen.blit(name_2, (int(screen_width*0.45)+50, int(screen_height*0.3)+100))
-    #                 screen.blit(name_3, (int(screen_width*0.45)+100, int(screen_height*0.3)+100))
-
-    #                 if blink:
-    #                     screen.blit(over_start,  (int(screen_width*0.45)+50, int(screen_height*0.3)+150))
-    #                     blink = False
-    #                 else:
-    #                     if name_location == 0:
-    #                         screen.blit(underbar_1, (int(screen_width*0.45), int(screen_height*0.3)+90))
-    #                     elif name_location == 1:
-    #                         screen.blit(underbar_2,  (int(screen_width*0.45)+50, int(screen_height*0.3)+90))
-    #                     elif name_location == 2:
-    #                         screen.blit(underbar_3, (int(screen_width*0.45)+100, int(screen_height*0.3)+90))
-    #                     blink = True
-
-    #                 pygame.display.update()
-    #             elif event.type == KEYDOWN:
-    #                 if event.key == K_RETURN:
-    #                     ui_variables.click_sound.play()
-
-    #                     outfile = open('leaderboard.txt','a')
-    #                     outfile.write(chr(name[0]) + chr(name[1]) + chr(name[2]) + ' ' + str(score) + '\n')
-    #                     outfile.close()
-
-    #                     game_over = False
-    #                     hold = False
-    #                     dx, dy = 3, 0
-    #                     rotation = 0
-    #                     mino = randint(1, 7)
-    #                     next_mino = randint(1, 7)
-    #                     hold_mino = -1
-    #                     framerate = 30
-    #                     score = 0
-    #                     score = 0
-    #                     level = 1
-    #                     goal = level * 5
-    #                     bottom_count = 0
-    #                     hard_drop = False
-    #                     name_location = 0
-    #                     name = [65, 65, 65]
-    #                     matrix = [[0 for y in range(height + 1)] for x in range(width)]
-
-    #                     with open('leaderboard.txt') as f:
-    #                         lines = f.readlines()
-    #                     lines = [line.rstrip('\n') for line in open('leaderboard.txt')]
-
-    #                     leaders = {'AAA': 0, 'BBB': 0, 'CCC': 0}
-    #                     for i in lines:
-    #                         leaders[i.split(' ')[0]] = int(i.split(' ')[1])
-    #                     leaders = sorted(leaders.items(), key=operator.itemgetter(1), reverse=True)
-
-    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
-    #                 elif event.key == K_RIGHT:
-    #                     if name_location != 2:
-    #                         name_location += 1
-    #                     else:
-    #                         name_location = 0
-    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
-    #                 elif event.key == K_LEFT:
-    #                     if name_location != 0:
-    #                         name_location -= 1
-    #                     else:
-    #                         name_location = 2
-    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
-    #                 elif event.key == K_UP:
-    #                     ui_variables.click_sound.play()
-    #                     if name[name_location] != 90:
-    #                         name[name_location] += 1
-    #                     else:
-    #                         name[name_location] = 65
-    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
-    #                 elif event.key == K_DOWN:
-    #                     ui_variables.click_sound.play()
-    #                     if name[name_location] != 65:
-    #                         name[name_location] -= 1
-    #                     else:
-    #                         name[name_location] = 90
-    #                     pygame.time.set_timer(pygame.USEREVENT, 1)
 
     elif game_mode:
         for event in pygame.event.get():
