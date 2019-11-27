@@ -142,7 +142,7 @@ def draw_single_board(next, hold, score, level, goal):
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
 
 # Draw multi board
-def draw_multi_board(next, hold, score, level, goal):
+def draw_multi_board_1(next, hold, score, level, goal):
     screen.fill(ui_variables.black)
     background_image()
 
@@ -821,7 +821,7 @@ while not done:
                 elif event.key == K_q:
                     done = True
                 # Hard drop
-                elif event.key == K_SPACE:
+                elif event.key == K_SPACE or event.key == K_LCTRL:
                     ui_variables.drop_sound.play()
                     while not is_bottom(dx, dy, mino, rotation):
                         dy += 1
@@ -831,7 +831,7 @@ while not done:
                     #draw_board(next_mino, hold_mino, score, level, goal)
                     draw_multi_board(next_mino, hold_mino, score, level, goal)
                 # Hold
-                elif event.key == K_LSHIFT or event.key == K_c:
+                elif event.key == K_LSHIFT or event.key == K_RSHIFT:
                     if hold == False:
                         ui_variables.move_sound.play()
                         if hold_mino == -1:
