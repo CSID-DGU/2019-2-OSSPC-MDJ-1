@@ -1,7 +1,9 @@
 # 2019-2-OSSPC-MDJ-1
 
 ## Project Name
-2019-2-OSSP-MDJ-1 (original source: [PYTRIS](https://github.com/k0626089/PYTRIS))
+2019-2-OSSP-MDJ-1
+
+(original source: [PYTRIS](https://github.com/k0626089/PYTRIS))
 
 
 ## Game
@@ -38,11 +40,11 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 ## Game keys
 
-- Space : move to the next Package
+- Space : move to the next Page
 
 - Game keys
 
-![Gamekeys](./assets/READMEimages/key.PNG)
+![Gamekeys](./assets/READMEimages/keys.PNG)
 
 ## Game Screen
 - Start Screen
