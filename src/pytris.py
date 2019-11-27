@@ -51,7 +51,7 @@ def draw_block(x, y, color):
 # draw single board
 def draw_single_board(next, hold, score, level, goal):
     screen.fill(ui_variables.black)
-    background_image()
+    background_image_alpha()
 
     # Draw sidebar _ right
     #pygame.draw.rect(
@@ -144,7 +144,7 @@ def draw_single_board(next, hold, score, level, goal):
 # Draw multi board
 def draw_multi_board(next, hold, score, level, goal):
     screen.fill(ui_variables.black)
-    background_image()
+    background_image_alpha()
 
     """# Draw sidebar
     pygame.draw.rect(
@@ -420,6 +420,14 @@ def background_image():
     background = pygame.image.load('../assets/images/backgroundimage.png')
     picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
     screen.blit(picture,(0,int(screen_height/2)))
+
+#background image 투명도 
+def background_image_alpha():
+    background = pygame.image.load('../assets/images/backgroundimage.png').convert()
+    background.set_alpha(70)
+    picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
+    screen.blit(picture,(0,int(screen_height/2)))   
+    
 
 #manual image
 def manual_image():
