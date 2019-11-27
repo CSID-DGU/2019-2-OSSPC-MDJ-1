@@ -93,6 +93,13 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 ## Demo video
 
+- Original Pytris
+
+
+- PYTRIS in DGU
+
+
+
 
 
 ## License
