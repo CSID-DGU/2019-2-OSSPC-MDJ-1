@@ -1,7 +1,9 @@
 # 2019-2-OSSPC-MDJ-1
 
 ## Project Name
-2019-2-OSSP-MDJ-1 (original source: [PYTRIS:TM:](https://github.com/k0626089/PYTRIS))
+2019-2-OSSP-MDJ-1
+
+(original source: [PYTRIS](https://github.com/k0626089/PYTRIS))
 
 
 ## Game
@@ -13,9 +15,9 @@ Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 
 
 ## Development Environment
-:heavy_check_mark: Linux Ubuntu
+- Linux Ubuntu
 
-:heavy_check_mark:Python 3.7
+- Python 3.7    :heavy_check_mark: Check before playing
 
 
 ## How to run
@@ -38,7 +40,11 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 ## Game keys
 
-- Space : move to the next Package
+- Space : move to the next Page
+
+- Game keys
+
+![Gamekeys](./assets/READMEimages/keys.PNG)
 
 ## Game Screen
 - Start Screen
@@ -92,6 +98,13 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 
 ## Demo video
+
+- Original Pytris
+
+
+- PYTRIS in DGU
+
+
 
 
 
