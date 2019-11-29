@@ -191,7 +191,7 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     # Draw next mino_player2
     for x in range(4):
         for y in range(4):
-            dx = screen_width*0.924 + block_size * 0.72 * y
+            dx = screen_width*0.84 + block_size * 0.72 * y
             dy = screen_height*0.27 + block_size * 0.72 * x
             if grid_m[x][y] != 0:
                 pygame.draw.rect(
