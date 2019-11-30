@@ -162,16 +162,20 @@ def draw_multi_board_1(next, hold, score, level, goal, matrix):
     goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
 
     # Place texts for player1
-    screen.blit(text_hold, (screen_width*0.016, screen_height*0.2))
-    screen.blit(text_level, (screen_width*0.01, screen_height*0.5))
-    screen.blit(level_value, (screen_width*0.04, screen_height*0.57))
-    screen.blit(text_goal, (screen_width*0.015, screen_height*0.7))
-    screen.blit(goal_value, (screen_width*0.027, screen_height*0.77))
-    screen.blit(text_next, (screen_width*0.385, screen_height*0.2))
-    screen.blit(text_score, (screen_width*0.38, screen_height*0.6))
-    screen.blit(score_value, (screen_width*0.391, screen_height*0.67))
+    #screen.blit(text_hold, (screen_width*0.08, screen_height*0.2))
+    screen.blit(text_hold, (screen_width*0.091, screen_height*0.2))
+    #screen.blit(text_level, (screen_width*0.08, screen_height*0.5))
+    screen.blit(text_level, (screen_width*0.083, screen_height*0.5))
+    screen.blit(level_value, (screen_width*0.11, screen_height*0.57))
+    #screen.blit(text_goal, (screen_width*0.08, screen_height*0.7))
+    screen.blit(text_goal, (screen_width*0.092, screen_height*0.7))
+    #screen.blit(goal_value, (screen_width*0.119, screen_height*0.77))  
+    screen.blit(goal_value, (screen_width*0.115, screen_height*0.77))
+    screen.blit(text_next, (screen_width*0.389, screen_height*0.2))
+    screen.blit(text_score, (screen_width*0.388, screen_height*0.6))
+    screen.blit(score_value, (screen_width*0.393, screen_height*0.67))
 
-     # Draw board - player1
+    # Draw board - player1
     for x in range(width):
         for y in range(height):
             dx = screen_width*0.15 + block_size * x
@@ -187,7 +191,7 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     # Draw next mino_player2
     for x in range(4):
         for y in range(4):
-            dx = screen_width*0.924 + block_size * 0.72 * y
+            dx = screen_width*0.84 + block_size * 0.72 * y
             dy = screen_height*0.27 + block_size * 0.72 * x
             if grid_m[x][y] != 0:
                 pygame.draw.rect(
@@ -229,14 +233,22 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
 
     # Place texts for player2
-    screen.blit(text_hold, (screen_width*0.562, screen_height*0.2))
-    screen.blit(text_level, (screen_width*0.55, screen_height*0.5))
-    screen.blit(level_value, (screen_width*0.58, screen_height*0.57))
-    screen.blit(text_goal, (screen_width*0.56, screen_height*0.7))
-    screen.blit(goal_value, (screen_width*0.578, screen_height*0.77))
-    screen.blit(text_next, (screen_width*0.918, screen_height*0.2))
-    screen.blit(text_score, (screen_width*0.92, screen_height*0.6))
-    screen.blit(score_value, (screen_width*0.931, screen_height*0.67))
+    #screen.blit(text_hold, (screen_width*0.548, screen_height*0.2))
+    screen.blit(text_hold, (screen_width*0.546, screen_height*0.2))
+    #screen.blit(text_level, (screen_width*0.51, screen_height*0.5))
+    screen.blit(text_level, (screen_width*0.53, screen_height*0.5))
+    #screen.blit(level_value, (screen_width*0.53, screen_height*0.57))
+    screen.blit(level_value, (screen_width*0.6, screen_height*0.57))
+    #screen.blit(text_goal, (screen_width*0.51, screen_height*0.7))
+    screen.blit(text_goal, (screen_width*0.54, screen_height*0.7))
+    #screen.blit(goal_value, (screen_width*0.57, screen_height*0.77))
+    screen.blit(goal_value, (screen_width*0.562, screen_height*0.77))
+    #screen.blit(text_next, (screen_width*0.86, screen_height*0.2))
+    screen.blit(text_next, (screen_width*0.84, screen_height*0.2))
+    #screen.blit(text_score, (screen_width*0.86, screen_height*0.6))
+    screen.blit(text_score, (screen_width*0.845, screen_height*0.6))
+    #screen.blit(score_value, (screen_width*0.9, screen_height*0.67))
+    screen.blit(score_value, (screen_width*0.85, screen_height*0.67))
 
     # Draw board - player2
     for i in range(width):
