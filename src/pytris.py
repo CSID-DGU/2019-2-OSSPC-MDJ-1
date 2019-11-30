@@ -103,15 +103,30 @@ def draw_single_board(next, hold, score, level, goal):
     goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
     aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
 
-    screen.blit(text_hold, (screen_width*0.25, screen_height*0.2))
-    screen.blit(text_level, (screen_width*0.25, screen_height*0.5))
-    screen.blit(level_value, (screen_width*0.25, screen_height*0.57))
-    screen.blit(text_goal, (screen_width*0.25, screen_height*0.7))
-    screen.blit(goal_value, (screen_width*0.25, screen_height*0.77))
+    screen.blit(text_hold, (screen_width*0.25, screen_height*0.15))
+    screen.blit(text_level, (screen_width*0.25, screen_height*0.35))
+    screen.blit(level_value, (screen_width*0.25, screen_height*0.4))
+    screen.blit(text_goal, (screen_width*0.25, screen_height*0.65))
+    screen.blit(goal_value, (screen_width*0.25, screen_height*0.7))
     screen.blit(text_next, (screen_width*0.69, screen_height*0.15))
     screen.blit(aco, (screen_width*0.69, screen_height*0.35))
     screen.blit(text_score, (screen_width*0.69, screen_height*0.65))
-    screen.blit(score_value, (screen_width*0.69, screen_height*0.7))
+    screen.blit(score_value, (screen_width*0.69, screen_height*0.7))\
+
+    # 플레이 화면에 아코 사진
+    if type == 1:
+        insert_aco(rect_aco1)
+        if level == 2:
+            insert_aco(rect_aco2)
+        elif level == 3:
+            insert_aco(rect_aco3)
+    elif type == 2:
+        insert_aco(rect_aco3)
+        if level == 10:
+            insert_aco(rect_aco3)
+    elif type == 3:
+        insert_aco(rect_aco3)
+
 
     # Draw board
     for x in range(width):
@@ -119,6 +134,7 @@ def draw_single_board(next, hold, score, level, goal):
             dx = screen_width*0.4 + block_size * x
             dy = screen_height*0.1 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
+
 
 # Draw multi board
 def draw_multi_board(next, hold, score, level, goal):
@@ -393,13 +409,13 @@ def background_image():
     picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
     screen.blit(picture,(0,int(screen_height/2)))
 
-#background image 투명도 
+#background image 투명도
 def background_image_alpha():
     background = pygame.image.load('../assets/images/backgroundimage.png').convert()
     background.set_alpha(70)
     picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
-    screen.blit(picture,(0,int(screen_height/2)))   
-    
+    screen.blit(picture,(0,int(screen_height/2)))
+
 
 #manual image
 def manual_image():
@@ -413,11 +429,22 @@ def insert_image(image, x, y, r, c):
     photo = pygame.transform.scale(image, (r, c))
     screen.blit(photo, (x, y))
 
+def insert_aco(aco):
+    screen.blit(aco, (int(screen_width*0.68), int(screen_height*0.41)))
+
 # image
 image_aco1 = pygame.image.load('../assets/images/aco1.png')
 image_aco2 = pygame.image.load('../assets/images/aco2.png')
 image_aco3 = pygame.image.load('../assets/images/aco3.png')
 image_manual = pygame.image.load('../assets/images/manual.png')
+
+rect_aco1b = pygame.image.load('../assets/images/aco1.png').convert()
+rect_aco2b = pygame.image.load('../assets/images/aco2.png').convert()
+rect_aco3b = pygame.image.load('../assets/images/aco3.png').convert()
+rect_aco1 = pygame.transform.scale(rect_aco1b, (int(screen_width*0.12), int(screen_height*0.13)))
+rect_aco2 = pygame.transform.scale(rect_aco2b, (int(screen_width*0.13), int(screen_height*0.16)))
+rect_aco3 = pygame.transform.scale(rect_aco3b, (int(screen_width*0.15), int(screen_height*0.19)))
+
 
 # Initial values
 blink = False
@@ -447,6 +474,9 @@ hold_mino = -1 # Holded mino
 
 name_location = 0
 name = [65, 65, 65]
+
+#모드 별 아코 사진 넣을려고 만듦
+type = 0
 
 # mouse position
 mousePos = pygame.mouse.get_pos()
@@ -1043,26 +1073,32 @@ while not done:
                     start_single = True
                     level = 1
                     goal = level * 5
+                    type = 1
                 elif keys[pygame.K_s] and keys[pygame.K_r]:
                     level = 5
                     start_single = True
                     goal = level * 5
+                    type = 2
                 elif keys[pygame.K_s] and keys[pygame.K_t]:
                     level = 10
                     start_single = True
                     goal = level * 5
+                    type = 3
                 elif keys[pygame.K_m] and keys[pygame.K_e]:
                     level = 1
                     goal = level * 5
                     start_mutlti= True
+                    type = 1
                 elif keys[pygame.K_m] and keys[pygame.K_r]:
                     level = 5
                     goal = level * 5
                     start_multi = True
+                    type = 2
                 elif keys[pygame.K_m] and keys[pygame.K_t]:
                     level = 10
                     start_multi = True
                     goal = level * 5
+                    type = 3
 
 
             elif event.type == USEREVENT:
