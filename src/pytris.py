@@ -1226,7 +1226,7 @@ while not done:
                 elif keys[pygame.K_m] and keys[pygame.K_e]:
                     level = 1
                     goal = level * 5
-                    start_mutlti= True
+                    start_multi= True
                     type = 1
                 elif keys[pygame.K_m] and keys[pygame.K_r]:
                     level = 5
