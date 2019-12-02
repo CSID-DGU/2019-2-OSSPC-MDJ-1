@@ -110,18 +110,7 @@ def draw_single_board(next, hold, score, level, goal, matrix):
     screen.blit(score_value, (screen_width*0.69, screen_height*0.7))\
 
     # 플레이 화면에 아코 사진
-    if type == 1:
-        insert_aco(rect_aco1, int(screen_width*0.68), int(screen_height*0.41))
-        if level == 2:
-            insert_aco(rect_aco2, int(screen_width*0.68), int(screen_height*0.41))
-        elif level == 3:
-            insert_aco(rect_aco3, int(screen_width*0.68), int(screen_height*0.41))
-    elif type == 2:
-        insert_aco(rect_aco3, int(screen_width*0.68), int(screen_height*0.41))
-        if level == 10:
-            insert_aco(rect_aco3, int(screen_width*0.68), int(screen_height*0.41))
-    elif type == 3:
-        insert_aco(rect_aco3, int(screen_width*0.68), int(screen_height*0.41))
+    aco_level(int(screen_width*0.68), int(screen_height*0.41))
 
 
     # Draw board
@@ -130,21 +119,6 @@ def draw_single_board(next, hold, score, level, goal, matrix):
             dx = screen_width*0.4 + block_size * x
             dy = screen_height*0.1 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
-
-def multi_aco_level():
-    # 플레이 화면에 아코 사진
-    if type == 1:
-        insert_aco(rect_aco1, int(screen_width*0.43), int(screen_height*0.42))
-        if level == 5:
-            insert_aco(rect_aco2, int(screen_width*0.43), int(screen_height*0.42))
-        elif level == 10:
-            insert_aco(rect_aco3, int(screen_width*0.43), int(screen_height*0.42))
-    elif type == 2:
-        insert_aco(rect_aco2, int(screen_width*0.43), int(screen_height*0.42))
-        if level == 10:
-            insert_aco(rect_aco3, int(screen_width*0.43), int(screen_height*0.42))
-    elif type == 3:
-        insert_aco(rect_aco3, int(screen_width*0.43), int(screen_height*0.42))
 
 
 def draw_multi_board_1(next, hold, score, level, goal, matrix):
@@ -192,18 +166,19 @@ def draw_multi_board_1(next, hold, score, level, goal, matrix):
     goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
 
     # Place texts for player1
-    #screen.blit(text_hold, (screen_width*0.08, screen_height*0.2))
-    screen.blit(text_hold, (screen_width*0.091, screen_height*0.2))
-    #screen.blit(text_level, (screen_width*0.08, screen_height*0.5))
+    screen.blit(text_hold, (screen_width*0.091, screen_height*0.15))
     screen.blit(text_level, (screen_width*0.083, screen_height*0.43))
     screen.blit(level_value, (screen_width*0.11, screen_height*0.48))
-    #screen.blit(text_goal, (screen_width*0.08, screen_height*0.7))
-    screen.blit(text_goal, (screen_width*0.092, screen_height*0.65))
-    #screen.blit(goal_value, (screen_width*0.119, screen_height*0.77))
-    screen.blit(goal_value, (screen_width*0.115, screen_height*0.7))
-    screen.blit(text_next, (screen_width*0.389, screen_height*0.2))
-    screen.blit(text_score, (screen_width*0.388, screen_height*0.65))
-    screen.blit(score_value, (screen_width*0.393, screen_height*0.7))
+    screen.blit(text_goal, (screen_width*0.092, screen_height*0.7))
+    screen.blit(goal_value, (screen_width*0.115, screen_height*0.75))
+    screen.blit(text_next, (screen_width*0.389, screen_height*0.15))
+    screen.blit(text_score, (screen_width*0.388, screen_height*0.7))
+    screen.blit(score_value, (screen_width*0.393, screen_height*0.75))
+
+    aco_level(screen_width*0.39, screen_height*0.48)
+    aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
+    screen.blit(aco, (screen_width*0.39, screen_height*0.43))
+
 
     # Draw board - player1
     for x in range(width):
@@ -264,21 +239,26 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
 
     # Place texts for player2
     #screen.blit(text_hold, (screen_width*0.548, screen_height*0.2))
-    screen.blit(text_hold, (screen_width*0.546, screen_height*0.2))
+    screen.blit(text_hold, (screen_width*0.546, screen_height*0.15))
     #screen.blit(text_level, (screen_width*0.51, screen_height*0.5))
-    screen.blit(text_level, (screen_width*0.84, screen_height*0.43))
+    screen.blit(text_level, (screen_width*0.54, screen_height*0.43))
     #screen.blit(level_value, (screen_width*0.53, screen_height*0.57))
-    screen.blit(level_value, (screen_width*0.845, screen_height*0.48))
+    screen.blit(level_value, (screen_width*0.546, screen_height*0.48))
     #screen.blit(text_goal, (screen_width*0.51, screen_height*0.7))
-    screen.blit(text_goal, (screen_width*0.54, screen_height*0.65))
+    screen.blit(text_goal, (screen_width*0.54, screen_height*0.7))
     #screen.blit(goal_value, (screen_width*0.57, screen_height*0.77))
-    screen.blit(goal_value, (screen_width*0.562, screen_height*0.7))
+    screen.blit(goal_value, (screen_width*0.562, screen_height*0.75))
     #screen.blit(text_next, (screen_width*0.86, screen_height*0.2))
-    screen.blit(text_next, (screen_width*0.84, screen_height*0.2))
+    screen.blit(text_next, (screen_width*0.84, screen_height*0.15))
     #screen.blit(text_score, (screen_width*0.86, screen_height*0.6))
-    screen.blit(text_score, (screen_width*0.845, screen_height*0.65))
+    screen.blit(text_score, (screen_width*0.845, screen_height*0.7))
     #screen.blit(score_value, (screen_width*0.9, screen_height*0.67))
-    screen.blit(score_value, (screen_width*0.85, screen_height*0.7))
+    screen.blit(score_value, (screen_width*0.85, screen_height*0.75))
+
+    aco_level(screen_width*0.85, screen_height*0.48)
+    aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
+    screen.blit(aco, (screen_width*0.845, screen_height*0.43))
+
 
     # Draw board - player2
     for i in range(width):
@@ -437,8 +417,21 @@ def insert_image(image, x, y, r, c):
     photo = pygame.transform.scale(image, (r, c))
     screen.blit(photo, (x, y))
 
-def insert_aco(aco, x, y):
-    screen.blit(aco, (x, y))
+def aco_level(x, y):
+    # 플레이 화면에 아코 사진
+    if type == 1:
+        screen.blit(rect_aco1, (x, y))
+        if level == 2:
+            screen.blit(rect_aco2, (x, y))
+        elif level == 10:
+            screen.blit(rect_aco3, (x, y))
+    elif type == 2:
+        screen.blit(rect_aco2, (x, y))
+        if level == 10:
+            screen.blit(rect_aco3, (x, y))
+    elif type == 3:
+        screen.blit(rect_aco3, (x, y))
+
 
 # image
 image_aco1 = pygame.image.load('../assets/images/aco1.png')
@@ -762,10 +755,8 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image_alpha()
 
-                aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
-                screen.blit(aco, (screen_width*0.44, screen_height*0.36))
-
-                multi_aco_level()
+                """aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
+                screen.blit(aco, (screen_width*0.44, screen_height*0.36))"""
 
                 # Set speed
                 if not game_over:
