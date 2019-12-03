@@ -421,13 +421,13 @@ def aco_level(x, y):
     # 플레이 화면에 아코 사진
     if type == 1:
         screen.blit(rect_aco1, (x, y))
-        if level == 2:
+        if level >=2 and level <=9:
             screen.blit(rect_aco2, (x, y))
-        elif level == 10:
+        elif level >= 10:
             screen.blit(rect_aco3, (x, y))
     elif type == 2:
         screen.blit(rect_aco2, (x, y))
-        if level == 10:
+        if level >= 10:
             screen.blit(rect_aco3, (x, y))
     elif type == 3:
         screen.blit(rect_aco3, (x, y))
