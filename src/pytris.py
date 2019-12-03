@@ -142,8 +142,8 @@ def draw_multi_board_1(next, hold, score, level, goal, matrix):
     if hold_mino != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.018 + block_size * 0.72 * x
-                dy = screen_height*0.27 + block_size * 0.72 * y
+                dx = screen_width*0.1 + block_size * 0.72 * x
+                dy = screen_height*0.215 + block_size * 0.72 * y
                 if grid_h[x][y] != 0:
                     pygame.draw.rect(
                         screen,
