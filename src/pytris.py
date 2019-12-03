@@ -118,7 +118,7 @@ def draw_single_board(next, hold, score, level, goal, matrix):
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
 
 
-def draw_multi_board_1(next, hold, score, level, goal, matrix):
+def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
     # Draw next mino_player1
     grid_n = tetrimino.mino_map[next - 1][0]
 
@@ -134,13 +134,13 @@ def draw_multi_board_1(next, hold, score, level, goal, matrix):
                 )
 
     # Draw hold mino_player1
-    grid_h = tetrimino.mino_map[hold - 1][0]
+    grid_h = tetrimino.mino_map[hold_n - 1][0]
 
-    if hold_mino != -1:
+    if hold_mino_n != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.018 + block_size * 0.72 * x
-                dy = screen_height*0.27 + block_size * 0.72 * y
+                dx = screen_width*0.018 + block_size * 0.72 * y
+                dy = screen_height*0.27 + block_size * 0.72 * x
                 if grid_h[x][y] != 0:
                     pygame.draw.rect(
                         screen,
@@ -182,7 +182,7 @@ def draw_multi_board_1(next, hold, score, level, goal, matrix):
         for y in range(height):
             dx = screen_width*0.15 + block_size * x
             dy = screen_height*0.1 + block_size * y
-            draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
+            draw_block(dx, dy, ui_variables.t_color[matrix_n[x][y + 1]])
 
 # Draw multi board
 def draw_multi_board_2(next, hold, score, level, goal, matrix):
@@ -210,9 +210,9 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     if hold_mino != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.56 + block_size * 0.72 * x
-                dy = screen_height*0.27 + block_size * 0.72 * y
-                if grid_h[x][y] != 0:
+                dx = screen_width*0.56 + block_size * 0.72 * y
+                dy = screen_height*0.27 + block_size * 0.72 * x
+                if grid_i[x][y] != 0:
                     pygame.draw.rect(
                         screen,
                         ui_variables.t_color[grid_i[x][y]],
@@ -235,21 +235,13 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
 
     # Place texts for player2
-    #screen.blit(text_hold, (screen_width*0.548, screen_height*0.2))
     screen.blit(text_hold, (screen_width*0.546, screen_height*0.15))
-    #screen.blit(text_level, (screen_width*0.51, screen_height*0.5))
     screen.blit(text_level, (screen_width*0.54, screen_height*0.43))
-    #screen.blit(level_value, (screen_width*0.53, screen_height*0.57))
     screen.blit(level_value, (screen_width*0.546, screen_height*0.48))
-    #screen.blit(text_goal, (screen_width*0.51, screen_height*0.7))
     screen.blit(text_goal, (screen_width*0.54, screen_height*0.7))
-    #screen.blit(goal_value, (screen_width*0.57, screen_height*0.77))
     screen.blit(goal_value, (screen_width*0.562, screen_height*0.75))
-    #screen.blit(text_next, (screen_width*0.86, screen_height*0.2))
     screen.blit(text_next, (screen_width*0.84, screen_height*0.15))
-    #screen.blit(text_score, (screen_width*0.86, screen_height*0.6))
     screen.blit(text_score, (screen_width*0.845, screen_height*0.7))
-    #screen.blit(score_value, (screen_width*0.9, screen_height*0.67))
     screen.blit(score_value, (screen_width*0.85, screen_height*0.75))
 
     aco_level(screen_width*0.85, screen_height*0.48)
@@ -456,10 +448,15 @@ show_manual = False
 screen_Start = True
 game_mode = False
 score = 0
+score_n = 0
 level = 1
+level_n = 1
 goal = 1
+goal_n = 1
 bottom_count = 0
+bottom_count_n = 0
 hard_drop = False
+hard_drop_n = False
 
 dx, dy = 3, 0 # Minos location status
 dp, dq = 3, 0
@@ -470,7 +467,9 @@ mino = randint(1, 7) # Current mino
 next_mino = randint(1, 7) # Next mino
 
 hold = False # Hold status
+hold_n=False
 hold_mino = -1 # Holded mino
+hold_mino_n = -1
 
 name_location = 0
 name = [65, 65, 65]
@@ -766,7 +765,7 @@ while not done:
 
                 draw_mino(dx, dy, mino, rotation, matrix)
                 draw_mino(dp, dq, mino, rotation_n ,matrix_n)
-                draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
+                draw_multi_board_1(next_mino, hold_mino_n, score_n, level_n, goal_n, matrix_n)
                 draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                 # Erase a mino
@@ -790,8 +789,6 @@ while not done:
                         score += 10 * level
 
                         draw_mino(dx, dy, mino, rotation, matrix)
-                        draw_mino(dp, dq, mino, rotation_n, matrix_n)
-                        draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
                         draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                         if is_stackable(next_mino, matrix):
@@ -807,12 +804,24 @@ while not done:
                             single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
 
+                    else:
+                        bottom_count += 1
+
+                    if hard_drop_n or bottom_count_n == 6:
+                        hard_drop_n = False
+                        bottom_count_n = 0
+                        score_n+=10*level_n
+
+                        draw_mino(dp, dq, mino, rotation_n, matrix_n)
+                        draw_multi_board_1(next_mino, hold_mino_n, score_n, level_n, goal_n, matrix_n)
+
+                    
                         if is_stackable(next_mino, matrix_n):
                             mino = next_mino
                             next_mino = randint(1, 7)
                             dp, dq = 3, 0
                             rotation_n = 0
-                            hold = False
+                            hold_n = False
                         else:
                             # start = False
                             start_multi = False
@@ -820,7 +829,7 @@ while not done:
                             single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
                     else:
-                        bottom_count += 1
+                        bottom_count_n += 1
 
                 # Erase line
                 erase_count = 0
@@ -829,16 +838,29 @@ while not done:
                     for i in range(10):
                         if matrix[i][j] == 0:
                             is_full = False
-                        if  matrix_n[i][j] == 0:
-                            is_full = False
                     if is_full:
                         erase_count += 1
                         k = j
                         while k > 0:
                             for i in range(10):
                                 matrix[i][k] = matrix[i][k - 1]
+                            k -= 1
+
+                erase_count_n = 0
+                for j in range(21):
+                    is_full = True
+                    for i in range(10):
+                        if matrix_n[i][j] == 0:
+                            is_full = False
+                    if is_full:
+                        erase_count_n += 1
+                        k = j
+                        while k > 0:
+                            for i in range(10):
                                 matrix_n[i][k] = matrix_n[i][k-1]
                             k -= 1
+
+                    
                 if erase_count == 1:
                     ui_variables.single_sound.play()
                     score += 50 * level
@@ -852,11 +874,31 @@ while not done:
                     ui_variables.tetris_sound.play()
                     score += 1000 * level
 
+                if erase_count_n == 1:
+                    ui_variables.single_sound.play()
+                    score_n += 50 * level_n
+                elif erase_count_n == 2:
+                    ui_variables.double_sound.play()
+                    score_n += 150 * level_n
+                elif erase_count_n == 3:
+                    ui_variables.triple_sound.play()
+                    score_n += 350 * level_n
+                elif erase_count_n == 4:
+                    ui_variables.tetris_sound.play()
+                    score_n += 1000 * level_n
+
                 # Increase level
                 goal -= erase_count
                 if goal < 1 and level < 15:
                     level += 1
                     goal += level * 5
+                    framerate = int(framerate * 0.8)
+
+                # Increase level
+                goal_n -= erase_count_n
+                if goal_n < 1 and level_n < 15:
+                    level_n += 1
+                    goal_n += level_n * 5
                     framerate = int(framerate * 0.8)
 
             elif event.type == KEYDOWN:
@@ -872,7 +914,6 @@ while not done:
 
                 # Hard drop
                 elif event.key == K_SPACE:
-                    ui_variables.drop_sound.play()
                     while not is_bottom(dx, dy, mino, rotation, matrix):
                         dy += 1
                     hard_drop = True
@@ -880,17 +921,16 @@ while not done:
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
-                elif event.key == K_p:
-                    ui_variables.drop_sound.play()
+                elif event.key == K_LCTRL:
                     while not is_bottom(dp, dq, mino, rotation_n, matrix_n):
                         dq += 1
-                    hard_drop = True
-                    pygame.time.set_timer(pygame.USEREVENT, 1)
+                    hard_drop_n = True
+                    # pygame.time.set_timer(pygame.USEREVENT, 1)
                     draw_mino(dp, dq, mino, rotation_n, matrix_n)
-                    draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
+                    draw_multi_board_1(next_mino, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
                 # Hold
-                elif event.key == K_LSHIFT:
+                elif event.key == K_RSHIFT:
                     if hold == False:
                         ui_variables.move_sound.play()
                         if hold_mino == -1:
@@ -905,20 +945,20 @@ while not done:
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
-                elif event.key == K_c:
-                    if hold == False:
+                elif event.key == K_LSHIFT:
+                    if hold_n == False:
                         ui_variables.move_sound.play()
-                        if hold_mino == -1:
-                            hold_mino = mino
+                        if hold_mino_n == -1:
+                            hold_mino_n = mino
                             mino = next_mino
                             next_mino = randint(1, 7)
                         else:
-                            hold_mino, mino = mino, hold_mino
+                            hold_mino_n, mino = mino, hold_mino_n
                         dp, dq = 3, 0
                         rotation_n = 0
-                        hold = True
+                        hold_n = True
                     draw_mino(dp, dq, mino, rotation_n, matrix_n)
-                    draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
+                    draw_multi_board_1(next_mino, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
 
                 # Turn right
@@ -988,7 +1028,7 @@ while not done:
                     if rotation_n == 4:
                         rotation_n = 0
                     draw_mino(dp, dq, mino, rotation_n, matrix_n)
-                    draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
+                    draw_multi_board_1(next_mino, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
                 # Turn left
                 elif event.key == K_z:
@@ -1055,7 +1095,7 @@ while not done:
                     if rotation_n == -1:
                         rotation_n = 3
                     draw_mino(dp, dq, mino, rotation_n, matrix_n)
-                    draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
+                    draw_multi_board_1(next_mino, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
                 # Move left
                 elif event.key == K_LEFT:
@@ -1070,7 +1110,7 @@ while not done:
                         ui_variables.move_sound.play()
                         dp -= 1
                     draw_mino(dp, dq, mino, rotation_n, matrix_n)
-                    draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
+                    draw_multi_board_1(next_mino, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
                 # Move right
                 elif event.key == K_RIGHT:
@@ -1085,7 +1125,7 @@ while not done:
                         ui_variables.move_sound.play()
                         dp += 1
                     draw_mino(dp, dq, mino, rotation_n, matrix_n)
-                    draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
+                    draw_multi_board_1(next_mino, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
 
         pygame.display.update()
@@ -1103,8 +1143,8 @@ while not done:
                 if single == True:
                     draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
                 else:
-                    draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
-                    draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
+                    draw_multi_board_1(next_mino, hold_mino, score_n, level_n, goal_n, matrix_n)
+                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)
 
                 #pause시 화면 불투명하게
                 over_surface = screen.convert_alpha()
@@ -1155,13 +1195,18 @@ while not done:
                     mino = randint(1, 7)
                     next_mino = randint(1, 7)
                     hold_mino = -1
+                    hold_mino_n = -1
                     framerate = 30
                     score = 0
-                    score = 0
+                    score_n = 0
                     level = 1
+                    level_n = 1
                     goal = level * 5
+                    goal_n = level_n*5
                     bottom_count = 0
+                    bottom_count_n = 0
                     hard_drop = False
+                    hard_drop_n = False
                     name_location = 0
                     name = [65, 65, 65]
                     matrix = [[0 for y in range(height + 1)] for x in range(width)]
@@ -1233,17 +1278,23 @@ while not done:
                 elif keys[pygame.K_m] and keys[pygame.K_e]:
                     level = 1
                     goal = level * 5
+                    level_n = 1
+                    goal_n = level_n*5
                     start_multi= True
                     type = 1
                 elif keys[pygame.K_m] and keys[pygame.K_r]:
                     level = 5
                     goal = level * 5
+                    level_n = 1
+                    goal_n = level_n*5
                     start_multi = True
                     type = 2
                 elif keys[pygame.K_m] and keys[pygame.K_t]:
                     level = 10
                     start_multi = True
                     goal = level * 5
+                    level_n = 1
+                    goal_n = level_n*5
                     type = 3
 
 
