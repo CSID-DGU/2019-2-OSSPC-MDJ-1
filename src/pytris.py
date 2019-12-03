@@ -113,7 +113,7 @@ def draw_single_board(next, hold, score, level, goal, matrix):
     # Draw board
     for x in range(width):
         for y in range(height):
-            dx = screen_width*0.4 + block_size * xd
+            dx = screen_width*0.4 + block_size * x
             dy = screen_height*0.1 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
 
@@ -676,7 +676,7 @@ while not done:
                         ui_variables.move_sound.play()
                         dx -= 1
                         rotation += 1
-                    elif is_turnable_r(dx, dy - 2, mino, rotation, martix):
+                    elif is_turnable_r(dx, dy - 2, mino, rotation, matrix):
                         ui_variables.move_sound.play()
                         dy -= 2
                         rotation += 1
@@ -751,9 +751,6 @@ while not done:
             elif event.type == USEREVENT:
                 screen.fill(ui_variables.black)
                 background_image_alpha()
-
-                """aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
-                screen.blit(aco, (screen_width*0.44, screen_height*0.36))"""
 
                 # Set speed
                 if not game_over:
@@ -1129,6 +1126,7 @@ while not done:
 
 
         pygame.display.update()
+
     # Game over screen
     elif game_over:
         for event in pygame.event.get():
