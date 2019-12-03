@@ -110,18 +110,7 @@ def draw_single_board(next, hold, score, level, goal, matrix):
     screen.blit(score_value, (screen_width*0.69, screen_height*0.7))\
 
     # 플레이 화면에 아코 사진
-    if type == 1:
-        insert_aco(rect_aco1)
-        if level == 2:
-            insert_aco(rect_aco2)
-        elif level == 3:
-            insert_aco(rect_aco3)
-    elif type == 2:
-        insert_aco(rect_aco3)
-        if level == 10:
-            insert_aco(rect_aco3)
-    elif type == 3:
-        insert_aco(rect_aco3)
+    aco_level(int(screen_width*0.68), int(screen_height*0.41))
 
 
     # Draw board
@@ -146,15 +135,15 @@ def draw_multi_board_1(next, hold, score, level, goal, matrix):
                     ui_variables.t_color[grid_n[x][y]],
                     Rect(dx, dy, block_size * 0.7, block_size * 0.7)
                 )
-    
-    # Draw hold mino_player1            
+
+    # Draw hold mino_player1
     grid_h = tetrimino.mino_map[hold - 1][0]
-    
+
     if hold_mino != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.018 + block_size * 0.72 * x
-                dy = screen_height*0.27 + block_size * 0.72 * y
+                dx = screen_width*0.1 + block_size * 0.72 * x
+                dy = screen_height*0.215 + block_size * 0.72 * y
                 if grid_h[x][y] != 0:
                     pygame.draw.rect(
                         screen,
@@ -177,18 +166,19 @@ def draw_multi_board_1(next, hold, score, level, goal, matrix):
     goal_value = ui_variables.DG_v_small.render(str(goal), 1, ui_variables.white)
 
     # Place texts for player1
-    #screen.blit(text_hold, (screen_width*0.08, screen_height*0.2))
-    screen.blit(text_hold, (screen_width*0.091, screen_height*0.2))
-    #screen.blit(text_level, (screen_width*0.08, screen_height*0.5))
-    screen.blit(text_level, (screen_width*0.083, screen_height*0.5))
-    screen.blit(level_value, (screen_width*0.11, screen_height*0.57))
-    #screen.blit(text_goal, (screen_width*0.08, screen_height*0.7))
+    screen.blit(text_hold, (screen_width*0.091, screen_height*0.15))
+    screen.blit(text_level, (screen_width*0.083, screen_height*0.43))
+    screen.blit(level_value, (screen_width*0.11, screen_height*0.48))
     screen.blit(text_goal, (screen_width*0.092, screen_height*0.7))
-    #screen.blit(goal_value, (screen_width*0.119, screen_height*0.77))  
-    screen.blit(goal_value, (screen_width*0.115, screen_height*0.77))
-    screen.blit(text_next, (screen_width*0.389, screen_height*0.2))
-    screen.blit(text_score, (screen_width*0.388, screen_height*0.6))
-    screen.blit(score_value, (screen_width*0.393, screen_height*0.67))
+    screen.blit(goal_value, (screen_width*0.115, screen_height*0.75))
+    screen.blit(text_next, (screen_width*0.389, screen_height*0.15))
+    screen.blit(text_score, (screen_width*0.388, screen_height*0.7))
+    screen.blit(score_value, (screen_width*0.393, screen_height*0.75))
+
+    aco_level(screen_width*0.39, screen_height*0.48)
+    aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
+    screen.blit(aco, (screen_width*0.39, screen_height*0.43))
+
 
     # Draw board - player1
     for x in range(width):
@@ -249,21 +239,26 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
 
     # Place texts for player2
     #screen.blit(text_hold, (screen_width*0.548, screen_height*0.2))
-    screen.blit(text_hold, (screen_width*0.546, screen_height*0.2))
+    screen.blit(text_hold, (screen_width*0.546, screen_height*0.15))
     #screen.blit(text_level, (screen_width*0.51, screen_height*0.5))
-    screen.blit(text_level, (screen_width*0.53, screen_height*0.5))
+    screen.blit(text_level, (screen_width*0.54, screen_height*0.43))
     #screen.blit(level_value, (screen_width*0.53, screen_height*0.57))
-    screen.blit(level_value, (screen_width*0.6, screen_height*0.57))
+    screen.blit(level_value, (screen_width*0.546, screen_height*0.48))
     #screen.blit(text_goal, (screen_width*0.51, screen_height*0.7))
     screen.blit(text_goal, (screen_width*0.54, screen_height*0.7))
     #screen.blit(goal_value, (screen_width*0.57, screen_height*0.77))
-    screen.blit(goal_value, (screen_width*0.562, screen_height*0.77))
+    screen.blit(goal_value, (screen_width*0.562, screen_height*0.75))
     #screen.blit(text_next, (screen_width*0.86, screen_height*0.2))
-    screen.blit(text_next, (screen_width*0.84, screen_height*0.2))
+    screen.blit(text_next, (screen_width*0.84, screen_height*0.15))
     #screen.blit(text_score, (screen_width*0.86, screen_height*0.6))
-    screen.blit(text_score, (screen_width*0.845, screen_height*0.6))
+    screen.blit(text_score, (screen_width*0.845, screen_height*0.7))
     #screen.blit(score_value, (screen_width*0.9, screen_height*0.67))
-    screen.blit(score_value, (screen_width*0.85, screen_height*0.67))
+    screen.blit(score_value, (screen_width*0.85, screen_height*0.75))
+
+    aco_level(screen_width*0.85, screen_height*0.48)
+    aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
+    screen.blit(aco, (screen_width*0.845, screen_height*0.43))
+
 
     # Draw board - player2
     for i in range(width):
@@ -422,8 +417,21 @@ def insert_image(image, x, y, r, c):
     photo = pygame.transform.scale(image, (r, c))
     screen.blit(photo, (x, y))
 
-def insert_aco(aco):
-    screen.blit(aco, (int(screen_width*0.68), int(screen_height*0.41)))
+def aco_level(x, y):
+    # 플레이 화면에 아코 사진
+    if type == 1:
+        screen.blit(rect_aco1, (x, y))
+        if level == 2:
+            screen.blit(rect_aco2, (x, y))
+        elif level == 10:
+            screen.blit(rect_aco3, (x, y))
+    elif type == 2:
+        screen.blit(rect_aco2, (x, y))
+        if level == 10:
+            screen.blit(rect_aco3, (x, y))
+    elif type == 3:
+        screen.blit(rect_aco3, (x, y))
+
 
 # image
 image_aco1 = pygame.image.load('../assets/images/aco1.png')
@@ -472,6 +480,7 @@ name = [65, 65, 65]
 
 #모드 별 아코 사진 넣을려고 만듦
 type = 0
+
 
 with open('leaderboard.txt') as f:
     lines = f.readlines()
@@ -746,8 +755,8 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image_alpha()
 
-                aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
-                screen.blit(aco, (screen_width*0.45, screen_height*0.35))
+                """aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
+                screen.blit(aco, (screen_width*0.44, screen_height*0.36))"""
 
                 # Set speed
                 if not game_over:
@@ -756,7 +765,7 @@ while not done:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 1)
                     else:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
-                
+
                 draw_mino(dx, dy, mino, rotation, matrix)
                 draw_mino(dp, dq, mino, rotation_n ,matrix_n)
                 draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
@@ -768,9 +777,9 @@ while not done:
                     erase_mino(dp, dq, mino, rotation_n, matrix_n)
 
                 # Move mino down
-                if not is_bottom(dx, dy, mino, rotation, matrix): 
+                if not is_bottom(dx, dy, mino, rotation, matrix):
                     dy += 1
-                
+
                 if not is_bottom(dp, dq, mino, rotation_n, matrix_n):
                     dq += 1
 
@@ -781,12 +790,12 @@ while not done:
                         hard_drop = False
                         bottom_count = 0
                         score += 10 * level
-                        
+
                         draw_mino(dx, dy, mino, rotation, matrix)
                         draw_mino(dp, dq, mino, rotation_n, matrix_n)
                         draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
                         draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
-                        
+
                         if is_stackable(next_mino, matrix):
                             mino = next_mino
                             next_mino = randint(1, 7)
@@ -855,14 +864,14 @@ while not done:
             elif event.type == KEYDOWN:
                 erase_mino(dx, dy, mino, rotation, matrix)
                 erase_mino(dp, dq, mino, rotation_n, matrix_n)
-               
+
                 if event.key == K_ESCAPE:
                     ui_variables.click_sound.play()
                     pause = True
-                #Q누르면 창 나가짐  
+                #Q누르면 창 나가짐
                 elif event.key == K_q:
                     done = True
-                
+
                 # Hard drop
                 elif event.key == K_SPACE:
                     ui_variables.drop_sound.play()
@@ -872,7 +881,7 @@ while not done:
                     pygame.time.set_timer(pygame.USEREVENT, 1)
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
-                
+
                 elif event.key == K_p:
                     ui_variables.drop_sound.play()
                     while not is_bottom(dp, dq, mino, rotation_n, matrix_n):
@@ -1057,14 +1066,14 @@ while not done:
                         dx -= 1
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
-                
+
                 elif event.key == K_a:
                     if not is_leftedge(dp, dq, mino, rotation_n, matrix_n):
                         ui_variables.move_sound.play()
                         dp -= 1
                     draw_mino(dp, dq, mino, rotation_n, matrix_n)
                     draw_multi_board_1(next_mino, hold_mino, score, level, goal, matrix_n)
-                
+
                 # Move right
                 elif event.key == K_RIGHT:
                     if not is_rightedge(dx, dy, mino, rotation, matrix):
@@ -1072,7 +1081,7 @@ while not done:
                         dx += 1
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
-                
+
                 elif event.key == K_d:
                     if not is_rightedge(dp, dq, mino, rotation_n, matrix_n):
                         ui_variables.move_sound.play()
