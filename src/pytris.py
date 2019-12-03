@@ -58,14 +58,12 @@ def draw_single_board(next, hold, score, level, goal, matrix):
 
     for i in range(4):
         for j in range(4):
-            # 기존 각각 310, 140
             dx = screen_width*0.692  + block_size * j
             dy = screen_height*0.22 + block_size * i
             if grid_n[i][j] != 0:
                 pygame.draw.rect(
                     screen,
                     ui_variables.t_color[grid_n[i][j]],
-                    #Rect(dx, dy, block_size, block_size)
                     Rect(dx, dy, block_size*0.9, block_size*0.9)
                 )
 
@@ -112,11 +110,10 @@ def draw_single_board(next, hold, score, level, goal, matrix):
     # 플레이 화면에 아코 사진
     aco_level(int(screen_width*0.68), int(screen_height*0.41))
 
-
     # Draw board
     for x in range(width):
         for y in range(height):
-            dx = screen_width*0.4 + block_size * x
+            dx = screen_width*0.4 + block_size * xd
             dy = screen_height*0.1 + block_size * y
             draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
 
@@ -547,6 +544,7 @@ while not done:
     # Game screen
     # Start_single screen
     elif start_single:
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 done = True
