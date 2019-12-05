@@ -31,7 +31,7 @@ size = [screen_width, screen_height]
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode(size)
 pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
-pygame.display.set_caption("PYTRIS™")
+pygame.display.set_caption("ACOTRIS™")
 
 
 
@@ -120,7 +120,7 @@ def draw_single_board(next, hold, score, level, goal, matrix):
 
 
 def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
-    
+
     # Draw next mino_player1
     grid_n = tetrimino.mino_map[next - 1][0]
 
@@ -445,6 +445,7 @@ start_multi = False  # multi mode
 pause = False
 done = False
 game_over = False
+
 show_score = False
 show_manual = False
 screen_Start = True
@@ -759,6 +760,7 @@ while not done:
                 if not game_over:
                     keys_pressed = pygame.key.get_pressed()
                     if keys_pressed[K_DOWN]:
+                        # s눌러도 내려가기 !!
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 1)
                     else:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
@@ -816,7 +818,7 @@ while not done:
                         draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
                         draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
-                    
+
                         if is_stackable(next_mino_n, matrix_n):
                             mino_n = next_mino_n
                             next_mino_n = randint(1,7)
@@ -861,7 +863,7 @@ while not done:
                                 matrix_n[i][k] = matrix_n[i][k-1]
                             k -= 1
 
-                    
+
                 if erase_count == 1:
                     score += 50 * level
                 elif erase_count == 2:
@@ -988,7 +990,7 @@ while not done:
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
-                elif event.key == K_x:
+                elif event.key == K_w:
                     if is_turnable_r(dp, dq, mino_n, rotation_n, matrix_n):
                         ui_variables.move_sound.play()
                         rotation_n += 1
@@ -1012,7 +1014,7 @@ while not done:
                     elif is_turnable_r(dp + 2, dq, mino_n,rotation_n, matrix_n):
                         ui_variables.move_sound.play()
                         dp += 2
-                        rrotation_n+= 1
+                        rotation_n+= 1
                     elif is_turnable_r(dp - 2, dq, mino_n, rotation_n, matrix_n):
                         ui_variables.move_sound.play()
                         dp -= 2
@@ -1022,72 +1024,72 @@ while not done:
                     draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
                     draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
-                # Turn left
-                elif event.key == K_z:
-                    if is_turnable_l(dx, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
-                        rotation -= 1
-                    # Kick
-                    elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
-                        dy -= 1
-                        rotation -= 1
-                    elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
-                        dx += 1
-                        rotation -= 1
-                    elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
-                        dx -= 1
-                        rotation -= 1
-                    elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
-                        dy -= 2
-                        rotation += 1
-                    elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
-                        dx += 2
-                        rotation += 1
-                    elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
-                        dx -= 2
-                    if rotation == -1:
-                        rotation = 3
-                    draw_mino(dx, dy, mino, rotation, matrix)
-                    draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
-
-                elif event.key == K_LCTRL:
-                    if is_turnable_l(dp, dq, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
-                        rotation_n -= 1
-                    # Kick
-                    elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
-                        dq -= 1
-                        rotation_n -= 1
-                    elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
-                        dp += 1
-                        rotation_n -= 1
-                    elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
-                        dp -= 1
-                        rotation_n -= 1
-                    elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
-                        dq -= 2
-                        rotation_n += 1
-                    elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
-                        dp += 2
-                        rotation_n += 1
-                    elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
-                        dp -= 2
-                    if rotation_n == -1:
-                        rotation_n = 3
-                    draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
-                    draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
+                # # Turn left
+                # elif event.key == K_z:
+                #     if is_turnable_l(dx, dy, mino, rotation, matrix):
+                #         ui_variables.move_sound.play()
+                #         rotation -= 1
+                #     # Kick
+                #     elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
+                #         ui_variables.move_sound.play()
+                #         dy -= 1
+                #         rotation -= 1
+                #     elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
+                #         ui_variables.move_sound.play()
+                #         dx += 1
+                #         rotation -= 1
+                #     elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
+                #         ui_variables.move_sound.play()
+                #         dx -= 1
+                #         rotation -= 1
+                #     elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
+                #         ui_variables.move_sound.play()
+                #         dy -= 2
+                #         rotation += 1
+                #     elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
+                #         ui_variables.move_sound.play()
+                #         dx += 2
+                #         rotation += 1
+                #     elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
+                #         ui_variables.move_sound.play()
+                #         dx -= 2
+                #     if rotation == -1:
+                #         rotation = 3
+                #     draw_mino(dx, dy, mino, rotation, matrix)
+                #     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
+                #
+                # elif event.key == K_LCTRL:
+                #     if is_turnable_l(dp, dq, mino_n, rotation_n, matrix_n):
+                #         ui_variables.move_sound.play()
+                #         rotation_n -= 1
+                #     # Kick
+                #     elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
+                #         ui_variables.move_sound.play()
+                #         dq -= 1
+                #         rotation_n -= 1
+                #     elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
+                #         ui_variables.move_sound.play()
+                #         dp += 1
+                #         rotation_n -= 1
+                #     elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
+                #         ui_variables.move_sound.play()
+                #         dp -= 1
+                #         rotation_n -= 1
+                #     elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
+                #         ui_variables.move_sound.play()
+                #         dq -= 2
+                #         rotation_n += 1
+                #     elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
+                #         ui_variables.move_sound.play()
+                #         dp += 2
+                #         rotation_n += 1
+                #     elif is_turnable_l(dp, dq - 1, mino_n, rotation_n, matrix_n):
+                #         ui_variables.move_sound.play()
+                #         dp -= 2
+                #     if rotation_n == -1:
+                #         rotation_n = 3
+                #     draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
+                #     draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
                 # Move left
                 elif event.key == K_LEFT:
@@ -1245,6 +1247,8 @@ while not done:
                 elif event.key == K_q:
                     done = True
 
+
+
     elif game_mode:
         for event in pygame.event.get():
 
@@ -1280,7 +1284,7 @@ while not done:
                 elif keys[pygame.K_m] and keys[pygame.K_r]:
                     level = 5
                     goal = level * 5
-                    level_n = 1
+                    level_n = 5
                     goal_n = level_n*5
                     start_multi = True
                     type = 2
@@ -1288,7 +1292,7 @@ while not done:
                     level = 10
                     start_multi = True
                     goal = level * 5
-                    level_n = 1
+                    level_n = 10
                     goal_n = level_n*5
                     type = 3
 
@@ -1480,19 +1484,19 @@ while not done:
         insert_image(image_aco3, screen_width*0.8, screen_height*0.18, 210, 210)
 
 
-        title = ui_variables.DG_big.render("PYTRIS", 1, ui_variables.black)
+        title = ui_variables.DG_big.render("ACOTRIS", 1, ui_variables.black)
         title_uni = ui_variables.DG_small.render("in DGU", 1, ui_variables.black)
         title_start = ui_variables.DGM23.render("<Press space to start>", 1, ui_variables.white)
         title_info = ui_variables.DGM13.render("Copyright (c) 2017 Jason Kim All Rights Reserved.", 1, ui_variables.white)
 
         if blink:
-            screen.blit(title_start, (92, 195))
+            screen.blit(title_start, (91, 195))
             blink = False
         else:
             blink = True
 
-        screen.blit(title, (screen_width*0.04, screen_height*0.3))
-        screen.blit(title_uni, (screen_width*0.36, screen_height*0.3))
+        screen.blit(title, (screen_width*0.028, screen_height*0.3))
+        screen.blit(title_uni, (screen_width*0.37, screen_height*0.3))
         screen.blit(title_start, (screen_width*0.37, screen_height*0.55))
         screen.blit(title_info, (screen_width*0.35, screen_height*0.93))
 
