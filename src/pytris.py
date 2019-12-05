@@ -141,7 +141,7 @@ def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
     if hold_mino_n != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.018 + block_size * 0.72 * y
+                dx = screen_width*0.08 + block_size * 0.72 * y
                 dy = screen_height*0.27 + block_size * 0.72 * x
                 if grid_h[x][y] != 0:
                     pygame.draw.rect(
@@ -212,7 +212,7 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     if hold_mino != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.56 + block_size * 0.72 * y
+                dx = screen_width*0.53 + block_size * 0.72 * y
                 dy = screen_height*0.27 + block_size * 0.72 * x
                 if grid_i[x][y] != 0:
                     pygame.draw.rect(
@@ -1502,5 +1502,3 @@ while not done:
             clock.tick(3)
 
         #여기에 버튼 만들고 그걸 클릭하면 show_score = True로 해줘야해요!
-
-pygame.quit()
