@@ -25,12 +25,14 @@ block_size = 25
 width = 10 # Board width
 height = 20 # Board height
 framerate = 30 # Bigger -> Slower
+framerate_n = 30
 
 pygame.init()
 size = [screen_width, screen_height]
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode(size)
 pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
+pygame.time.set_timer(pygame.USEREVENT, framerate_n * 10)
 pygame.display.set_caption("ACOTRIS™")
 
 
@@ -559,7 +561,7 @@ while not done:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 1)
                     else:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
-
+    
                 # Draw a mino
                 draw_mino(dx, dy, mino, rotation, matrix)
                 draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
@@ -765,23 +767,17 @@ while not done:
                     else:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
 
-                draw_mino(dx, dy, mino, rotation, matrix)
-                draw_mino(dp, dq, mino_n, rotation_n ,matrix_n)
 
-                draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
+                draw_mino(dx, dy, mino, rotation, matrix)
                 draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                 # Erase a mino
                 if not game_over:
                     erase_mino(dx, dy, mino, rotation, matrix)
-                    erase_mino(dp, dq, mino_n, rotation_n, matrix_n)
 
                 # Move mino down
                 if not is_bottom(dx, dy, mino, rotation, matrix):
                     dy += 1
-
-                if not is_bottom(dp, dq, mino_n, rotation_n, matrix_n):
-                    dq += 1
 
 
                 # Create new mino
@@ -809,7 +805,55 @@ while not done:
 
                     else:
                         bottom_count += 1
+                
+                # Erase line
+                erase_count = 0
+                for j in range(21):
+                    is_full = True
+                    for i in range(10):
+                        if matrix[i][j] == 0:
+                            is_full = False
+                    if is_full:
+                        erase_count += 1
+                        k = j
+                        while k > 0:
+                            for i in range(10):
+                                matrix[i][k] = matrix[i][k - 1]
+                            k -= 1
 
+                if erase_count == 1:
+                    score += 50 * level
+                elif erase_count == 2:
+                    score += 150 * level
+                elif erase_count == 3:
+                    score += 350 * level
+                elif erase_count == 4:
+                    score += 1000 * level
+
+                # Increase level
+                goal -= erase_count
+                if goal < 1 and level < 15:
+                    level += 1
+                    goal += level * 5
+                    framerate = int(framerate * 0.8)
+
+                if not game_over:
+                    keys_pressed = pygame.key.get_pressed()
+                    if keys_pressed[K_s]:
+                        pygame.time.set_timer(pygame.USEREVENT, framerate_n*1)
+                    else:
+                        pygame.time.set_timer(pygame.USEREVENT, framerate_n*10)
+                
+                draw_mino(dp, dq, mino_n, rotation_n ,matrix_n)
+                draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
+
+                if not game_over: 
+                    erase_mino(dp, dq, mino_n, rotation_n, matrix_n)
+
+                # Move mino down
+                if not is_bottom(dp, dq, mino_n, rotation_n, matrix_n):
+                    dq += 1
+                else:
                     if hard_drop_n or bottom_count_n == 6:
                         hard_drop_n = False
                         bottom_count_n = 0
@@ -834,21 +878,6 @@ while not done:
                     else:
                         bottom_count_n += 1
 
-                # Erase line
-                erase_count = 0
-                for j in range(21):
-                    is_full = True
-                    for i in range(10):
-                        if matrix[i][j] == 0:
-                            is_full = False
-                    if is_full:
-                        erase_count += 1
-                        k = j
-                        while k > 0:
-                            for i in range(10):
-                                matrix[i][k] = matrix[i][k - 1]
-                            k -= 1
-
                 erase_count_n = 0
                 for j in range(21):
                     is_full_n = True
@@ -863,16 +892,6 @@ while not done:
                                 matrix_n[i][k] = matrix_n[i][k-1]
                             k -= 1
 
-
-                if erase_count == 1:
-                    score += 50 * level
-                elif erase_count == 2:
-                    score += 150 * level
-                elif erase_count == 3:
-                    score += 350 * level
-                elif erase_count == 4:
-                    score += 1000 * level
-
                 if erase_count_n == 1:
                     score_n += 50 * level_n
                 elif erase_count_n == 2:
@@ -883,18 +902,11 @@ while not done:
                     score_n += 1000 * level_n
 
                 # Increase level
-                goal -= erase_count
-                if goal < 1 and level < 15:
-                    level += 1
-                    goal += level * 5
-                    framerate = int(framerate * 0.8)
-
-                # Increase level
                 goal_n -= erase_count_n
                 if goal_n < 1 and level_n < 15:
                     level_n += 1
                     goal_n += level_n * 5
-                    framerate = int(framerate * 0.8)
+                    framerate_n = int(framerate_n * 0.8)
 
             elif event.type == KEYDOWN:
                 erase_mino(dx, dy, mino, rotation, matrix)
@@ -926,7 +938,6 @@ while not done:
                 # Hold
                 elif event.key == K_RSHIFT:
                     if hold == False:
-                        ui_variables.move_sound.play()
                         if hold_mino == -1:
                             hold_mino = mino
                             mino = next_mino
@@ -941,7 +952,6 @@ while not done:
 
                 elif event.key == K_LSHIFT:
                     if hold_n == False:
-                        ui_variables.move_sound.play()
                         if hold_mino_n == -1:
                             hold_mino_n = mino_n
                             mino_n = next_mino_n
@@ -958,31 +968,24 @@ while not done:
                 # Turn right
                 elif event.key == K_UP :
                     if is_turnable_r(dx, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         rotation += 1
                     # Kick
                     elif is_turnable_r(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dy -= 1
                         rotation += 1
                     elif is_turnable_r(dx + 1, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx += 1
                         rotation += 1
                     elif is_turnable_r(dx - 1, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx -= 1
                         rotation += 1
                     elif is_turnable_r(dx, dy - 2, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dy -= 2
                         rotation += 1
                     elif is_turnable_r(dx + 2, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx += 2
                         rotation += 1
                     elif is_turnable_r(dx - 2, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx -= 2
                         rotation += 1
                     if rotation == 4:
@@ -1094,14 +1097,12 @@ while not done:
                 # Move left
                 elif event.key == K_LEFT:
                     if not is_leftedge(dx, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx -= 1
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                 elif event.key == K_a:
                     if not is_leftedge(dp, dq, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         dp -= 1
                     draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
                     draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
@@ -1109,14 +1110,12 @@ while not done:
                 # Move right
                 elif event.key == K_RIGHT:
                     if not is_rightedge(dx, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx += 1
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                 elif event.key == K_d:
                     if not is_rightedge(dp, dq, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         dp += 1
                     draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
                     draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
