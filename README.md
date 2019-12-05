@@ -17,7 +17,7 @@ Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 ## Development Environment
 - Linux Ubuntu
 
-- Python 3.7    :heavy_check_mark: Check before playing
+- Python 3.7   ( :heavy_check_mark: Check before playing)
 
 
 ## How to run
@@ -74,7 +74,15 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 - Single Mode Play
 
+: Enjoy Single play!
+
+![SingleModeScreen](./assets/READMEimages/singlescreen.PNG)
+
 - Multi Mode Play
+
+: Enjoy Multi play!
+
+![MultiScreen](./assets/READMEimages/multiscreen.PNG)
 
 - Pause Screen
 
