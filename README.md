@@ -17,7 +17,7 @@ Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 ## Development Environment
 - Linux Ubuntu
 
-- Python 3.7   ( :heavy_check_mark: Check before playing)
+- Python 3.7   ( :heavy_check_mark: Check before playing )
 
 
 ## How to run
