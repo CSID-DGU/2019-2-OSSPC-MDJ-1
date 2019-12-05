@@ -9,6 +9,7 @@ from pygame.locals import *
 from ui import *
 from screeninfo import get_monitors
 from pygame.surface import Surface
+import sys
 
 #화면크기 조정
 screen_width = 0
@@ -523,10 +524,8 @@ while not done:
                 pause_text = ui_variables.DG_70.render("PAUSED", 1, ui_variables.white)
                 pause_start = ui_variables.DG_small.render("Press esc to continue", 1, ui_variables.white)
 
-                #screen.blit(pause_text, (43, 100))
                 screen.blit(pause_text, (screen_width*0.415, screen_height*0.35))
                 if blink:
-                    #screen.blit(pause_start, (40, 160))
                     screen.blit(pause_start, (screen_width*0.38, screen_height*0.6))
                     blink = False
                 else:
@@ -864,29 +863,21 @@ while not done:
 
                     
                 if erase_count == 1:
-                    ui_variables.single_sound.play()
                     score += 50 * level
                 elif erase_count == 2:
-                    ui_variables.double_sound.play()
                     score += 150 * level
                 elif erase_count == 3:
-                    ui_variables.triple_sound.play()
                     score += 350 * level
                 elif erase_count == 4:
-                    ui_variables.tetris_sound.play()
                     score += 1000 * level
 
                 if erase_count_n == 1:
-                    ui_variables.single_sound.play()
                     score_n += 50 * level_n
                 elif erase_count_n == 2:
-                    ui_variables.double_sound.play()
                     score_n += 150 * level_n
                 elif erase_count_n == 3:
-                    ui_variables.triple_sound.play()
                     score_n += 350 * level_n
                 elif erase_count_n == 4:
-                    ui_variables.tetris_sound.play()
                     score_n += 1000 * level_n
 
                 # Increase level
@@ -926,7 +917,7 @@ while not done:
                     while not is_bottom(dp, dq, mino_n, rotation_n, matrix_n):
                         dq += 1
                     hard_drop_n = True
-                    # pygame.time.set_timer(pygame.USEREVENT, 1)
+                    pygame.time.set_timer(pygame.USEREVENT, 1)
                     draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
                     draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
@@ -1189,42 +1180,42 @@ while not done:
                     outfile = open('leaderboard.txt','a')
                     outfile.write(chr(name[0]) + chr(name[1]) + chr(name[2]) + ' ' + str(score) + '\n')
                     outfile.close()
-
-                    game_over = False
-                    hold = False
-                    dx, dy = 3, 0
-                    rotation = 0
-                    mino = randint(1, 7)
-                    mino_n = randint(1,7)
-                    next_mino = randint(1, 7)
-                    next_mino_n = randint(1,7)
-                    hold_mino = -1
-                    hold_mino_n = -1
-                    framerate = 30
-                    score = 0
-                    score_n = 0
-                    level = 1
-                    level_n = 1
-                    goal = level * 5
-                    goal_n = level_n*5
-                    bottom_count = 0
-                    bottom_count_n = 0
-                    hard_drop = False
-                    hard_drop_n = False
-                    name_location = 0
-                    name = [65, 65, 65]
-                    matrix = [[0 for y in range(height + 1)] for x in range(width)]
-                    matrix_n = [[0 for y in range(height + 1)] for x in range(width)]
-                    with open('leaderboard.txt') as f:
-                        lines = f.readlines()
-                    lines = [line.rstrip('\n') for line in open('leaderboard.txt')]
-
-                    leaders = {'AAA': 0, 'BBB': 0, 'CCC': 0}
-                    for i in lines:
-                        leaders[i.split(' ')[0]] = int(i.split(' ')[1])
-                    leaders = sorted(leaders.items(), key=operator.itemgetter(1), reverse=True)
-
                     pygame.time.set_timer(pygame.USEREVENT, 1)
+                    sys.exit()
+
+                    # game_over = False
+                    # hold = False
+                    # dx, dy = 3, 0
+                    # rotation = 0
+                    # mino = randint(1, 7)
+                    # mino_n = randint(1,7)
+                    # next_mino = randint(1, 7)
+                    # next_mino_n = randint(1,7)
+                    # hold_mino = -1
+                    # hold_mino_n = -1
+                    # framerate = 30
+                    # score = 0
+                    # score_n = 0
+                    # level = 1
+                    # level_n = 1
+                    # goal = level * 5
+                    # goal_n = level_n*5
+                    # bottom_count = 0
+                    # bottom_count_n = 0
+                    # hard_drop = False
+                    # hard_drop_n = False
+                    # name_location = 0
+                    # name = [65, 65, 65]
+                    # matrix = [[0 for y in range(height + 1)] for x in range(width)]
+                    # matrix_n = [[0 for y in range(height + 1)] for x in range(width)]
+                    # with open('leaderboard.txt') as f:
+                    #     lines = f.readlines()
+                    # lines = [line.rstrip('\n') for line in open('leaderboard.txt')]
+
+                    # leaders = {'AAA': 0, 'BBB': 0, 'CCC': 0}
+                    # for i in lines:
+                    #     leaders[i.split(' ')[0]] = int(i.split(' ')[1])
+                    # leaders = sorted(leaders.items(), key=operator.itemgetter(1), reverse=True)
 
                 if event.key == K_RIGHT:
                     if name_location != 2:
