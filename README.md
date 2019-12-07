@@ -21,7 +21,7 @@ Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 
 
 ## How to run
-Download Package (pygame, screeninfo)
+Download Package (pygame 1.9.6, screeninfo)
 
 :warning: Use *pip install pygame*, *pip install screeninfo*
 
@@ -29,7 +29,7 @@ Download Package (pygame, screeninfo)
 ## Description
 Tetris is the most addictive classical puzzle game in the world!
 
-Enjoy **PYTRIS in DGU** with cute baby elephants! :elephant: :elephant: :elephant:
+Enjoy **ACOTRIS in DGU** with cute baby elephants! :elephant: :elephant: :elephant:
 
 
 ## How to play
