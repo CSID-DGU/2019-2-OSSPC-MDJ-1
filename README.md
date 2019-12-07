@@ -17,11 +17,11 @@ Yeonjin Kim, Seongyeon Choi, Seokjin Choi
 ## Development Environment
 - Linux Ubuntu
 
-- Python 3.7    :heavy_check_mark: Check before playing
+- Python 3.7   ( :heavy_check_mark: Check before playing )
 
 
 ## How to run
-Download Package (pygame, screeninfo)
+Download Package (pygame 1.9.6, screeninfo)
 
 :warning: Use *pip install pygame*, *pip install screeninfo*
 
@@ -29,7 +29,7 @@ Download Package (pygame, screeninfo)
 ## Description
 Tetris is the most addictive classical puzzle game in the world!
 
-Enjoy **PYTRIS in DGU** with cute baby elephants! :elephant: :elephant: :elephant:
+Enjoy **ACOTRIS in DGU** with cute baby elephants! :elephant: :elephant: :elephant:
 
 
 ## How to play
@@ -74,7 +74,15 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 - Single Mode Play
 
+: Enjoy Single play!
+
+![SingleModeScreen](./assets/READMEimages/singlescreen.PNG)
+
 - Multi Mode Play
+
+: Enjoy Multi play!
+
+![MultiScreen](./assets/READMEimages/multiscreen.PNG)
 
 - Pause Screen
 

@@ -47,6 +47,7 @@ class ui_variables:
     double_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialLineClearDouble.wav")
     triple_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialLineClearTriple.wav")
     tetris_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialTetris.wav")
+    multi_over_sound = pygame.mixer.Sound("../assets/sounds/multi_winner.wav")
 
     # Background colors
     black = (0,0,0) #rgb(10, 10, 10)
