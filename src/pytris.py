@@ -432,6 +432,8 @@ image_aco2 = pygame.image.load('../assets/images/aco2.png')
 image_aco3 = pygame.image.load('../assets/images/aco3.png')
 image_manual = pygame.image.load('../assets/images/manual.png')
 
+image_crown = pygame.image.load('../assets/images/Crown.png')
+
 rect_aco1b = pygame.image.load('../assets/images/aco1.png').convert()
 rect_aco2b = pygame.image.load('../assets/images/aco2.png').convert()
 rect_aco3b = pygame.image.load('../assets/images/aco3.png').convert()
@@ -447,6 +449,8 @@ start_multi = False  # multi mode
 pause = False
 done = False
 game_over = False
+multi_over = False
+multi_over_n = False
 
 show_score = False
 show_manual = False
@@ -799,7 +803,9 @@ while not done:
                         else:
                             # start = False
                             start_multi = False
-                            game_over = True
+                            #game_over = True
+                            multi_over = True
+                            ui_variables.multi_over_sound.play()
                             single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
 
@@ -872,7 +878,9 @@ while not done:
                         else:
                             # start = False
                             start_multi = False
-                            game_over = True
+                            #game_over = True
+                            multi_over_n = True
+                            ui_variables.multi_over_sound.play()
                             single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
                     else:
@@ -1184,40 +1192,6 @@ while not done:
                     pygame.time.set_timer(pygame.USEREVENT, 1)
                     sys.exit()
 
-                    # game_over = False
-                    # hold = False
-                    # dx, dy = 3, 0
-                    # rotation = 0
-                    # mino = randint(1, 7)
-                    # mino_n = randint(1,7)
-                    # next_mino = randint(1, 7)
-                    # next_mino_n = randint(1,7)
-                    # hold_mino = -1
-                    # hold_mino_n = -1
-                    # framerate = 30
-                    # score = 0
-                    # score_n = 0
-                    # level = 1
-                    # level_n = 1
-                    # goal = level * 5
-                    # goal_n = level_n*5
-                    # bottom_count = 0
-                    # bottom_count_n = 0
-                    # hard_drop = False
-                    # hard_drop_n = False
-                    # name_location = 0
-                    # name = [65, 65, 65]
-                    # matrix = [[0 for y in range(height + 1)] for x in range(width)]
-                    # matrix_n = [[0 for y in range(height + 1)] for x in range(width)]
-                    # with open('leaderboard.txt') as f:
-                    #     lines = f.readlines()
-                    # lines = [line.rstrip('\n') for line in open('leaderboard.txt')]
-
-                    # leaders = {'AAA': 0, 'BBB': 0, 'CCC': 0}
-                    # for i in lines:
-                    #     leaders[i.split(' ')[0]] = int(i.split(' ')[1])
-                    # leaders = sorted(leaders.items(), key=operator.itemgetter(1), reverse=True)
-
                 if event.key == K_RIGHT:
                     if name_location != 2:
                         name_location += 1
@@ -1245,6 +1219,62 @@ while not done:
 
                 elif event.key == K_q:
                     done = True
+
+    elif multi_over:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                done = True
+            elif event.type == USEREVENT:
+                pygame.time.set_timer(pygame.USEREVENT, 300)
+                over_text_1 = ui_variables.DG_70.render("1P win", 1, ui_variables.black)
+                
+                #mode 따른 종료
+                if single == True:
+                    draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
+                else:
+                    draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
+                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)
+
+                #pause시 화면 불투명하게
+                over_surface = screen.convert_alpha()
+                over_surface.fill((0, 0, 0, 0))
+                pygame.draw.rect(over_surface, ui_variables.black_t, [0, 0, int(screen_width), int(screen_height)])
+                screen.blit(over_surface, (0, 0))
+
+                pygame.draw.line(screen, ui_variables.white, [int(screen_width*0.39), int(screen_height*0.56)], [int(screen_width*0.59), int(screen_height*0.56)],80)
+                screen.blit(over_text_1, (int(screen_width*0.39), int(screen_height*0.5)))
+                insert_image(image_crown, int(screen_width*0.25), int(screen_height*0.115), int(screen_width*0.5), int(screen_height*0.5))
+                
+
+                pygame.display.update()
+
+    elif multi_over_n:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                done = True
+            elif event.type == USEREVENT:
+                pygame.time.set_timer(pygame.USEREVENT, 300)
+                over_text_1 = ui_variables.DG_70.render("2P win", 1, ui_variables.black)
+                
+                #mode 따른 종료
+                if single == True:
+                    draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
+                else:
+                    draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
+                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)
+
+                #pause시 화면 불투명하게
+                over_surface = screen.convert_alpha()
+                over_surface.fill((0, 0, 0, 0))
+                pygame.draw.rect(over_surface, ui_variables.black_t, [0, 0, int(screen_width), int(screen_height)])
+                screen.blit(over_surface, (0, 0))
+                
+                pygame.draw.line(screen, ui_variables.white, [int(screen_width*0.39), int(screen_height*0.56)], [int(screen_width*0.59), int(screen_height*0.56)],80)
+                screen.blit(over_text_1, (int(screen_width*0.39), int(screen_height*0.5)))
+                insert_image(image_crown, int(screen_width*0.25), int(screen_height*0.115), int(screen_width*0.5), int(screen_height*0.5))
+                
+                pygame.display.update()
+
 
 
 
