@@ -614,16 +614,12 @@ while not done:
                                 matrix[i][k] = matrix[i][k - 1]
                             k -= 1
                 if erase_count == 1:
-                    ui_variables.single_sound.play()
                     score += 50 * level
                 elif erase_count == 2:
-                    ui_variables.double_sound.play()
                     score += 150 * level
                 elif erase_count == 3:
-                    ui_variables.triple_sound.play()
                     score += 350 * level
                 elif erase_count == 4:
-                    ui_variables.tetris_sound.play()
                     score += 1000 * level
 
                 # Increase level
@@ -1406,7 +1402,6 @@ while not done:
                 done = True
             elif event.type == KEYDOWN:
                 if event.key == K_SPACE:
-                    ui_variables.click_sound.play()
                     show_score=True
             #Q 누르면 창 나가짐
                 elif event.key == K_q:
