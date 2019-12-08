@@ -5,28 +5,9 @@ pygame.init()
 
 class ui_variables:
     # Fonts
-    font_path = "../assets/fonts/OpenSans-Light.ttf"
-    font_path_b = "../assets/fonts/OpenSans-Bold.ttf"
-    font_path_i = "../assets/fonts/Inconsolata/Inconsolata.otf"
-    # 폰트 추가
     font_path_DOSGothic = "../assets/fonts/DOSGothic.ttf"
     font_path_DOSSaemmul = "../assets/fonts/DOSSaemmul.ttf"
     font_path_DGM = "../assets/fonts/DungGeunMo.ttf"
-
-
-    h1 = pygame.font.Font(font_path, 50)
-    h2 = pygame.font.Font(font_path, 30)
-    h4 = pygame.font.Font(font_path, 20)
-    h5 = pygame.font.Font(font_path, 13)
-    h6 = pygame.font.Font(font_path, 10)
-
-    h1_b = pygame.font.Font(font_path_b, 50)
-    h2_b = pygame.font.Font(font_path_b, 30)
-    h3_b = pygame.font.Font(font_path_b, 35)
-
-    h2_i = pygame.font.Font(font_path_i, 30)
-    h3_i = pygame.font.Font(font_path_i, 24)
-    h5_i = pygame.font.Font(font_path_i, 13)
 
     #새 폰트
     DG_big = pygame.font.Font(font_path_DGM, 100)
