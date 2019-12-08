@@ -775,7 +775,7 @@ while not done:
                         else:
                             start_multi = False
                             multi_over = True
-                            player = 2
+                            player = 1
                             single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
 
@@ -813,13 +813,6 @@ while not done:
                     goal += level * 5
                     framerate = int(framerate * 0.8)
 
-                # if not multi_over:
-                #     keys_pressed = pygame.key.get_pressed()
-                #     if keys_pressed[K_s]:
-                #         pygame.time.set_timer(pygame.USEREVENT, framerate_n)
-                #     else:
-                #         pygame.time.set_timer(pygame.USEREVENT, framerate_n*10)
-
                 draw_mino(dp, dq, mino_n, rotation_n ,matrix_n)
                 draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
@@ -848,7 +841,7 @@ while not done:
                         else:
                             start_multi = False
                             multi_over= True
-                            player = 1
+                            player = 2
                             single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
                     else:
