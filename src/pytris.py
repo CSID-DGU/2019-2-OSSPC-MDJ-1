@@ -127,8 +127,8 @@ def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
 
     for x in range(4):
         for y in range(4):
-            dx = screen_width*0.389 + block_size * 0.72 * y
-            dy = screen_height*0.27 + block_size * 0.72 * x
+            dx = screen_width*0.39 + block_size * 0.72 * y
+            dy = screen_height*0.23 + block_size * 0.72 * x
             if grid_n[x][y] != 0:
                 pygame.draw.rect(
                     screen,
@@ -142,8 +142,8 @@ def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
     if hold_mino_n != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.018 + block_size * 0.72 * y
-                dy = screen_height*0.27 + block_size * 0.72 * x
+                dx = screen_width*0.095 + block_size * 0.72 * y
+                dy = screen_height*0.23 + block_size * 0.72 * x
                 if grid_h[x][y] != 0:
                     pygame.draw.rect(
                         screen,
@@ -197,7 +197,7 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     for x in range(4):
         for y in range(4):
             dx = screen_width*0.84 + block_size * 0.72 * y
-            dy = screen_height*0.27 + block_size * 0.72 * x
+            dy = screen_height*0.23 + block_size * 0.72 * x
             if grid_m[x][y] != 0:
                 pygame.draw.rect(
                     screen,
@@ -213,8 +213,8 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     if hold_mino != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.56 + block_size * 0.72 * y
-                dy = screen_height*0.27 + block_size * 0.72 * x
+                dx = screen_width*0.55 + block_size * 0.72 * y
+                dy = screen_height*0.23 + block_size * 0.72 * x
                 if grid_i[x][y] != 0:
                     pygame.draw.rect(
                         screen,
@@ -517,7 +517,7 @@ while not done:
                 if start_single == True:
                     draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
                 elif start_multi == True:
-                    draw_multi_board_1(next_mino_n, hold_mino, score, level, goal, matrix_n)
+                    draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                 #pause시 화면 불투명하게
@@ -542,7 +542,6 @@ while not done:
                 erase_mino(dp, dq, mino_n, rotation_n, matrix_n)
                 if event.key == K_ESCAPE:
                     pause = False
-                    ui_variables.click_sound.play()
                     pygame.time.set_timer(pygame.USEREVENT, 1)
 
                 elif event.key == K_q:
