@@ -175,7 +175,7 @@ def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
     screen.blit(text_score, (screen_width*0.388, screen_height*0.7))
     screen.blit(score_value, (screen_width*0.393, screen_height*0.75))
 
-    aco_level(screen_width*0.39, screen_height*0.48)
+    aco_level(screen_width*0.38, screen_height*0.48)
     aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
     screen.blit(aco, (screen_width*0.39, screen_height*0.43))
 
@@ -247,7 +247,7 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     screen.blit(text_score, (screen_width*0.845, screen_height*0.7))
     screen.blit(score_value, (screen_width*0.85, screen_height*0.75))
 
-    aco_level(screen_width*0.85, screen_height*0.48)
+    aco_level(screen_width*0.84, screen_height*0.48)
     aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
     screen.blit(aco, (screen_width*0.845, screen_height*0.43))
 
@@ -438,7 +438,7 @@ rect_aco2b = pygame.image.load('../assets/images/aco2.png').convert()
 rect_aco3b = pygame.image.load('../assets/images/aco3.png').convert()
 rect_aco1 = pygame.transform.scale(rect_aco1b, (int(screen_width*0.12), int(screen_height*0.13)))
 rect_aco2 = pygame.transform.scale(rect_aco2b, (int(screen_width*0.13), int(screen_height*0.16)))
-rect_aco3 = pygame.transform.scale(rect_aco3b, (int(screen_width*0.15), int(screen_height*0.19)))
+rect_aco3 = pygame.transform.scale(rect_aco3b, (int(screen_width*0.14), int(screen_height*0.18)))
 
 
 # Initial values
