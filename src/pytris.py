@@ -430,6 +430,8 @@ image_aco1 = pygame.image.load('../assets/images/aco1.png')
 image_aco2 = pygame.image.load('../assets/images/aco2.png')
 image_aco3 = pygame.image.load('../assets/images/aco3.png')
 image_manual = pygame.image.load('../assets/images/manual.png')
+image_winner = pygame.image.load('../assets/images/winner1.png')
+image_trophy = pygame.image.load('../assets/images/trophy.png')
 
 rect_aco1b = pygame.image.load('../assets/images/aco1.png').convert()
 rect_aco2b = pygame.image.load('../assets/images/aco2.png').convert()
@@ -561,7 +563,7 @@ while not done:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 1)
                     else:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
-    
+
                 # Draw a mino
                 draw_mino(dx, dy, mino, rotation, matrix)
                 draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
@@ -801,7 +803,7 @@ while not done:
 
                     else:
                         bottom_count += 1
-                
+
                 # Erase line
                 erase_count = 0
                 for j in range(21):
@@ -839,11 +841,11 @@ while not done:
                         pygame.time.set_timer(pygame.USEREVENT, framerate_n*1)
                     else:
                         pygame.time.set_timer(pygame.USEREVENT, framerate_n*10)
-                
+
                 draw_mino(dp, dq, mino_n, rotation_n ,matrix_n)
                 draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
-                if not game_over: 
+                if not game_over:
                     erase_mino(dp, dq, mino_n, rotation_n, matrix_n)
 
                 # Move mino down
@@ -1023,7 +1025,7 @@ while not done:
                     draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
                     draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
-     
+
                 # Move left
                 elif event.key == K_LEFT:
                     if not is_leftedge(dx, dy, mino, rotation, matrix):
@@ -1064,11 +1066,12 @@ while not done:
                 over_start = ui_variables.DG_v_small.render("Press return to continue", 1, ui_variables.white)
 
                 #mode 따른 종료
-                if single == True:
+                """if single == True:
                     draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
                 else:
                     draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
-                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)
+                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)"""
+                draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
 
                 #pause시 화면 불투명하게
                 over_surface = screen.convert_alpha()
@@ -1136,7 +1139,7 @@ while not done:
                     bottom_count_n = 0
                     hard_drop = False
                     hard_drop_n = False
-                
+
 
                 if event.key == K_RIGHT:
                     if name_location != 2:
@@ -1172,15 +1175,21 @@ while not done:
                 done = True
             elif event.type == USEREVENT:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
-                string = "{}P win".format(player)
-                over_text_1 = ui_variables.DG_70.render(string, 1, ui_variables.white)
-                
-                #mode 따른 종료
+                title = "ACOTRIS"
+                winner_text = "{}P win".format(player)
+                title_text_1 = ui_variables.DG_big.render(title, 1, ui_variables.white)
+                over_text_1 = ui_variables.DG_70.render(winner_text, 1, ui_variables.white)
+
+
+                """#mode 따른 종료
                 if single == True:
                     draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
                 else:
                     draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
-                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)
+                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)"""
+
+                draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
+                draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)
 
                 #pause시 화면 불투명하게
                 over_surface = screen.convert_alpha()
@@ -1188,10 +1197,21 @@ while not done:
                 pygame.draw.rect(over_surface, ui_variables.black_t, [0, 0, int(screen_width), int(screen_height)])
                 screen.blit(over_surface, (0, 0))
 
-                screen.blit(over_text_1, (int(screen_width*0.39), int(screen_height*0.5)))
-                
+                screen.blit(title_text_1,(int(screen_width*0.35), int(screen_height*0.1)))
+                screen.blit(over_text_1, (int(screen_width*0.39), int(screen_height*0.75)))
+                insert_image(image_winner, screen_width*0.25, screen_height*0.12, int(screen_width*0.55), int(screen_height*0.65))
+                insert_image(image_trophy, screen_width*0.21, screen_height*0.13, int(screen_width*0.1), int(screen_height*0.18))
+                insert_image(image_trophy, screen_width*0.7, screen_height*0.13, int(screen_width*0.1), int(screen_height*0.18))
+
 
                 pygame.display.update()
+
+            if event.type == KEYDOWN:
+                if event.key == K_q:
+                    done = True
+                elif event.key == K_RETURN:
+                    done = True
+
 
 
 
@@ -1328,7 +1348,7 @@ while not done:
                 show_desc2_manual = ui_variables.DGM23.render("떨어질 때 블록을 회전, 이동, 낙하 시켜 빈 곳으로 블록을 끼워 넣어", 1, ui_variables.white)
                 show_desc3_manual = ui_variables.DGM23.render("한 라인을 채우면 라인이 제거되면서 점수를 얻는 방식입니다.", 1, ui_variables.white)
 
-            
+
                 pygame.draw.line(screen, ui_variables.white,
                 [0, int(screen_height*0.055)],
                 [screen_width,int(screen_height*0.055)],2)
