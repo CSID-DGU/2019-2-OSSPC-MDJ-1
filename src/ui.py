@@ -20,15 +20,6 @@ class ui_variables:
     DGM40 = pygame.font.Font(font_path_DGM, 40)
 
 
-    # Sounds
-    click_sound = pygame.mixer.Sound("../assets/sounds/SFX_ButtonUp.wav")
-    move_sound = pygame.mixer.Sound("../assets/sounds/SFX_PieceMoveLR.wav")
-    drop_sound = pygame.mixer.Sound("../assets/sounds/SFX_PieceHardDrop.wav")
-    single_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialLineClearSingle.wav")
-    double_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialLineClearDouble.wav")
-    triple_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialLineClearTriple.wav")
-    tetris_sound = pygame.mixer.Sound("../assets/sounds/SFX_SpecialTetris.wav")
-
     # Background colors
     black = (0,0,0) #rgb(10, 10, 10)
     black_t = (0, 0, 0, 127) #transparent black
