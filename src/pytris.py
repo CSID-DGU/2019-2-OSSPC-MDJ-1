@@ -30,8 +30,10 @@ pygame.init()
 size = [screen_width, screen_height]
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode(size)
+
 pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
 pygame.time.set_timer(pygame.USEREVENT, framerate_n * 10)
+
 pygame.display.set_caption("ACOTRIS™")
 
 
@@ -127,8 +129,8 @@ def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
 
     for x in range(4):
         for y in range(4):
-            dx = screen_width*0.389 + block_size * 0.72 * y
-            dy = screen_height*0.27 + block_size * 0.72 * x
+            dx = screen_width*0.39 + block_size * 0.72 * y
+            dy = screen_height*0.23 + block_size * 0.72 * x
             if grid_n[x][y] != 0:
                 pygame.draw.rect(
                     screen,
@@ -142,8 +144,8 @@ def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
     if hold_mino_n != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.08 + block_size * 0.72 * y
-                dy = screen_height*0.27 + block_size * 0.72 * x
+                dx = screen_width*0.095 + block_size * 0.72 * y
+                dy = screen_height*0.23 + block_size * 0.72 * x
                 if grid_h[x][y] != 0:
                     pygame.draw.rect(
                         screen,
@@ -197,7 +199,7 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     for x in range(4):
         for y in range(4):
             dx = screen_width*0.84 + block_size * 0.72 * y
-            dy = screen_height*0.27 + block_size * 0.72 * x
+            dy = screen_height*0.23 + block_size * 0.72 * x
             if grid_m[x][y] != 0:
                 pygame.draw.rect(
                     screen,
@@ -213,8 +215,8 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     if hold_mino != -1:
         for x in range(4):
             for y in range(4):
-                dx = screen_width*0.54 + block_size * 0.72 * y
-                dy = screen_height*0.27 + block_size * 0.72 * x
+                dx = screen_width*0.55 + block_size * 0.72 * y
+                dy = screen_height*0.23 + block_size * 0.72 * x
                 if grid_i[x][y] != 0:
                     pygame.draw.rect(
                         screen,
@@ -401,7 +403,6 @@ def background_image_alpha():
 def manual_image():
     manual = pygame.image.load('../assets/images/manual.png')
     picture2 = pygame.transform.scale(manual, (screen_width, int(screen_height)))
-    #screen.blit(picture2,(0,int(screen_height)))
     screen.blit(picture2,(0,0))
 
 def aco_level(x, y):
@@ -517,7 +518,7 @@ while not done:
                 if start_single == True:
                     draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
                 elif start_multi == True:
-                    draw_multi_board_1(next_mino_n, hold_mino, score, level, goal, matrix_n)
+                    draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                 #pause시 화면 불투명하게
@@ -542,7 +543,6 @@ while not done:
                 erase_mino(dp, dq, mino_n, rotation_n, matrix_n)
                 if event.key == K_ESCAPE:
                     pause = False
-                    ui_variables.click_sound.play()
                     pygame.time.set_timer(pygame.USEREVENT, 1)
 
                 elif event.key == K_q:
@@ -556,6 +556,7 @@ while not done:
             if event.type == QUIT:
                 done = True
             elif event.type == USEREVENT:
+
                 # Set speed
                 if not game_over:
                     keys_pressed = pygame.key.get_pressed()
@@ -613,16 +614,12 @@ while not done:
                                 matrix[i][k] = matrix[i][k - 1]
                             k -= 1
                 if erase_count == 1:
-                    ui_variables.single_sound.play()
                     score += 50 * level
                 elif erase_count == 2:
-                    ui_variables.double_sound.play()
                     score += 150 * level
                 elif erase_count == 3:
-                    ui_variables.triple_sound.play()
                     score += 350 * level
                 elif erase_count == 4:
-                    ui_variables.tetris_sound.play()
                     score += 1000 * level
 
                 # Increase level
@@ -634,15 +631,14 @@ while not done:
 
             elif event.type == KEYDOWN:
                 erase_mino(dx, dy, mino, rotation, matrix)
+
                 if event.key == K_ESCAPE:
-                    ui_variables.click_sound.play()
                     pause = True
                 #Q누르면 창 나가짐
                 elif event.key == K_q:
                     done = True
                 # Hard drop
                 elif event.key == K_SPACE:
-                    ui_variables.drop_sound.play()
                     while not is_bottom(dx, dy, mino, rotation, matrix):
                         dy += 1
                     hard_drop = True
@@ -652,7 +648,6 @@ while not done:
                 # Hold
                 elif event.key == K_LSHIFT:
                     if hold == False:
-                        ui_variables.move_sound.play()
                         if hold_mino == -1:
                             hold_mino = mino
                             mino = next_mino
@@ -667,31 +662,24 @@ while not done:
                 # Turn right
                 elif event.key == K_UP:
                     if is_turnable_r(dx, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         rotation += 1
                     # Kick
                     elif is_turnable_r(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dy -= 1
                         rotation += 1
                     elif is_turnable_r(dx + 1, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx += 1
                         rotation += 1
                     elif is_turnable_r(dx - 1, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx -= 1
                         rotation += 1
                     elif is_turnable_r(dx, dy - 2, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dy -= 2
                         rotation += 1
                     elif is_turnable_r(dx + 2, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx += 2
                         rotation += 1
                     elif is_turnable_r(dx - 2, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx -= 2
                         rotation += 1
                     if rotation == 4:
@@ -701,31 +689,24 @@ while not done:
                 # Turn left
                 elif event.key == K_z or event.key == K_LCTRL:
                     if is_turnable_l(dx, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         rotation -= 1
                     # Kick
                     elif is_turnable_l(dx, dy - 1, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dy -= 1
                         rotation -= 1
                     elif is_turnable_l(dx + 1, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx += 1
                         rotation -= 1
                     elif is_turnable_l(dx - 1, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx -= 1
                         rotation -= 1
                     elif is_turnable_l(dx, dy - 2, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dy -= 2
                         rotation += 1
                     elif is_turnable_l(dx + 2, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx += 2
                         rotation += 1
                     elif is_turnable_l(dx - 2, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx -= 2
                     if rotation == -1:
                         rotation = 3
@@ -734,14 +715,12 @@ while not done:
                 # Move left
                 elif event.key == K_LEFT:
                     if not is_leftedge(dx, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx -= 1
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
                 # Move right
                 elif event.key == K_RIGHT:
                     if not is_rightedge(dx, dy, mino, rotation, matrix):
-                        ui_variables.move_sound.play()
                         dx += 1
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
@@ -758,10 +737,9 @@ while not done:
                 background_image_alpha()
 
                 # Set speed
-                if not game_over:
+                if not multi_over:
                     keys_pressed = pygame.key.get_pressed()
                     if keys_pressed[K_DOWN]:
-                        # s눌러도 내려가기 !!
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 1)
                     else:
                         pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
@@ -771,7 +749,7 @@ while not done:
                 draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                 # Erase a mino
-                if not game_over:
+                if not multi_over:
                     erase_mino(dx, dy, mino, rotation, matrix)
 
                 # Move mino down
@@ -797,7 +775,7 @@ while not done:
                         else:
                             start_multi = False
                             multi_over = True
-                            player = 2
+                            player = 1
                             single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
 
@@ -835,17 +813,10 @@ while not done:
                     goal += level * 5
                     framerate = int(framerate * 0.8)
 
-                if not game_over:
-                    keys_pressed = pygame.key.get_pressed()
-                    if keys_pressed[K_s]:
-                        pygame.time.set_timer(pygame.USEREVENT, framerate_n*1)
-                    else:
-                        pygame.time.set_timer(pygame.USEREVENT, framerate_n*10)
-
                 draw_mino(dp, dq, mino_n, rotation_n ,matrix_n)
                 draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
-                if not game_over:
+                if not multi_over:
                     erase_mino(dp, dq, mino_n, rotation_n, matrix_n)
 
                 # Move mino down
@@ -870,7 +841,7 @@ while not done:
                         else:
                             start_multi = False
                             multi_over= True
-                            player = 1
+                            player = 2
                             single = False
                             pygame.time.set_timer(pygame.USEREVENT, 1)
                     else:
@@ -909,6 +880,7 @@ while not done:
             elif event.type == KEYDOWN:
                 erase_mino(dx, dy, mino, rotation, matrix)
                 erase_mino(dp, dq, mino_n, rotation_n, matrix_n)
+                keys_pressed = pygame.key.get_pressed()
 
                 if event.key == K_ESCAPE:
                     pause = True
@@ -918,10 +890,11 @@ while not done:
 
                 # Hard drop
                 elif event.key == K_SPACE:
+
                     while not is_bottom(dx, dy, mino, rotation, matrix):
                         dy += 1
                     hard_drop = True
-                    pygame.time.set_timer(pygame.USEREVENT, 1)
+                    pygame.time.set_timer(pygame.USEREVENT, framerate)
                     draw_mino(dx, dy, mino, rotation, matrix)
                     draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
@@ -929,7 +902,7 @@ while not done:
                     while not is_bottom(dp, dq, mino_n, rotation_n, matrix_n):
                         dq += 1
                     hard_drop_n = True
-                    pygame.time.set_timer(pygame.USEREVENT, 1)
+                    pygame.time.set_timer(pygame.USEREVENT, framerate_n)
                     draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
                     draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
@@ -993,35 +966,29 @@ while not done:
 
                 elif event.key == K_w:
                     if is_turnable_r(dp, dq, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         rotation_n += 1
                     # Kick
                     elif is_turnable_r(dp, dq - 1, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         dq -= 1
                         rotation_n += 1
                     elif is_turnable_r(dp + 1, dq, mino_n,rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         dp += 1
                         rotation_n += 1
                     elif is_turnable_r(dp - 1, dq, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         dp -= 1
                         rotation_n += 1
                     elif is_turnable_r(dp, dq - 2, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         dq -= 2
                         rotation_n+= 1
                     elif is_turnable_r(dp + 2, dq, mino_n,rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         dp += 2
                         rotation_n+= 1
                     elif is_turnable_r(dp - 2, dq, mino_n, rotation_n, matrix_n):
-                        ui_variables.move_sound.play()
                         dp -= 2
                         rotation_n += 1
                     if rotation_n == 4:
                         rotation_n = 0
+
                     draw_mino(dp, dq, mino_n, rotation_n, matrix_n)
                     draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
 
@@ -1129,6 +1096,7 @@ while not done:
                     hold_mino = -1
                     hold_mino_n = -1
                     framerate = 30
+                    framerate_n = 30
                     score = 0
                     score_n = 0
                     level = 1
@@ -1188,8 +1156,8 @@ while not done:
                     draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
                     draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)"""
 
-                draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
-                draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)
+                draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
+                draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
                 #pause시 화면 불투명하게
                 over_surface = screen.convert_alpha()
@@ -1427,7 +1395,6 @@ while not done:
                 done = True
             elif event.type == KEYDOWN:
                 if event.key == K_SPACE:
-                    ui_variables.click_sound.play()
                     show_score=True
             #Q 누르면 창 나가짐
                 elif event.key == K_q:
