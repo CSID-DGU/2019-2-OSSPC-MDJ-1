@@ -112,7 +112,7 @@ def draw_single_board(next, hold, score, level, goal, matrix):
     screen.blit(score_value, (screen_width*0.69, screen_height*0.7))\
 
     # 플레이 화면에 아코 사진
-    aco_level(int(screen_width*0.68), int(screen_height*0.41))
+    aco_level(level, int(screen_width*0.68), int(screen_height*0.41))
 
     # Draw board
     for x in range(width):
@@ -177,10 +177,11 @@ def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
     screen.blit(text_score, (screen_width*0.388, screen_height*0.7))
     screen.blit(score_value, (screen_width*0.393, screen_height*0.75))
 
-    aco_level(screen_width*0.38, screen_height*0.48)
+    #aco_level(screen_width*0.38, screen_height*0.48)
     aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
     screen.blit(aco, (screen_width*0.39, screen_height*0.43))
 
+    aco_level(level1, screen_width*0.38, screen_height*0.48)
 
     # Draw board - player1
     for x in range(width):
@@ -249,9 +250,11 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
     screen.blit(text_score, (screen_width*0.845, screen_height*0.7))
     screen.blit(score_value, (screen_width*0.85, screen_height*0.75))
 
-    aco_level(screen_width*0.84, screen_height*0.48)
+    #aco_level(screen_width*0.84, screen_height*0.48)
     aco = ui_variables.DG_v_small.render("ACO level", 1, ui_variables.white)
     screen.blit(aco, (screen_width*0.845, screen_height*0.43))
+
+    aco_level(level, screen_width*0.84, screen_height*0.48)
 
 
     # Draw board - player2
@@ -405,7 +408,7 @@ def manual_image():
     picture2 = pygame.transform.scale(manual, (screen_width, int(screen_height)))
     screen.blit(picture2,(0,0))
 
-def aco_level(x, y):
+def aco_level(level, x, y):
     # 플레이 화면에 아코 사진
     if type == 1:
         screen.blit(rect_aco1, (x, y))
@@ -487,7 +490,8 @@ name = [65, 65, 65]
 
 #모드 별 아코 사진 넣을려고 만듦
 type = 0
-
+level1 = 0
+level2 = 0
 
 with open('leaderboard.txt') as f:
     lines = f.readlines()
@@ -532,7 +536,7 @@ while not done:
 
                 screen.blit(pause_text, (screen_width*0.415, screen_height*0.35))
                 if blink:
-                    screen.blit(pause_start, (screen_width*0.38, screen_height*0.6))
+                    screen.blit(pause_start, (screen_width*0.36, screen_height*0.6))
                     blink = False
                 else:
                     blink = True
@@ -812,6 +816,9 @@ while not done:
                     level += 1
                     goal += level * 5
                     framerate = int(framerate * 0.8)
+                    level_2 = level
+
+
 
                 draw_mino(dp, dq, mino_n, rotation_n ,matrix_n)
                 draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
@@ -876,6 +883,8 @@ while not done:
                     level_n += 1
                     goal_n += level_n * 5
                     framerate_n = int(framerate_n * 0.8)
+                    level1 = level_n
+
 
             elif event.type == KEYDOWN:
                 erase_mino(dx, dy, mino, rotation, matrix)
