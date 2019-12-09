@@ -15,6 +15,7 @@ import sys
 screen_width = 0
 screen_height = 0
 
+
 for m in get_monitors():
     screen_width = int(m.width*0.7)
     screen_height = int(m.height*0.7)
@@ -740,15 +741,6 @@ while not done:
                 screen.fill(ui_variables.black)
                 background_image_alpha()
 
-                # Set speed
-                if not multi_over:
-                    keys_pressed = pygame.key.get_pressed()
-                    if keys_pressed[K_DOWN]:
-                        pygame.time.set_timer(pygame.USEREVENT, framerate * 1)
-                    else:
-                        pygame.time.set_timer(pygame.USEREVENT, framerate * 10)
-
-
                 draw_mino(dx, dy, mino, rotation, matrix)
                 draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
@@ -889,7 +881,6 @@ while not done:
             elif event.type == KEYDOWN:
                 erase_mino(dx, dy, mino, rotation, matrix)
                 erase_mino(dp, dq, mino_n, rotation_n, matrix_n)
-                keys_pressed = pygame.key.get_pressed()
 
                 if event.key == K_ESCAPE:
                     pause = True
