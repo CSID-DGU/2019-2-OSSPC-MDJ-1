@@ -298,7 +298,7 @@ def erase_mino(x, y, mino, r, matrix):
     # Erase mino
     for i in range(4):
         for j in range(4):
-            if grid[i][j] != 0:
+            if grid[i][j] != 0: 
                 matrix[x + j][y + i] = 0
 
 # Returns true if mino is at bottom
@@ -740,6 +740,12 @@ while not done:
             elif event.type == USEREVENT:
                 screen.fill(ui_variables.black)
                 background_image_alpha()
+                if not multi_over:
+                    keys_pressed = pygame.key.get_pressed()
+                    if keys_pressed[K_DOWN]:
+                        pygame.time.set_timer(pygame.USEREVENT, framerate*1)
+                    else:
+                        pygame.time.set_timer(pygame.USEREVENT, framerate*10)
 
                 draw_mino(dx, dy, mino, rotation, matrix)
                 draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
@@ -809,7 +815,6 @@ while not done:
                     goal += level * 5
                     framerate = int(framerate * 0.8)
                     level_2 = level
-
 
 
                 draw_mino(dp, dq, mino_n, rotation_n ,matrix_n)
