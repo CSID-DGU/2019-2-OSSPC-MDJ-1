@@ -90,9 +90,13 @@ As lines are cleared, the level increases and Tetriminos fall faster, making the
 
 ![PauseScreen](./assets/READMEimages/pausescreen.PNG)
 
-- Game Over Screen
+- Game Over Screen : Single Mode
 
 ![GameOverScreen](./assets/READMEimages/gameoverscreen.PNG)
+
+- Game Over Screen : Multi Mode
+
+![GameOverScreen](./assets/READMEimages/gameovermulti.PNG)
 
 
 
