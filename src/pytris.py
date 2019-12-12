@@ -536,11 +536,14 @@ while not done:
                 pause_start = ui_variables.DG_small.render("Press esc to continue", 1, ui_variables.white)
 
                 screen.blit(pause_text, (screen_width*0.415, screen_height*0.35))
+
                 if blink:
                     screen.blit(pause_start, (screen_width*0.36, screen_height*0.6))
                     blink = False
+
                 else:
                     blink = True
+
                 pygame.display.update()
 
             elif event.type == KEYDOWN:
@@ -1363,11 +1366,16 @@ while not done:
                 background_image()
 
                 show_score_list = list()
+                i = 0
 
-                for i in range(0,10):
+                try:
+                 while i<10:
                     j=0
                     temp = ui_variables.DG_small.render('%2d' % ((i+1))+'등 '+'{:>6s}'.format(leaders[i][j]) + '   ' + '{:<8s}'.format(str(leaders[i][j+1])), 1, ui_variables.white)
                     show_score_list.append(temp)
+                    i+=1
+                except:
+                    show_manual = True
 
                 show_name_y = int(screen_height*0.17)
                 prop = (show_name_y*0.3)
