@@ -10,6 +10,7 @@ from ui import *
 from screeninfo import get_monitors
 from pygame.surface import Surface
 import sys
+from function import *
 
 #화면크기 조정
 screen_width = 0
@@ -37,26 +38,12 @@ pygame.time.set_timer(pygame.USEREVENT, framerate_n * 10)
 
 pygame.display.set_caption("ACOTRIS™")
 
-
-
-# Draw block
-def draw_block(x, y, color):
-    pygame.draw.rect(
-        screen,
-        color,
-        Rect(x, y, block_size, block_size)
-    )
-    pygame.draw.rect(
-        screen,
-        ui_variables.grey_1,
-        Rect(x, y, block_size, block_size),
-        1
-    )
+background_file = '../assets/images/backgroundimage.png'
 
 # draw single board
 def draw_single_board(next, hold, score, level, goal, matrix):
     screen.fill(ui_variables.black)
-    background_image_alpha()
+    background_image_alpha(screen, background_file,screen_width, screen_height)
 
     # Draw next mino
     grid_n = tetrimino.mino_map[next - 1][0]
@@ -120,7 +107,7 @@ def draw_single_board(next, hold, score, level, goal, matrix):
         for y in range(height):
             dx = screen_width*0.4 + block_size * x
             dy = screen_height*0.1 + block_size * y
-            draw_block(dx, dy, ui_variables.t_color[matrix[x][y + 1]])
+            draw_block(screen,dx, dy, ui_variables.t_color[matrix[x][y + 1]], block_size)
 
 
 def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
@@ -189,7 +176,7 @@ def draw_multi_board_1(next, hold_n, score, level, goal, matrix_n):
         for y in range(height):
             dx = screen_width*0.15 + block_size * x
             dy = screen_height*0.1 + block_size * y
-            draw_block(dx, dy, ui_variables.t_color[matrix_n[x][y + 1]])
+            draw_block(screen, dx, dy, ui_variables.t_color[matrix_n[x][y + 1]], block_size)
 
 # Draw multi board
 def draw_multi_board_2(next, hold, score, level, goal, matrix):
@@ -263,151 +250,14 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
         for j in range(height):
             di = screen_width*0.6 + block_size * i
             dj = screen_height*0.1 + block_size * j
-            draw_block(di, dj, ui_variables.t_color[matrix[i][j + 1]])
+            draw_block(screen, di, dj, ui_variables.t_color[matrix[i][j + 1]], block_size)
 
-# Draw a tetrimino
-def draw_mino(x, y, mino, r, matrix):
-    grid = tetrimino.mino_map[mino - 1][r]
-
-    tx, ty = x, y
-    while not is_bottom(tx, ty, mino, r, matrix):
-        ty += 1
-
-    # Draw ghost
-    for i in range(4):
-        for j in range(4):
-            if grid[i][j] != 0:
-                matrix[tx + j][ty + i] = 8
-
-    # Draw mino
-    for i in range(4):
-        for j in range(4):
-            if grid[i][j] != 0:
-                matrix[x + j][y + i] = grid[i][j]
-
-# Erase a tetrimino
-def erase_mino(x, y, mino, r, matrix):
-    grid = tetrimino.mino_map[mino - 1][r]
-
-    # Erase ghost
-    for j in range(21):
-        for i in range(10):
-            if matrix[i][j] == 8:
-                matrix[i][j] = 0
-
-    # Erase mino
-    for i in range(4):
-        for j in range(4):
-            if grid[i][j] != 0: 
-                matrix[x + j][y + i] = 0
-
-# Returns true if mino is at bottom
-def is_bottom(x, y, mino, r, matrix):
-    grid = tetrimino.mino_map[mino - 1][r]
-
-    for i in range(4):
-        for j in range(4):
-            if grid[i][j] != 0:
-                if (y + i + 1) > 20:
-                    return True
-                elif matrix[x + j][y + i + 1] != 0 and matrix[x + j][y + i + 1] != 8:
-                    return True
-
-    return False
-
-# Returns true if mino is at the left edge
-def is_leftedge(x, y, mino, r, matrix):
-    grid = tetrimino.mino_map[mino - 1][r]
-
-    for i in range(4):
-        for j in range(4):
-            if grid[i][j] != 0:
-                if (x + j - 1) < 0:
-                    return True
-                elif matrix[x + j - 1][y + i] != 0:
-                    return True
-
-    return False
-
-# Returns true if mino is at the right edge
-def is_rightedge(x, y, mino, r, matrix):
-    grid = tetrimino.mino_map[mino - 1][r]
-
-    for i in range(4):
-        for j in range(4):
-            if grid[i][j] != 0:
-                if (x + j + 1) > 9:
-                    return True
-                elif matrix[x + j + 1][y + i] != 0:
-                    return True
-
-    return False
-
-# Returns true if turning right is possible
-def is_turnable_r(x, y, mino, r, matrix):
-    if r != 3:
-        grid = tetrimino.mino_map[mino - 1][r + 1]
-    else:
-        grid = tetrimino.mino_map[mino - 1][0]
-
-    for i in range(4):
-        for j in range(4):
-            if grid[i][j] != 0:
-                if (x + j) < 0 or (x + j) > 9 or (y + i) < 0 or (y + i) > 20:
-                    return False
-                elif matrix[x + j][y + i] != 0:
-                    return False
-
-    return True
-
-# Returns true if turning left is possible
-def is_turnable_l(x, y, mino, r, matrix):
-    if r != 0:
-        grid = tetrimino.mino_map[mino - 1][r - 1]
-    else:
-        grid = tetrimino.mino_map[mino - 1][3]
-
-    for i in range(4):
-        for j in range(4):
-            if grid[i][j] != 0:
-                if (x + j) < 0 or (x + j) > 9 or (y + i) < 0 or (y + i) > 20:
-                    return False
-                elif matrix[x + j][y + i] != 0:
-                    return False
-
-    return True
-
-# Returns true if new block is drawable
-def is_stackable(mino, matrix):
-    grid = tetrimino.mino_map[mino - 1][0]
-
-    for i in range(4):
-        for j in range(4):
-            #print(grid[i][j], matrix[3 + j][i])
-            if grid[i][j] != 0 and matrix[3 + j][i] != 0:
-                return False
-
-    return True
 
 #background image
-def background_image():
-    background = pygame.image.load('../assets/images/backgroundimage.png')
-    picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
-    screen.blit(picture,(0,int(screen_height/2)))
-
-#background image 투명도
-def background_image_alpha():
-    background = pygame.image.load('../assets/images/backgroundimage.png').convert()
-    background.set_alpha(70)
-    picture = pygame.transform.scale(background,(screen_width,int(screen_height/2)))
-    screen.blit(picture,(0,int(screen_height/2)))
-
-
-#manual image
-def manual_image():
-    manual = pygame.image.load('../assets/images/manual.png')
-    picture2 = pygame.transform.scale(manual, (screen_width, int(screen_height)))
-    screen.blit(picture2,(0,0))
+def background_image(filename, width, height, blit_pos):
+    background = pygame.image.load(filename)
+    picture = pygame.transform.scale(background,(width, height))
+    screen.blit(picture,(0,blit_pos))
 
 def aco_level(level, x, y):
     # 플레이 화면에 아코 사진
@@ -593,6 +443,7 @@ while not done:
                         score += 10 * level
                         draw_mino(dx, dy, mino, rotation, matrix)
                         draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
+                        
                         if is_stackable(next_mino, matrix):
                             mino = next_mino
                             next_mino = randint(1, 7)
@@ -742,7 +593,7 @@ while not done:
                 done = True
             elif event.type == USEREVENT:
                 screen.fill(ui_variables.black)
-                background_image_alpha()
+                background_image_alpha(screen, background_file, screen_width, screen_height)
                 if not multi_over:
                     keys_pressed = pygame.key.get_pressed()
                     if keys_pressed[K_DOWN]:
@@ -1040,12 +891,6 @@ while not done:
                 over_text_1 = ui_variables.DG_70.render("GAME OVER", 1, ui_variables.white)
                 over_start = ui_variables.DG_v_small.render("Press return to continue", 1, ui_variables.white)
 
-                #mode 따른 종료
-                """if single == True:
-                    draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
-                else:
-                    draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
-                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)"""
                 draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
 
                 #pause시 화면 불투명하게
@@ -1156,14 +1001,6 @@ while not done:
                 title_text_1 = ui_variables.DG_big.render(title, 1, ui_variables.white)
                 over_text_1 = ui_variables.DG_70.render(winner_text, 1, ui_variables.white)
 
-
-                """#mode 따른 종료
-                if single == True:
-                    draw_single_board(next_mino, hold_mino, score, level, goal, matrix)
-                else:
-                    draw_multi_board_1(next_mino_n, hold_mino, score_n, level_n, goal_n, matrix_n)
-                    draw_multi_board_2(next_mino, hold_mino_n, score, level, goal, matrix)"""
-
                 draw_multi_board_1(next_mino_n, hold_mino_n, score_n, level_n, goal_n, matrix_n)
                 draw_multi_board_2(next_mino, hold_mino, score, level, goal, matrix)
 
@@ -1243,7 +1080,7 @@ while not done:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
 
                 screen.fill(ui_variables.black)
-                background_image()
+                background_image(background_file, screen_width, int(screen_height/2), int(screen_height/2))
 
                 game_mode_title = ui_variables.DG_small.render("게임옵션설정(두개의 키를 동시에 눌러주세요!)", 1, ui_variables.white)
                 game_mode_choice = ui_variables.DG_v_small.render("게임모드설정", 1, ui_variables.white)
@@ -1317,7 +1154,7 @@ while not done:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
 
                 screen.fill(ui_variables.black)
-                manual_image()
+                background_image('../assets/images/manual.png', screen_width, screen_height, 0)
 
                 show_score_manual = ui_variables.DG_small.render("Manual", 1, ui_variables.white)
                 show_desc1_manual = ui_variables.DGM23.render("Pytris는 테트리스 게임으로 총 7가지 모양의 블록이 위에서 아래로", 1, ui_variables.white)
@@ -1363,7 +1200,7 @@ while not done:
                 pygame.time.set_timer(pygame.USEREVENT, 300)
 
                 screen.fill(ui_variables.black)
-                background_image()
+                background_image(background_file, screen_width, int(screen_height/2), int(screen_height/2))
 
                 show_score_list = list()
                 i = 0
@@ -1375,7 +1212,7 @@ while not done:
                     show_score_list.append(temp)
                     i+=1
                 except:
-                    show_manual = True
+                    show_manual = True 
 
                 show_name_y = int(screen_height*0.17)
                 prop = (show_name_y*0.3)
@@ -1417,7 +1254,7 @@ while not done:
 
 
         screen.fill(ui_variables.white)
-        background_image()
+        background_image(background_file, screen_width, int(screen_height/2), int(screen_height/2))
 
         insert_image(image_aco1, screen_width*0.52, screen_height*0.29, 150, 130)
         insert_image(image_aco2, screen_width*0.65, screen_height*0.22, 180, 180)
@@ -1444,7 +1281,5 @@ while not done:
         if not show_score:
             pygame.display.update()
             clock.tick(3)
-
-        #여기에 버튼 만들고 그걸 클릭하면 show_score = True로 해줘야해요!
 
 pygame.quit()
