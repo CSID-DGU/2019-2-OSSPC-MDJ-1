@@ -250,7 +250,65 @@ def draw_multi_board_2(next, hold, score, level, goal, matrix):
         for j in range(height):
             di = screen_width*0.6 + block_size * i
             dj = screen_height*0.1 + block_size * j
+<<<<<<< HEAD
+            draw_block(di, dj, ui_variables.t_color[matrix[i][j + 1]])
+
+# Draw a tetrimino
+def draw_mino(x, y, mino, r, matrix):
+    grid = tetrimino.mino_map[mino - 1][r]
+
+    tx, ty = x, y
+    while not is_bottom(tx, ty, mino, r, matrix):
+        ty += 1
+
+    # Draw ghost
+    for i in range(4):
+        for j in range(4):
+            if grid[i][j] != 0:
+                matrix[tx + j][ty + i] = 8
+
+    # Draw mino
+    for i in range(4):
+        for j in range(4):
+            if grid[i][j] != 0:
+                matrix[x + j][y + i] = grid[i][j]
+
+# Erase a tetrimino
+def erase_mino(x, y, mino, r, matrix):
+    grid = tetrimino.mino_map[mino - 1][r]
+
+    # Erase ghost
+    for j in range(21):
+        for i in range(10):
+            if matrix[i][j] == 8:
+                matrix[i][j] = 0
+
+    # Erase mino
+    for i in range(4):
+        for j in range(4):
+            if grid[i][j] != 0:
+                matrix[x + j][y + i] = 0
+
+# Returns true if mino is at bottom
+def is_bottom(x, y, mino, r, matrix):
+    grid = tetrimino.mino_map[mino - 1][r]
+
+    for i in range(4):
+        for j in range(4):
+            if grid[i][j] != 0:
+                if (y + i + 1) > 20:
+                    return True
+                elif matrix[x + j][y + i + 1] != 0 and matrix[x + j][y + i + 1] != 8:
+                    return True
+
+    return False
+
+# Returns true if mino is at the left edge
+def is_leftedge(x, y, mino, r, matrix):
+    grid = tetrimino.mino_map[mino - 1][r]
+=======
             draw_block(screen, di, dj, ui_variables.t_color[matrix[i][j + 1]], block_size)
+>>>>>>> dc21628c203e674b5b67d08bbe0b63b0d5ef249e
 
 
 #background image
@@ -263,7 +321,7 @@ def aco_level(level, x, y):
     # 플레이 화면에 아코 사진
     if type == 1:
         screen.blit(rect_aco1, (x, y))
-        if level >=2 and level <=9:
+        if level >=5 and level <=9:
             screen.blit(rect_aco2, (x, y))
         elif level >= 10:
             screen.blit(rect_aco3, (x, y))
